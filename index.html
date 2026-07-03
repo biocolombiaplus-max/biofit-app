@@ -168,19 +168,31 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:-apple-system,
 .uc-val{font-size:14px;font-weight:700;color:#c084fc}
 .uc-lbl{font-size:8px;color:var(--d);margin-top:2px}
 /* STICK FIGURE ANIMATIONS */
-@keyframes sq{0%,100%{transform:translateY(0)}50%{transform:translateY(16px)}}
-@keyframes pr{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-50deg)}}
-@keyframes prR{0%,100%{transform:rotate(0deg)}50%{transform:rotate(50deg)}}
-@keyframes th{0%,100%{transform:rotate(0deg) translateY(0)}50%{transform:rotate(-22deg) translateY(-8px)}}
-@keyframes cr{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-28deg)}}
-@keyframes jmp{0%,100%{transform:translateY(0)}45%{transform:translateY(-18px)}}
-@keyframes rw{0%,100%{transform:rotate(-15deg)}50%{transform:rotate(20deg)}}
-@keyframes rwr{0%,100%{transform:rotate(15deg)}50%{transform:rotate(-20deg)}}
-@keyframes lng{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(22deg)}}
-@keyframes lngR{0%,100%{transform:rotate(12deg)}50%{transform:rotate(-22deg)}}
-@keyframes lat{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-55deg)}}
-@keyframes latR{0%,100%{transform:rotate(0deg)}50%{transform:rotate(55deg)}}
-@keyframes kck{0%,35%,100%{transform:rotate(0deg)}55%,85%{transform:rotate(38deg)}}
+@keyframes sqBody{0%,100%{transform:translateY(0)}50%{transform:translateY(22px)}}
+@keyframes sqKneeL{0%,100%{transform:rotate(0deg)}50%{transform:rotate(42deg)}}
+@keyframes sqKneeR{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-42deg)}}
+@keyframes sqArmL{0%,100%{transform:rotate(0deg)}50%{transform:rotate(28deg)}}
+@keyframes sqArmR{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-28deg)}}
+@keyframes thHip{0%,100%{transform:translateY(0) rotate(0)}45%{transform:translateY(-20px) rotate(-14deg)}}
+@keyframes thLegL{0%,100%{transform:rotate(0deg)}45%{transform:rotate(-30deg)}}
+@keyframes thLegR{0%,100%{transform:rotate(0deg)}45%{transform:rotate(30deg)}}
+@keyframes prArmL{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-70deg)}}
+@keyframes prArmR{0%,100%{transform:rotate(0deg)}50%{transform:rotate(70deg)}}
+@keyframes rwArm{0%,100%{transform:rotate(-15deg)}50%{transform:rotate(35deg)}}
+@keyframes rwFore{0%,100%{transform:rotate(10deg)}50%{transform:rotate(-25deg)}}
+@keyframes plBody{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+@keyframes jmpAll{0%,100%{transform:translateY(0)}38%{transform:translateY(-22px)}}
+@keyframes jmpArmL{0%,100%{transform:rotate(0deg)}38%{transform:rotate(-55deg)}}
+@keyframes jmpArmR{0%,100%{transform:rotate(0deg)}38%{transform:rotate(55deg)}}
+@keyframes lngFwd{0%,100%{transform:rotate(0deg)}50%{transform:rotate(35deg)}}
+@keyframes lngBack{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-28deg)}}
+@keyframes crTorso{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-36deg)}}
+@keyframes crLegL{0%,100%{transform:rotate(0deg)}50%{transform:rotate(25deg)}}
+@keyframes crLegR{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-25deg)}}
+@keyframes latArmL{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-72deg)}}
+@keyframes latArmR{0%,100%{transform:rotate(0deg)}50%{transform:rotate(72deg)}}
+@keyframes kckLeg{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-58deg)}}
+@keyframes kckFore{0%,100%{transform:rotate(0deg)}50%{transform:rotate(30deg)}}
 </style>
 </head>
 <body>
@@ -354,6 +366,14 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:-apple-system,
     <div class="voice-wave"><span></span><span></span><span></span><span></span></div>
     <div style="font-size:11px;color:var(--m);line-height:1.5;flex:1;font-style:italic" id="wa-voice-txt">Preparando instrucciones de voz...</div>
   </div>
+  <button id="listen-btn" onclick="toggleListen()" style="margin:0 18px 10px;background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.35);border-radius:13px;padding:11px 16px;display:flex;align-items:center;gap:10px;width:calc(100% - 36px);cursor:pointer;flex-shrink:0">
+    <span style="font-size:18px">🎤</span>
+    <div style="text-align:left;flex:1">
+      <div style="font-size:12px;color:#f9a8d4;font-weight:700">Comandos de Voz — Habla con tu entrenadora</div>
+      <div style="font-size:9px;color:rgba(249,168,212,.6);margin-top:1px">Di: "siguiente", "cuántas faltan", "máquina ocupada", "ánimo"</div>
+    </div>
+    <span id="listen-dot" style="width:8px;height:8px;border-radius:50%;background:#f9a8d4;opacity:0.4"></span>
+  </button>
   <button class="alt-btn" onclick="toggleAlt()">
     <span style="font-size:18px">🏗️</span>
     <div><div style="font-size:12px;color:#fbbf24;font-weight:700">¿Máquina ocupada?</div><div style="font-size:10px;color:rgba(251,191,36,.6)">Ver ejercicio alternativo sin máquina</div></div>
@@ -499,18 +519,27 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:-apple-system,
 </div>
 
 <!-- ADMIN -->
-<div class="screen" id="s-admin" style="background:linear-gradient(180deg,#0a0a1a,#120828)">
+<div class="screen" id="s-admin" style="background:#08081a;overflow-y:auto">
   <div class="sbar"><span>9:41</span><span>▲▲ 🔋</span></div>
-  <div class="admin-hd">
-    <div style="display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:4px 10px;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">⚙️ Admin</div>
-    <div style="font-size:20px;font-weight:900">Panel BIOfit</div>
-    <div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:2px">Gestión de usuarias</div>
+  <!-- Header premium -->
+  <div style="background:linear-gradient(135deg,#2d1060,#5b21b6,#7c3aed);padding:22px 18px 28px;position:relative;overflow:hidden;flex-shrink:0">
+    <div style="position:absolute;top:-30px;right:-30px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.06)"></div>
+    <div style="position:absolute;bottom:-20px;left:40px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.04)"></div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;position:relative">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:4px 11px;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px">⚙️ ADMINISTRADOR</div>
+        <div style="font-size:24px;font-weight:900;letter-spacing:-.5px">Panel BIOfit</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:3px">Gestión de usuarias y estadísticas</div>
+      </div>
+      <button onclick="doLogout()" style="background:rgba(239,68,68,.25);border:1px solid rgba(239,68,68,.4);border-radius:12px;padding:9px 14px;font-size:11px;font-weight:800;color:#fca5a5;cursor:pointer;white-space:nowrap;flex-shrink:0">🚪 Salir</button>
+    </div>
   </div>
-  <div class="admin-cards" id="admin-cards"></div>
-  <div style="flex:1;overflow-y:auto;padding-bottom:8px" id="admin-users"></div>
-  <div style="padding:16px 20px 32px">
-    <button onclick="doLogout()" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:14px;padding:14px;text-align:center;font-size:13px;font-weight:700;color:#fca5a5;width:100%;cursor:pointer">🚪 Cerrar Sesión</button>
-  </div>
+  <!-- Stats cards -->
+  <div id="admin-cards" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:16px 16px 8px;flex-shrink:0"></div>
+  <!-- Divider -->
+  <div style="padding:0 16px 12px;font-size:11px;font-weight:800;color:var(--m);letter-spacing:.5px;text-transform:uppercase;flex-shrink:0">Usuarias registradas</div>
+  <!-- Users list -->
+  <div id="admin-users" style="padding:0 16px 32px;flex-shrink:0"></div>
 </div>
 
 <!-- MODALS -->
@@ -928,99 +957,245 @@ function getExType(name){
 }
 
 function makeFigure(type){
-  const svgs={
-    squat:`<svg viewBox="0 0 100 130" width="72" height="100">
-      <g class="sf-squat-body" style="animation:sq 2s ease-in-out infinite">
-        <circle cx="50" cy="14" r="10" fill="white"/>
-        <line x1="50" y1="24" x2="50" y2="62" stroke="white" stroke-width="3"/>
-        <line x1="50" y1="38" x2="26" y2="54" stroke="white" stroke-width="3"/>
-        <line x1="50" y1="38" x2="74" y2="54" stroke="white" stroke-width="3"/>
-        <line x1="50" y1="62" x2="32" y2="88" stroke="white" stroke-width="3"/>
-        <line x1="32" y1="88" x2="28" y2="110" stroke="white" stroke-width="3"/>
-        <line x1="50" y1="62" x2="68" y2="88" stroke="white" stroke-width="3"/>
-        <line x1="68" y1="88" x2="72" y2="110" stroke="white" stroke-width="3"/>
-      </g></svg>`,
-    thrust:`<svg viewBox="0 0 110 100" width="80" height="80">
-      <g style="animation:th 2s ease-in-out infinite;transform-origin:55px 60px">
-        <circle cx="55" cy="22" r="10" fill="white"/>
-        <line x1="55" y1="32" x2="55" y2="64" stroke="white" stroke-width="3"/>
-        <line x1="55" y1="45" x2="30" y2="58" stroke="white" stroke-width="3"/>
-        <line x1="55" y1="45" x2="80" y2="58" stroke="white" stroke-width="3"/>
-        <line x1="55" y1="64" x2="36" y2="86" stroke="white" stroke-width="3"/>
-        <line x1="55" y1="64" x2="74" y2="86" stroke="white" stroke-width="3"/>
-      </g></svg>`,
-    press:`<svg viewBox="0 0 100 130" width="72" height="100">
-      <circle cx="50" cy="14" r="10" fill="white"/>
-      <line x1="50" y1="24" x2="50" y2="70" stroke="white" stroke-width="3"/>
-      <g class="sf-arm-l" style="transform-origin:50px 40px;animation:pr 2s ease-in-out infinite"><line x1="50" y1="40" x2="22" y2="22" stroke="white" stroke-width="3"/></g>
-      <g class="sf-arm-r" style="transform-origin:50px 40px;animation:prR 2s ease-in-out infinite"><line x1="50" y1="40" x2="78" y2="22" stroke="white" stroke-width="3"/></g>
-      <line x1="50" y1="70" x2="32" y2="100" stroke="white" stroke-width="3"/>
-      <line x1="50" y1="70" x2="68" y2="100" stroke="white" stroke-width="3"/>
-      </svg>`,
-    row:`<svg viewBox="0 0 110 110" width="80" height="85">
-      <circle cx="30" cy="30" r="10" fill="white"/>
-      <line x1="30" y1="40" x2="30" y2="72" stroke="white" stroke-width="3" style="transform-origin:30px 56px;transform:rotate(-30deg)"/>
-      <g style="transform-origin:30px 55px;animation:rw 2s ease-in-out infinite"><line x1="30" y1="50" x2="80" y2="38" stroke="white" stroke-width="3"/></g>
-      <g style="transform-origin:30px 55px;animation:rwr 2s ease-in-out infinite"><line x1="30" y1="55" x2="78" y2="60" stroke="white" stroke-width="3"/></g>
-      <line x1="30" y1="72" x2="18" y2="95" stroke="white" stroke-width="3"/>
-      <line x1="30" y1="72" x2="42" y2="95" stroke="white" stroke-width="3"/>
-      </svg>`,
-    plank:`<svg viewBox="0 0 130 90" width="90" height="70">
-      <circle cx="105" cy="32" r="10" fill="white"/>
-      <line x1="96" y1="38" x2="24" y2="56" stroke="white" stroke-width="3"/>
-      <line x1="24" y1="56" x2="8" y2="56" stroke="white" stroke-width="3"/>
-      <line x1="58" y1="48" x2="58" y2="68" stroke="white" stroke-width="3"/>
-      <line x1="38" y1="52" x2="38" y2="72" stroke="white" stroke-width="3"/>
-      </svg>`,
-    jump:`<svg viewBox="0 0 100 130" width="72" height="100">
-      <g style="animation:jmp 1.2s ease-in-out infinite">
-        <circle cx="50" cy="16" r="10" fill="white"/>
-        <line x1="50" y1="26" x2="50" y2="65" stroke="white" stroke-width="3"/>
-        <line x1="50" y1="40" x2="22" y2="28" stroke="white" stroke-width="3"/>
-        <line x1="50" y1="40" x2="78" y2="28" stroke="white" stroke-width="3"/>
-        <line x1="50" y1="65" x2="32" y2="88" stroke="white" stroke-width="3"/>
-        <line x1="32" y1="88" x2="26" y2="108" stroke="white" stroke-width="3"/>
-        <line x1="50" y1="65" x2="68" y2="88" stroke="white" stroke-width="3"/>
-        <line x1="68" y1="88" x2="74" y2="108" stroke="white" stroke-width="3"/>
-      </g></svg>`,
-    lunge:`<svg viewBox="0 0 110 130" width="80" height="100">
-      <circle cx="55" cy="14" r="10" fill="white"/>
-      <line x1="55" y1="24" x2="55" y2="64" stroke="white" stroke-width="3"/>
-      <line x1="55" y1="38" x2="32" y2="52" stroke="white" stroke-width="3"/>
-      <line x1="55" y1="38" x2="78" y2="52" stroke="white" stroke-width="3"/>
-      <g style="transform-origin:55px 64px;animation:lng 2s ease-in-out infinite"><line x1="55" y1="64" x2="28" y2="90" stroke="white" stroke-width="3"/><line x1="28" y1="90" x2="18" y2="116" stroke="white" stroke-width="3"/></g>
-      <g style="transform-origin:55px 64px;animation:lngR 2s ease-in-out infinite"><line x1="55" y1="64" x2="80" y2="90" stroke="white" stroke-width="3"/><line x1="80" y1="90" x2="88" y2="116" stroke="white" stroke-width="3"/></g>
-      </svg>`,
-    crunch:`<svg viewBox="0 0 120 100" width="88" height="80">
-      <g style="transform-origin:30px 50px;animation:cr 2s ease-in-out infinite">
-        <circle cx="20" cy="30" r="10" fill="white"/>
-        <line x1="20" y1="40" x2="30" y2="60" stroke="white" stroke-width="3"/>
-        <line x1="20" y1="48" x2="4" y2="56" stroke="white" stroke-width="3"/>
+  const lc='stroke-linecap="round" stroke-linejoin="round"';
+  const bod='stroke="#e2d9f3" stroke-width="5"';
+  const lim='stroke="#c084fc" stroke-width="4"';
+  const jnt='fill="#9333ea"';
+  const hed='fill="#fff" stroke="#c084fc" stroke-width="2"';
+  const grd=`<defs><radialGradient id="hg" cx="40%" cy="35%"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#e0d0ff"/></radialGradient></defs>`;
+
+  const squat=`<svg viewBox="0 0 120 155" width="88" height="120" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
+    <g style="animation:sqBody 2s ease-in-out infinite;transform-origin:60px 75px">
+      <circle cx="60" cy="15" r="13" fill="url(#hg)" ${hed}/>
+      <line x1="60" y1="28" x2="60" y2="72" ${bod} ${lc}/>
+      <circle cx="60" cy="72" r="6" ${jnt}/>
+      <g style="transform-origin:44px 40px;animation:sqArmL 2s ease-in-out infinite">
+        <circle cx="44" cy="40" r="5" ${jnt}/>
+        <line x1="44" y1="40" x2="26" y2="62" ${lim} ${lc}/>
+        <circle cx="26" cy="62" r="4" ${jnt}/>
       </g>
-      <line x1="30" y1="60" x2="60" y2="68" stroke="white" stroke-width="3"/>
-      <line x1="60" y1="68" x2="90" y2="64" stroke="white" stroke-width="3"/>
-      <line x1="60" y1="68" x2="62" y2="85" stroke="white" stroke-width="3"/>
-      <line x1="90" y1="64" x2="92" y2="85" stroke="white" stroke-width="3"/>
-      </svg>`,
-    lateral:`<svg viewBox="0 0 100 130" width="72" height="100">
-      <circle cx="50" cy="14" r="10" fill="white"/>
-      <line x1="50" y1="24" x2="50" y2="70" stroke="white" stroke-width="3"/>
-      <g style="transform-origin:42px 42px;animation:lat 2s ease-in-out infinite"><line x1="50" y1="38" x2="16" y2="52" stroke="white" stroke-width="3"/></g>
-      <g style="transform-origin:58px 42px;animation:latR 2s ease-in-out infinite"><line x1="50" y1="38" x2="84" y2="52" stroke="white" stroke-width="3"/></g>
-      <line x1="50" y1="70" x2="34" y2="100" stroke="white" stroke-width="3"/>
-      <line x1="50" y1="70" x2="66" y2="100" stroke="white" stroke-width="3"/>
-      </svg>`,
-    kick:`<svg viewBox="0 0 100 130" width="72" height="100">
-      <circle cx="50" cy="14" r="10" fill="white"/>
-      <line x1="50" y1="24" x2="50" y2="70" stroke="white" stroke-width="3"/>
-      <line x1="50" y1="38" x2="26" y2="52" stroke="white" stroke-width="3"/>
-      <line x1="50" y1="38" x2="74" y2="52" stroke="white" stroke-width="3"/>
-      <line x1="50" y1="70" x2="34" y2="96" stroke="white" stroke-width="3"/>
-      <line x1="34" y1="96" x2="28" y2="116" stroke="white" stroke-width="3"/>
-      <g style="transform-origin:50px 70px;animation:kck 2s ease-in-out infinite"><line x1="50" y1="70" x2="66" y2="96" stroke="white" stroke-width="3"/><line x1="66" y1="96" x2="86" y2="84" stroke="white" stroke-width="3"/></g>
-      </svg>`
-  };
-  return svgs[type]||svgs.squat;
+      <g style="transform-origin:76px 40px;animation:sqArmR 2s ease-in-out infinite">
+        <circle cx="76" cy="40" r="5" ${jnt}/>
+        <line x1="76" y1="40" x2="94" y2="62" ${lim} ${lc}/>
+        <circle cx="94" cy="62" r="4" ${jnt}/>
+      </g>
+    </g>
+    <g style="transform-origin:48px 72px;animation:sqKneeL 2s ease-in-out infinite">
+      <line x1="48" y1="72" x2="34" y2="108" ${bod} ${lc}/>
+      <circle cx="34" cy="108" r="5" ${jnt}/>
+      <line x1="34" y1="108" x2="28" y2="138" ${lim} ${lc}/>
+      <circle cx="28" cy="138" r="4" fill="#c084fc"/>
+    </g>
+    <g style="transform-origin:72px 72px;animation:sqKneeR 2s ease-in-out infinite">
+      <line x1="72" y1="72" x2="86" y2="108" ${bod} ${lc}/>
+      <circle cx="86" cy="108" r="5" ${jnt}/>
+      <line x1="86" y1="108" x2="92" y2="138" ${lim} ${lc}/>
+      <circle cx="92" cy="138" r="4" fill="#c084fc"/>
+    </g>
+  </svg>`;
+
+  const thrust=`<svg viewBox="0 0 160 110" width="110" height="90" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
+    <line x1="8" y1="90" x2="152" y2="90" stroke="#333" stroke-width="3" ${lc}/>
+    <circle cx="22" cy="72" r="4" fill="#c084fc"/>
+    <line x1="22" y1="76" x2="40" y2="90" ${lim} ${lc}/>
+    <g style="transform-origin:90px 68px;animation:thHip 2s ease-in-out infinite">
+      <line x1="40" y1="90" x2="90" y2="68" ${bod} ${lc}/>
+      <circle cx="90" cy="68" r="7" ${jnt}/>
+      <g style="transform-origin:90px 68px;animation:thLegL 2s ease-in-out infinite">
+        <line x1="90" y1="68" x2="110" y2="90" ${bod} ${lc}/>
+        <circle cx="110" cy="90" r="5" ${jnt}/>
+        <line x1="110" y1="90" x2="140" y2="90" ${lim} ${lc}/>
+      </g>
+      <line x1="60" y1="78" x2="60" y2="48" ${lim} ${lc}/>
+      <circle cx="60" cy="48" r="5" ${jnt}/>
+      <circle cx="22" cy="58" r="13" fill="url(#hg)" ${hed}/>
+    </g>
+  </svg>`;
+
+  const press=`<svg viewBox="0 0 120 155" width="88" height="120" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
+    <circle cx="60" cy="15" r="13" fill="url(#hg)" ${hed}/>
+    <line x1="60" y1="28" x2="60" y2="76" ${bod} ${lc}/>
+    <circle cx="60" cy="76" r="6" ${jnt}/>
+    <line x1="60" y1="76" x2="38" y2="110" ${bod} ${lc}/>
+    <circle cx="38" cy="110" r="5" ${jnt}/>
+    <line x1="38" y1="110" x2="34" y2="140" ${lim} ${lc}/>
+    <line x1="60" y1="76" x2="82" y2="110" ${bod} ${lc}/>
+    <circle cx="82" cy="110" r="5" ${jnt}/>
+    <line x1="82" y1="110" x2="86" y2="140" ${lim} ${lc}/>
+    <circle cx="42" cy="42" r="5" ${jnt}/>
+    <g style="transform-origin:42px 42px;animation:prArmL 2s ease-in-out infinite">
+      <line x1="42" y1="42" x2="24" y2="62" ${lim} ${lc}/>
+      <circle cx="24" cy="62" r="4" ${jnt}/>
+      <line x1="24" y1="62" x2="14" y2="44" stroke="#ec4899" stroke-width="3" ${lc}/>
+    </g>
+    <circle cx="78" cy="42" r="5" ${jnt}/>
+    <g style="transform-origin:78px 42px;animation:prArmR 2s ease-in-out infinite">
+      <line x1="78" y1="42" x2="96" y2="62" ${lim} ${lc}/>
+      <circle cx="96" cy="62" r="4" ${jnt}/>
+      <line x1="96" y1="62" x2="106" y2="44" stroke="#ec4899" stroke-width="3" ${lc}/>
+    </g>
+  </svg>`;
+
+  const row=`<svg viewBox="0 0 150 120" width="108" height="100" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
+    <line x1="10" y1="105" x2="140" y2="105" stroke="#333" stroke-width="3" ${lc}/>
+    <circle cx="30" cy="35" r="13" fill="url(#hg)" ${hed}/>
+    <line x1="30" y1="48" x2="75" y2="68" ${bod} ${lc} style="transform-origin:30px 48px;transform:rotate(-10deg)"/>
+    <circle cx="75" cy="68" r="6" ${jnt}/>
+    <line x1="75" y1="68" x2="95" y2="105" ${bod} ${lc}/>
+    <circle cx="95" cy="105" r="5" ${jnt}/>
+    <line x1="95" y1="105" x2="120" y2="105" ${lim} ${lc}/>
+    <circle cx="75" cy="105" r="5" ${jnt}/>
+    <line x1="75" y1="105" x2="55" y2="105" ${lim} ${lc}/>
+    <circle cx="42" cy="60" r="5" ${jnt}/>
+    <g style="transform-origin:42px 60px;animation:rwArm 2s ease-in-out infinite">
+      <line x1="42" y1="60" x2="90" y2="48" ${lim} ${lc}/>
+      <circle cx="90" cy="48" r="4" ${jnt}/>
+      <g style="transform-origin:90px 48px;animation:rwFore 2s ease-in-out infinite">
+        <line x1="90" y1="48" x2="118" y2="58" stroke="#ec4899" stroke-width="3" ${lc}/>
+      </g>
+    </g>
+    <line x1="42" y1="60" x2="20" y2="72" ${lim} ${lc}/>
+    <circle cx="20" cy="72" r="4" ${jnt}/>
+  </svg>`;
+
+  const plank=`<svg viewBox="0 0 160 100" width="115" height="85" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
+    <g style="animation:plBody 2.5s ease-in-out infinite">
+      <circle cx="130" cy="28" r="13" fill="url(#hg)" ${hed}/>
+      <line x1="118" y1="36" x2="30" y2="58" ${bod} ${lc}/>
+      <circle cx="118" cy="36" r="5" ${jnt}/>
+      <circle cx="30" cy="58" r="6" ${jnt}/>
+      <line x1="118" y1="36" x2="108" y2="20" ${lim} ${lc}/>
+      <circle cx="108" cy="20" r="4" ${jnt}/>
+      <line x1="95" y1="40" x2="95" y2="62" ${bod} ${lc}/>
+      <circle cx="95" cy="62" r="5" ${jnt}/>
+      <line x1="65" y1="48" x2="65" y2="70" ${bod} ${lc}/>
+      <circle cx="65" cy="70" r="4" fill="#c084fc"/>
+      <line x1="30" y1="58" x2="10" y2="58" ${lim} ${lc}/>
+      <circle cx="10" cy="58" r="4" fill="#ec4899"/>
+    </g>
+  </svg>`;
+
+  const jump=`<svg viewBox="0 0 120 155" width="88" height="120" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
+    <g style="animation:jmpAll 1.3s ease-in-out infinite">
+      <circle cx="60" cy="14" r="13" fill="url(#hg)" ${hed}/>
+      <line x1="60" y1="27" x2="60" y2="72" ${bod} ${lc}/>
+      <circle cx="60" cy="72" r="6" ${jnt}/>
+      <circle cx="42" cy="40" r="5" ${jnt}/>
+      <g style="transform-origin:42px 40px;animation:jmpArmL 1.3s ease-in-out infinite">
+        <line x1="42" y1="40" x2="18" y2="58" ${lim} ${lc}/>
+        <circle cx="18" cy="58" r="4" ${jnt}/>
+      </g>
+      <circle cx="78" cy="40" r="5" ${jnt}/>
+      <g style="transform-origin:78px 40px;animation:jmpArmR 1.3s ease-in-out infinite">
+        <line x1="78" y1="40" x2="102" y2="58" ${lim} ${lc}/>
+        <circle cx="102" cy="58" r="4" ${jnt}/>
+      </g>
+      <line x1="60" y1="72" x2="40" y2="108" ${bod} ${lc}/>
+      <circle cx="40" cy="108" r="5" ${jnt}/>
+      <line x1="40" y1="108" x2="34" y2="138" ${lim} ${lc}/>
+      <circle cx="34" cy="138" r="4" fill="#c084fc"/>
+      <line x1="60" y1="72" x2="80" y2="108" ${bod} ${lc}/>
+      <circle cx="80" cy="108" r="5" ${jnt}/>
+      <line x1="80" y1="108" x2="86" y2="138" ${lim} ${lc}/>
+      <circle cx="86" cy="138" r="4" fill="#c084fc"/>
+    </g>
+  </svg>`;
+
+  const lunge=`<svg viewBox="0 0 140 155" width="105" height="120" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
+    <circle cx="70" cy="14" r="13" fill="url(#hg)" ${hed}/>
+    <line x1="70" y1="27" x2="70" y2="72" ${bod} ${lc}/>
+    <circle cx="70" cy="72" r="6" ${jnt}/>
+    <line x1="70" y1="42" x2="46" y2="60" ${lim} ${lc}/>
+    <circle cx="46" cy="60" r="4" ${jnt}/>
+    <line x1="70" y1="42" x2="94" y2="60" ${lim} ${lc}/>
+    <circle cx="94" cy="60" r="4" ${jnt}/>
+    <g style="transform-origin:70px 72px;animation:lngFwd 2s ease-in-out infinite">
+      <line x1="70" y1="72" x2="44" y2="108" ${bod} ${lc}/>
+      <circle cx="44" cy="108" r="5" ${jnt}/>
+      <line x1="44" y1="108" x2="22" y2="138" ${lim} ${lc}/>
+      <circle cx="22" cy="138" r="4" fill="#c084fc"/>
+    </g>
+    <g style="transform-origin:70px 72px;animation:lngBack 2s ease-in-out infinite">
+      <line x1="70" y1="72" x2="96" y2="108" ${bod} ${lc}/>
+      <circle cx="96" cy="108" r="5" ${jnt}/>
+      <line x1="96" y1="108" x2="116" y2="138" ${lim} ${lc}/>
+      <circle cx="116" cy="138" r="4" fill="#c084fc"/>
+    </g>
+  </svg>`;
+
+  const crunch=`<svg viewBox="0 0 150 105" width="112" height="90" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
+    <line x1="10" y1="95" x2="140" y2="95" stroke="#222" stroke-width="3" ${lc}/>
+    <g style="transform-origin:28px 58px;animation:crTorso 2s ease-in-out infinite">
+      <circle cx="18" cy="28" r="13" fill="url(#hg)" ${hed}/>
+      <line x1="18" y1="41" x2="28" y2="68" ${bod} ${lc}/>
+      <line x1="18" y1="52" x2="2" y2="66" ${lim} ${lc}/>
+      <circle cx="2" cy="66" r="4" ${jnt}/>
+    </g>
+    <line x1="28" y1="68" x2="68" y2="75" ${bod} ${lc}/>
+    <circle cx="68" cy="75" r="6" ${jnt}/>
+    <g style="transform-origin:68px 75px;animation:crLegL 2s ease-in-out infinite">
+      <line x1="68" y1="75" x2="98" y2="68" ${bod} ${lc}/>
+      <circle cx="98" cy="68" r="5" ${jnt}/>
+      <line x1="98" y1="68" x2="130" y2="78" ${lim} ${lc}/>
+      <circle cx="130" cy="78" r="4" fill="#c084fc"/>
+    </g>
+    <g style="transform-origin:68px 75px;animation:crLegR 2s ease-in-out infinite">
+      <line x1="68" y1="75" x2="100" y2="88" ${bod} ${lc}/>
+      <circle cx="100" cy="88" r="5" ${jnt}/>
+      <line x1="100" y1="88" x2="132" y2="95" ${lim} ${lc}/>
+      <circle cx="132" cy="95" r="4" fill="#c084fc"/>
+    </g>
+  </svg>`;
+
+  const lateral=`<svg viewBox="0 0 120 155" width="88" height="120" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
+    <circle cx="60" cy="14" r="13" fill="url(#hg)" ${hed}/>
+    <line x1="60" y1="27" x2="60" y2="76" ${bod} ${lc}/>
+    <circle cx="60" cy="76" r="6" ${jnt}/>
+    <line x1="60" y1="76" x2="38" y2="112" ${bod} ${lc}/>
+    <circle cx="38" cy="112" r="5" ${jnt}/>
+    <line x1="38" y1="112" x2="34" y2="142" ${lim} ${lc}/>
+    <line x1="60" y1="76" x2="82" y2="112" ${bod} ${lc}/>
+    <circle cx="82" cy="112" r="5" ${jnt}/>
+    <line x1="82" y1="112" x2="86" y2="142" ${lim} ${lc}/>
+    <circle cx="42" cy="42" r="5" ${jnt}/>
+    <g style="transform-origin:42px 42px;animation:latArmL 2s ease-in-out infinite">
+      <line x1="42" y1="42" x2="14" y2="52" ${lim} ${lc}/>
+      <circle cx="14" cy="52" r="4" ${jnt}/>
+      <line x1="14" y1="52" x2="6" y2="32" stroke="#ec4899" stroke-width="3" ${lc}/>
+    </g>
+    <circle cx="78" cy="42" r="5" ${jnt}/>
+    <g style="transform-origin:78px 42px;animation:latArmR 2s ease-in-out infinite">
+      <line x1="78" y1="42" x2="106" y2="52" ${lim} ${lc}/>
+      <circle cx="106" cy="52" r="4" ${jnt}/>
+      <line x1="106" y1="52" x2="114" y2="32" stroke="#ec4899" stroke-width="3" ${lc}/>
+    </g>
+  </svg>`;
+
+  const kick=`<svg viewBox="0 0 160 130" width="115" height="110" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
+    <circle cx="30" cy="22" r="13" fill="url(#hg)" ${hed}/>
+    <line x1="30" y1="35" x2="62" y2="60" ${bod} ${lc}/>
+    <circle cx="62" cy="60" r="6" ${jnt}/>
+    <line x1="62" y1="60" x2="52" y2="95" ${bod} ${lc}/>
+    <circle cx="52" cy="95" r="5" ${jnt}/>
+    <line x1="52" y1="95" x2="42" y2="120" ${lim} ${lc}/>
+    <circle cx="42" cy="120" r="4" fill="#c084fc"/>
+    <line x1="30" y1="35" x2="14" y2="55" ${lim} ${lc}/>
+    <circle cx="14" cy="55" r="4" ${jnt}/>
+    <line x1="14" y1="55" x2="8" y2="38" stroke="#ec4899" stroke-width="3" ${lc}/>
+    <line x1="30" y1="35" x2="48" y2="52" ${lim} ${lc}/>
+    <circle cx="48" cy="52" r="4" ${jnt}/>
+    <g style="transform-origin:62px 60px;animation:kckLeg 2s ease-in-out infinite">
+      <line x1="62" y1="60" x2="90" y2="80" ${bod} ${lc}/>
+      <circle cx="90" cy="80" r="5" ${jnt}/>
+      <g style="transform-origin:90px 80px;animation:kckFore 2s ease-in-out infinite">
+        <line x1="90" y1="80" x2="130" y2="68" ${lim} ${lc}/>
+        <circle cx="130" cy="68" r="4" fill="#ec4899"/>
+      </g>
+    </g>
+  </svg>`;
+
+  const figs={squat,thrust,press,row,plank,jump,lunge,crunch,lateral,kick};
+  return figs[type]||figs.squat;
 }
 
 function renderActiveExercise(){
@@ -1051,7 +1226,10 @@ function renderActiveExercise(){
     document.getElementById('alt-name').textContent=origEx.alt.name;
     document.getElementById('alt-desc').textContent=origEx.alt.desc;
   }
-  if(S.voiceOn)setTimeout(()=>speak(voiceTxt),600);
+  if(S.voiceOn){
+    const intro=S.exIdx===0&&S.setIdx===0?'¡Vamos a comenzar! ':S.setIdx===0?'Siguiente ejercicio. ':'';
+    setTimeout(()=>speak(intro+voiceTxt),600);
+  }
 }
 
 function completeSet(){
@@ -1070,9 +1248,9 @@ function completeSet(){
     startRest(ex.rest||45);
   }else{
     document.getElementById('wa-set-cur').textContent=S.setIdx+1;
-    const nextTip=['¡Excelente!','¡Muy bien!','¡Sigue así!','¡Eso es!'][S.setIdx%4];
-    toast(nextTip+' Serie '+(S.setIdx+1)+' de '+ex.sets);
-    if(S.voiceOn)speak('Ahora descansa '+ex.rest+' segundos antes de la siguiente serie.');
+    const tips=['¡Excelente! Esa es tu fuerza.','¡Increíble! Sigue así.','¡Eso es! No pares.','¡Muy bien! Cada serie cuenta.'];
+    toast(tips[S.setIdx%4]+' Serie '+(S.setIdx+1)+' de '+ex.sets);
+    if(S.voiceOn)speak(tips[S.setIdx%4]+' Descansa '+ex.rest+' segundos y prepárate para la siguiente serie.');
   }
 }
 
@@ -1089,6 +1267,61 @@ function switchToAlt(){
   document.getElementById('alt-arrow').textContent='▾';
   renderActiveExercise();
   toast('💡 Ejercicio alternativo activado');
+}
+
+// ══ VOICE COMMANDS ══
+function initVoiceCmd(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){toast('Tu dispositivo no soporta comandos de voz');return false;}
+  S.sr=new SR();S.sr.lang='es-ES';S.sr.continuous=true;S.sr.interimResults=false;
+  S.sr.onresult=e=>{
+    const cmd=e.results[e.results.length-1][0].transcript.toLowerCase().trim();
+    toast('🎙 "'+cmd.slice(0,28)+'"');processCmd(cmd);
+  };
+  S.sr.onend=()=>{if(S.srActive)setTimeout(()=>{try{S.sr.start()}catch(e){}},400);};
+  S.sr.onerror=()=>{};
+  return true;
+}
+function processCmd(cmd){
+  if(/siguiente|listo|lista|hecha|hecho|serie|completa/.test(cmd)){
+    completeSet();
+  } else if(/ocupa|máquina|alternativ/.test(cmd)){
+    switchToAlt();speak('Aquí tienes la alternativa sin máquina. ¡Tú puedes!');
+  } else if(/cuántas|faltan|quedan|cuánto|falta/.test(cmd)){
+    if(!S.workout)return;
+    const left=S.workout.exercises.length-S.exIdx-1;
+    const sets=S.workout.exercises[S.exIdx].sets-S.setIdx-1;
+    speak('Te '+(sets>0?'faltan '+sets+' series más de este ejercicio':'queda la última serie')+' y '+left+' ejercicios más. ¡Vas increíble!');
+  } else if(/ánimo|motiv|puedo|cansa|ayud/.test(cmd)){
+    const f=['¡Eres una campeona, no pares!','¡Cada repetición te acerca a tu meta!','¡Tú puedes, ya casi terminas!','¡Ese cuerpo que quieres lo estás construyendo ahora!','¡Sigue así, estás haciendo un trabajo increíble!'];
+    speak(f[Math.floor(Math.random()*f.length)]);
+  } else if(/pausa|espera|momento/.test(cmd)){
+    speak('Tomando una pausa. Respira profundo. Cuando estés lista di "siguiente" para continuar.');
+  } else if(/salir|terminar|parar|basta/.test(cmd)){
+    speak('¿Segura que quieres salir? Di "confirmar" para salir.');
+    S._exitPending=true;
+  } else if(/confirmar/.test(cmd)&&S._exitPending){
+    S._exitPending=false;confirmExit();
+  } else if(/tiempo|cuánto tiempo|minutos/.test(cmd)){
+    if(S.wStart){const m=Math.round((Date.now()-S.wStart)/60000);speak('Llevas '+m+' minutos entrenando. ¡Excelente!')}
+  }
+}
+function toggleListen(){
+  if(!S.sr&&!initVoiceCmd())return;
+  S.srActive=!S.srActive;
+  const btn=document.getElementById('listen-btn');
+  const dot=document.getElementById('listen-dot');
+  if(S.srActive){
+    try{S.sr.start();}catch(e){}
+    btn.style.background='rgba(236,72,153,.3)';btn.style.borderColor='rgba(236,72,153,.6)';
+    dot.style.opacity='1';dot.style.animation='wv .8s ease-in-out infinite alternate';
+    speak('Entrenadora activada. Puedes decirme: siguiente serie, cuántas me faltan, ánimo, o máquina ocupada.');
+  } else {
+    try{S.sr.stop();}catch(e){}
+    btn.style.background='rgba(236,72,153,.15)';btn.style.borderColor='rgba(236,72,153,.35)';
+    dot.style.opacity='0.4';dot.style.animation='none';
+    speak('Comandos de voz desactivados.');
+  }
 }
 
 function toggleVoice(){
@@ -1386,28 +1619,68 @@ function saveProfile(){
 
 // ══ ADMIN ══
 function renderAdmin(){
-  const users=DB.getUsers();
+  const users=DB.getUsers().filter(u=>u.email!=='admin@biofit.com');
   const complete=users.filter(u=>u.profile).length;
+  const totalW=users.reduce((a,u)=>{const h=DB.getWorkoutHistory(u.id);return a+h.length;},0);
   document.getElementById('admin-cards').innerHTML=`
-    <div class="asc"><div style="font-size:24px;font-weight:900;color:#c084fc;margin-bottom:2px">${users.length}</div><div style="font-size:8px;color:var(--d);line-height:12px">Usuarias</div></div>
-    <div class="asc"><div style="font-size:24px;font-weight:900;color:#34d399;margin-bottom:2px">${complete}</div><div style="font-size:8px;color:var(--d);line-height:12px">Completas</div></div>
-    <div class="asc"><div style="font-size:24px;font-weight:900;color:#fbbf24;margin-bottom:2px">${users.length-complete}</div><div style="font-size:8px;color:var(--d);line-height:12px">Pendientes</div></div>`;
+    <div class="asc" style="background:rgba(147,51,234,.12);border:1px solid rgba(147,51,234,.25);border-radius:16px;padding:14px 10px;text-align:center">
+      <div style="font-size:28px;font-weight:900;color:#c084fc">${users.length}</div>
+      <div style="font-size:9px;color:var(--m);margin-top:3px;font-weight:600">Usuarias</div>
+    </div>
+    <div class="asc" style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);border-radius:16px;padding:14px 10px;text-align:center">
+      <div style="font-size:28px;font-weight:900;color:#34d399">${complete}</div>
+      <div style="font-size:9px;color:var(--m);margin-top:3px;font-weight:600">Activas</div>
+    </div>
+    <div class="asc" style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:16px;padding:14px 10px;text-align:center">
+      <div style="font-size:28px;font-weight:900;color:#fbbf24">${totalW}</div>
+      <div style="font-size:9px;color:var(--m);margin-top:3px;font-weight:600">Entrenos</div>
+    </div>`;
   const list=document.getElementById('admin-users');
-  if(!users.length){list.innerHTML='<div style="text-align:center;color:var(--d);padding:32px;font-size:12px">No hay usuarias registradas aún</div>';return;}
+  if(!users.length){
+    list.innerHTML=`<div style="text-align:center;padding:40px 20px">
+      <div style="font-size:48px;margin-bottom:12px">👥</div>
+      <div style="font-size:14px;font-weight:700;color:var(--m);margin-bottom:6px">Sin usuarias aún</div>
+      <div style="font-size:11px;color:var(--d)">Las usuarias aparecerán aquí cuando se registren en la app</div>
+    </div>`;
+    return;
+  }
+  const goalN={glutes:'🍑 Glúteos',upper:'💪 Superior',hiit:'⚡ HIIT',core:'🎯 Core',fullbody:'🏋️ Full Body'};
+  const actN=['Sedentaria','Ligera','Moderada','Activa'];
   list.innerHTML=users.map(u=>{
     const p=u.profile;const m=p?.metrics||{};
-    const goalN={glutes:'🍑 Glúteos',upper:'💪 Superior',hiit:'⚡ HIIT',core:'🎯 Core',fullbody:'🏋️ Full Body'};
-    return `<div class="ucard">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-        <div class="uc-ava">${u.name[0]?.toUpperCase()}</div>
-        <div><div style="font-size:13px;font-weight:700">${u.name}</div><div style="font-size:10px;color:var(--m);margin-top:1px">${u.email}</div></div>
-        <div style="margin-left:auto"><span class="pill ${p?'pill-g':'pill-y'}">${p?'Activa':'Nuevo'}</span></div>
+    const hist=DB.getWorkoutHistory(u.id);
+    const avatarColors=['#7c3aed','#db2777','#0891b2','#059669','#d97706'];
+    const ac=avatarColors[u.name.charCodeAt(0)%avatarColors.length];
+    return `<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:16px;margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:${p?'14px':'0'}">
+        <div style="width:44px;height:44px;border-radius:50%;background:${ac};display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;flex-shrink:0">${u.name[0]?.toUpperCase()}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${u.name}</div>
+          <div style="font-size:10px;color:var(--m);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${u.email}</div>
+          <div style="margin-top:4px;display:flex;gap:5px;flex-wrap:wrap">
+            <span class="pill ${p?'pill-g':'pill-y'}">${p?'✓ Perfil completo':'⏳ Sin perfil'}</span>
+            ${hist.length?`<span class="pill pill-p">${hist.length} entrenos</span>`:''}
+          </div>
+        </div>
       </div>
-      ${p?`<div class="uc-grid">
-        <div class="uc-box"><div class="uc-val">${p.weight} kg</div><div class="uc-lbl">Peso</div></div>
-        <div class="uc-box"><div class="uc-val">${m.bmi||'—'}</div><div class="uc-lbl">IMC</div></div>
-        <div class="uc-box"><div class="uc-val">${goalN[p.goal]||'—'}</div><div class="uc-lbl">Objetivo</div></div>
-      </div>`:'<div style="font-size:10px;color:var(--d);text-align:center;padding:8px">Sin perfil configurado</div>'}
+      ${p?`<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:7px">
+        <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:8px;text-align:center">
+          <div style="font-size:13px;font-weight:800;color:#c084fc">${p.weight}<span style="font-size:8px;color:var(--d)">kg</span></div>
+          <div style="font-size:8px;color:var(--d);margin-top:1px">Peso</div>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:8px;text-align:center">
+          <div style="font-size:13px;font-weight:800;color:#34d399">${m.bmi||'—'}</div>
+          <div style="font-size:8px;color:var(--d);margin-top:1px">IMC</div>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:8px;text-align:center">
+          <div style="font-size:13px;font-weight:800;color:#fbbf24">${m.tmb||'—'}</div>
+          <div style="font-size:8px;color:var(--d);margin-top:1px">TMB</div>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border-radius:10px;padding:8px;text-align:center">
+          <div style="font-size:11px;font-weight:800;color:#f9a8d4">${goalN[p.goal]||'—'}</div>
+          <div style="font-size:8px;color:var(--d);margin-top:1px">Meta</div>
+        </div>
+      </div>`:''}
     </div>`;
   }).join('');
 }
