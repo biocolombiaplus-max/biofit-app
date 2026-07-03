@@ -168,31 +168,38 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:-apple-system,
 .uc-val{font-size:14px;font-weight:700;color:#c084fc}
 .uc-lbl{font-size:8px;color:var(--d);margin-top:2px}
 /* STICK FIGURE ANIMATIONS */
-@keyframes sqBody{0%,100%{transform:translateY(0)}50%{transform:translateY(22px)}}
-@keyframes sqKneeL{0%,100%{transform:rotate(0deg)}50%{transform:rotate(42deg)}}
-@keyframes sqKneeR{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-42deg)}}
-@keyframes sqArmL{0%,100%{transform:rotate(0deg)}50%{transform:rotate(28deg)}}
-@keyframes sqArmR{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-28deg)}}
-@keyframes thHip{0%,100%{transform:translateY(0) rotate(0)}45%{transform:translateY(-20px) rotate(-14deg)}}
-@keyframes thLegL{0%,100%{transform:rotate(0deg)}45%{transform:rotate(-30deg)}}
-@keyframes thLegR{0%,100%{transform:rotate(0deg)}45%{transform:rotate(30deg)}}
-@keyframes prArmL{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-70deg)}}
-@keyframes prArmR{0%,100%{transform:rotate(0deg)}50%{transform:rotate(70deg)}}
-@keyframes rwArm{0%,100%{transform:rotate(-15deg)}50%{transform:rotate(35deg)}}
-@keyframes rwFore{0%,100%{transform:rotate(10deg)}50%{transform:rotate(-25deg)}}
-@keyframes plBody{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
-@keyframes jmpAll{0%,100%{transform:translateY(0)}38%{transform:translateY(-22px)}}
-@keyframes jmpArmL{0%,100%{transform:rotate(0deg)}38%{transform:rotate(-55deg)}}
-@keyframes jmpArmR{0%,100%{transform:rotate(0deg)}38%{transform:rotate(55deg)}}
-@keyframes lngFwd{0%,100%{transform:rotate(0deg)}50%{transform:rotate(35deg)}}
-@keyframes lngBack{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-28deg)}}
-@keyframes crTorso{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-36deg)}}
-@keyframes crLegL{0%,100%{transform:rotate(0deg)}50%{transform:rotate(25deg)}}
-@keyframes crLegR{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-25deg)}}
-@keyframes latArmL{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-72deg)}}
-@keyframes latArmR{0%,100%{transform:rotate(0deg)}50%{transform:rotate(72deg)}}
-@keyframes kckLeg{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-58deg)}}
-@keyframes kckFore{0%,100%{transform:rotate(0deg)}50%{transform:rotate(30deg)}}
+@keyframes sqBody{0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(26px) scaleY(.9)}}
+@keyframes sqKneeL{0%,100%{transform:rotate(0)}50%{transform:rotate(50deg)}}
+@keyframes sqKneeR{0%,100%{transform:rotate(0)}50%{transform:rotate(-50deg)}}
+@keyframes sqCalfL{0%,100%{transform:rotate(0)}50%{transform:rotate(-42deg)}}
+@keyframes sqCalfR{0%,100%{transform:rotate(0)}50%{transform:rotate(42deg)}}
+@keyframes sqArmL{0%,100%{transform:rotate(0)}50%{transform:rotate(-32deg)}}
+@keyframes sqArmR{0%,100%{transform:rotate(0)}50%{transform:rotate(32deg)}}
+@keyframes thUp{0%,100%{transform:translateY(0) rotate(0)}45%{transform:translateY(-26px) rotate(-18deg)}}
+@keyframes thLegBend{0%,100%{transform:rotate(0)}45%{transform:rotate(-22deg)}}
+@keyframes thLegBendR{0%,100%{transform:rotate(0)}45%{transform:rotate(22deg)}}
+@keyframes prArm{0%,100%{transform:rotate(0)}50%{transform:rotate(-78deg)}}
+@keyframes prArmR{0%,100%{transform:rotate(0)}50%{transform:rotate(78deg)}}
+@keyframes prFore{0%,100%{transform:rotate(35deg)}50%{transform:rotate(-10deg)}}
+@keyframes prForeR{0%,100%{transform:rotate(-35deg)}50%{transform:rotate(10deg)}}
+@keyframes rwPull{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(45deg)}}
+@keyframes rwPullF{0%,100%{transform:rotate(15deg)}50%{transform:rotate(-30deg)}}
+@keyframes plBreath{0%,100%{transform:scaleY(1) translateY(0)}50%{transform:scaleY(1.03) translateY(-1px)}}
+@keyframes jmpUp{0%,100%{transform:translateY(0)}40%{transform:translateY(-28px)}}
+@keyframes jmpLeg{0%,100%{transform:rotate(0)}40%{transform:rotate(28deg)}}
+@keyframes jmpLegR{0%,100%{transform:rotate(0)}40%{transform:rotate(-28deg)}}
+@keyframes jmpArm{0%,100%{transform:rotate(0)}40%{transform:rotate(-72deg)}}
+@keyframes jmpArmR{0%,100%{transform:rotate(0)}40%{transform:rotate(72deg)}}
+@keyframes lngThF{0%,100%{transform:rotate(0)}50%{transform:rotate(38deg)}}
+@keyframes lngCaF{0%,100%{transform:rotate(0)}50%{transform:rotate(-32deg)}}
+@keyframes lngThB{0%,100%{transform:rotate(0)}50%{transform:rotate(-30deg)}}
+@keyframes crUp{0%,100%{transform:rotate(0)}50%{transform:rotate(-42deg)}}
+@keyframes crLgL{0%,100%{transform:rotate(0)}50%{transform:rotate(22deg)}}
+@keyframes crLgR{0%,100%{transform:rotate(0)}50%{transform:rotate(-22deg)}}
+@keyframes latAL{0%,100%{transform:rotate(0)}50%{transform:rotate(-82deg)}}
+@keyframes latAR{0%,100%{transform:rotate(0)}50%{transform:rotate(82deg)}}
+@keyframes kckBk{0%,100%{transform:rotate(0)}50%{transform:rotate(-68deg)}}
+@keyframes kckCf{0%,100%{transform:rotate(0)}50%{transform:rotate(32deg)}}
 </style>
 </head>
 <body>
@@ -956,246 +963,254 @@ function getExType(name){
   return 'squat';
 }
 
-function makeFigure(type){
-  const lc='stroke-linecap="round" stroke-linejoin="round"';
-  const bod='stroke="#e2d9f3" stroke-width="5"';
-  const lim='stroke="#c084fc" stroke-width="4"';
-  const jnt='fill="#9333ea"';
-  const hed='fill="#fff" stroke="#c084fc" stroke-width="2"';
-  const grd=`<defs><radialGradient id="hg" cx="40%" cy="35%"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#e0d0ff"/></radialGradient></defs>`;
+function makeFigure(type,altMode){
+  const pc=altMode?'#f59e0b':'#9333ea';
+  const sc=altMode?'#d97706':'#ec4899';
+  const sk='#fcd5b0';const sh='#dba880';const hr='#3b0764';const shoe='#2d1b69';
+  const G=`<defs><linearGradient id="ug" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${pc}"/><stop offset="100%" stop-color="${sc}"/></linearGradient><linearGradient id="sg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="${sk}"/><stop offset="100%" stop-color="${sh}"/></linearGradient></defs>`;
+  const FLT=`style="filter:drop-shadow(0 6px 16px rgba(147,51,234,.5))"`;
+  const Hd=(cx,cy)=>`<ellipse cx="${cx}" cy="${cy-4}" rx="13" ry="10" fill="${hr}"/><circle cx="${cx+11}" cy="${cy-10}" r="7" fill="${hr}"/><ellipse cx="${cx}" cy="${cy+1}" rx="12" ry="13" fill="url(#sg)"/><ellipse cx="${cx-4.5}" cy="${cy}" rx="2.2" ry="2.8" fill="#1a0f3d"/><circle cx="${cx-3.8}" cy="${cy-.8}" r=".9" fill="white"/><ellipse cx="${cx+4.5}" cy="${cy}" rx="2.2" ry="2.8" fill="#1a0f3d"/><circle cx="${cx+5.2}" cy="${cy-.8}" r=".9" fill="white"/><path d="M${cx-3.5},${cy+5.5}Q${cx},${cy+8.5}${cx+3.5},${cy+5.5}" stroke="#c08060" stroke-width="1.5" fill="none" stroke-linecap="round"/><ellipse cx="${cx-7}" cy="${cy+3}" rx="2.5" ry="1.5" fill="rgba(236,72,153,.28)"/><ellipse cx="${cx+7}" cy="${cy+3}" rx="2.5" ry="1.5" fill="rgba(236,72,153,.28)"/>`;
 
-  const squat=`<svg viewBox="0 0 120 155" width="88" height="120" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
-    <g style="animation:sqBody 2s ease-in-out infinite;transform-origin:60px 75px">
-      <circle cx="60" cy="15" r="13" fill="url(#hg)" ${hed}/>
-      <line x1="60" y1="28" x2="60" y2="72" ${bod} ${lc}/>
-      <circle cx="60" cy="72" r="6" ${jnt}/>
-      <g style="transform-origin:44px 40px;animation:sqArmL 2s ease-in-out infinite">
-        <circle cx="44" cy="40" r="5" ${jnt}/>
-        <line x1="44" y1="40" x2="26" y2="62" ${lim} ${lc}/>
-        <circle cx="26" cy="62" r="4" ${jnt}/>
+  if(type==='squat')return`<svg viewBox="0 0 130 175" width="96" height="140" ${FLT}>${G}
+    <ellipse cx="65" cy="171" rx="30" ry="6" fill="rgba(147,51,234,.15)"/>
+    <g style="animation:sqBody 2s ease-in-out infinite;transform-origin:65px 90px">
+      ${Hd(65,22)}
+      <rect x="59" y="35" width="12" height="9" rx="5" fill="url(#sg)"/>
+      <path d="M46,44C47,41 55,38 65,38C75,38 83,41 84,44L80,84C80,87 73,90 65,90C57,90 50,87 50,84Z" fill="url(#ug)"/>
+      <path d="M51,53C55,58 65,61 79,53" stroke="${sc}" stroke-width="1.5" fill="none"/>
+      <path d="M50,84L44,110L61,110L65,98L69,110L86,110L80,84Z" fill="${pc}"/>
+      <g style="transform-origin:47px 53px;animation:sqArmL 2s ease-in-out infinite">
+        <rect x="32" y="47" width="13" height="26" rx="6.5" fill="url(#sg)" transform="rotate(20,47,53)"/>
+        <rect x="22" y="69" width="12" height="22" rx="6" fill="url(#sg)" transform="rotate(30,34,71)"/>
       </g>
-      <g style="transform-origin:76px 40px;animation:sqArmR 2s ease-in-out infinite">
-        <circle cx="76" cy="40" r="5" ${jnt}/>
-        <line x1="76" y1="40" x2="94" y2="62" ${lim} ${lc}/>
-        <circle cx="94" cy="62" r="4" ${jnt}/>
-      </g>
-    </g>
-    <g style="transform-origin:48px 72px;animation:sqKneeL 2s ease-in-out infinite">
-      <line x1="48" y1="72" x2="34" y2="108" ${bod} ${lc}/>
-      <circle cx="34" cy="108" r="5" ${jnt}/>
-      <line x1="34" y1="108" x2="28" y2="138" ${lim} ${lc}/>
-      <circle cx="28" cy="138" r="4" fill="#c084fc"/>
-    </g>
-    <g style="transform-origin:72px 72px;animation:sqKneeR 2s ease-in-out infinite">
-      <line x1="72" y1="72" x2="86" y2="108" ${bod} ${lc}/>
-      <circle cx="86" cy="108" r="5" ${jnt}/>
-      <line x1="86" y1="108" x2="92" y2="138" ${lim} ${lc}/>
-      <circle cx="92" cy="138" r="4" fill="#c084fc"/>
-    </g>
-  </svg>`;
-
-  const thrust=`<svg viewBox="0 0 160 110" width="110" height="90" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
-    <line x1="8" y1="90" x2="152" y2="90" stroke="#333" stroke-width="3" ${lc}/>
-    <circle cx="22" cy="72" r="4" fill="#c084fc"/>
-    <line x1="22" y1="76" x2="40" y2="90" ${lim} ${lc}/>
-    <g style="transform-origin:90px 68px;animation:thHip 2s ease-in-out infinite">
-      <line x1="40" y1="90" x2="90" y2="68" ${bod} ${lc}/>
-      <circle cx="90" cy="68" r="7" ${jnt}/>
-      <g style="transform-origin:90px 68px;animation:thLegL 2s ease-in-out infinite">
-        <line x1="90" y1="68" x2="110" y2="90" ${bod} ${lc}/>
-        <circle cx="110" cy="90" r="5" ${jnt}/>
-        <line x1="110" y1="90" x2="140" y2="90" ${lim} ${lc}/>
-      </g>
-      <line x1="60" y1="78" x2="60" y2="48" ${lim} ${lc}/>
-      <circle cx="60" cy="48" r="5" ${jnt}/>
-      <circle cx="22" cy="58" r="13" fill="url(#hg)" ${hed}/>
-    </g>
-  </svg>`;
-
-  const press=`<svg viewBox="0 0 120 155" width="88" height="120" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
-    <circle cx="60" cy="15" r="13" fill="url(#hg)" ${hed}/>
-    <line x1="60" y1="28" x2="60" y2="76" ${bod} ${lc}/>
-    <circle cx="60" cy="76" r="6" ${jnt}/>
-    <line x1="60" y1="76" x2="38" y2="110" ${bod} ${lc}/>
-    <circle cx="38" cy="110" r="5" ${jnt}/>
-    <line x1="38" y1="110" x2="34" y2="140" ${lim} ${lc}/>
-    <line x1="60" y1="76" x2="82" y2="110" ${bod} ${lc}/>
-    <circle cx="82" cy="110" r="5" ${jnt}/>
-    <line x1="82" y1="110" x2="86" y2="140" ${lim} ${lc}/>
-    <circle cx="42" cy="42" r="5" ${jnt}/>
-    <g style="transform-origin:42px 42px;animation:prArmL 2s ease-in-out infinite">
-      <line x1="42" y1="42" x2="24" y2="62" ${lim} ${lc}/>
-      <circle cx="24" cy="62" r="4" ${jnt}/>
-      <line x1="24" y1="62" x2="14" y2="44" stroke="#ec4899" stroke-width="3" ${lc}/>
-    </g>
-    <circle cx="78" cy="42" r="5" ${jnt}/>
-    <g style="transform-origin:78px 42px;animation:prArmR 2s ease-in-out infinite">
-      <line x1="78" y1="42" x2="96" y2="62" ${lim} ${lc}/>
-      <circle cx="96" cy="62" r="4" ${jnt}/>
-      <line x1="96" y1="62" x2="106" y2="44" stroke="#ec4899" stroke-width="3" ${lc}/>
-    </g>
-  </svg>`;
-
-  const row=`<svg viewBox="0 0 150 120" width="108" height="100" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
-    <line x1="10" y1="105" x2="140" y2="105" stroke="#333" stroke-width="3" ${lc}/>
-    <circle cx="30" cy="35" r="13" fill="url(#hg)" ${hed}/>
-    <line x1="30" y1="48" x2="75" y2="68" ${bod} ${lc} style="transform-origin:30px 48px;transform:rotate(-10deg)"/>
-    <circle cx="75" cy="68" r="6" ${jnt}/>
-    <line x1="75" y1="68" x2="95" y2="105" ${bod} ${lc}/>
-    <circle cx="95" cy="105" r="5" ${jnt}/>
-    <line x1="95" y1="105" x2="120" y2="105" ${lim} ${lc}/>
-    <circle cx="75" cy="105" r="5" ${jnt}/>
-    <line x1="75" y1="105" x2="55" y2="105" ${lim} ${lc}/>
-    <circle cx="42" cy="60" r="5" ${jnt}/>
-    <g style="transform-origin:42px 60px;animation:rwArm 2s ease-in-out infinite">
-      <line x1="42" y1="60" x2="90" y2="48" ${lim} ${lc}/>
-      <circle cx="90" cy="48" r="4" ${jnt}/>
-      <g style="transform-origin:90px 48px;animation:rwFore 2s ease-in-out infinite">
-        <line x1="90" y1="48" x2="118" y2="58" stroke="#ec4899" stroke-width="3" ${lc}/>
+      <g style="transform-origin:83px 53px;animation:sqArmR 2s ease-in-out infinite">
+        <rect x="85" y="47" width="13" height="26" rx="6.5" fill="url(#sg)" transform="rotate(-20,83,53)"/>
+        <rect x="96" y="69" width="12" height="22" rx="6" fill="url(#sg)" transform="rotate(-30,96,71)"/>
       </g>
     </g>
-    <line x1="42" y1="60" x2="20" y2="72" ${lim} ${lc}/>
-    <circle cx="20" cy="72" r="4" ${jnt}/>
-  </svg>`;
-
-  const plank=`<svg viewBox="0 0 160 100" width="115" height="85" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
-    <g style="animation:plBody 2.5s ease-in-out infinite">
-      <circle cx="130" cy="28" r="13" fill="url(#hg)" ${hed}/>
-      <line x1="118" y1="36" x2="30" y2="58" ${bod} ${lc}/>
-      <circle cx="118" cy="36" r="5" ${jnt}/>
-      <circle cx="30" cy="58" r="6" ${jnt}/>
-      <line x1="118" y1="36" x2="108" y2="20" ${lim} ${lc}/>
-      <circle cx="108" cy="20" r="4" ${jnt}/>
-      <line x1="95" y1="40" x2="95" y2="62" ${bod} ${lc}/>
-      <circle cx="95" cy="62" r="5" ${jnt}/>
-      <line x1="65" y1="48" x2="65" y2="70" ${bod} ${lc}/>
-      <circle cx="65" cy="70" r="4" fill="#c084fc"/>
-      <line x1="30" y1="58" x2="10" y2="58" ${lim} ${lc}/>
-      <circle cx="10" cy="58" r="4" fill="#ec4899"/>
-    </g>
-  </svg>`;
-
-  const jump=`<svg viewBox="0 0 120 155" width="88" height="120" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
-    <g style="animation:jmpAll 1.3s ease-in-out infinite">
-      <circle cx="60" cy="14" r="13" fill="url(#hg)" ${hed}/>
-      <line x1="60" y1="27" x2="60" y2="72" ${bod} ${lc}/>
-      <circle cx="60" cy="72" r="6" ${jnt}/>
-      <circle cx="42" cy="40" r="5" ${jnt}/>
-      <g style="transform-origin:42px 40px;animation:jmpArmL 1.3s ease-in-out infinite">
-        <line x1="42" y1="40" x2="18" y2="58" ${lim} ${lc}/>
-        <circle cx="18" cy="58" r="4" ${jnt}/>
+    <g style="transform-origin:55px 110px;animation:sqKneeL 2s ease-in-out infinite">
+      <rect x="44" y="110" width="20" height="34" rx="10" fill="url(#sg)"/>
+      <g style="transform-origin:54px 144px;animation:sqCalfL 2s ease-in-out infinite">
+        <rect x="37" y="144" width="18" height="26" rx="9" fill="url(#sg)"/>
+        <ellipse cx="46" cy="171" rx="14" ry="5" fill="${shoe}"/>
       </g>
-      <circle cx="78" cy="40" r="5" ${jnt}/>
-      <g style="transform-origin:78px 40px;animation:jmpArmR 1.3s ease-in-out infinite">
-        <line x1="78" y1="40" x2="102" y2="58" ${lim} ${lc}/>
-        <circle cx="102" cy="58" r="4" ${jnt}/>
-      </g>
-      <line x1="60" y1="72" x2="40" y2="108" ${bod} ${lc}/>
-      <circle cx="40" cy="108" r="5" ${jnt}/>
-      <line x1="40" y1="108" x2="34" y2="138" ${lim} ${lc}/>
-      <circle cx="34" cy="138" r="4" fill="#c084fc"/>
-      <line x1="60" y1="72" x2="80" y2="108" ${bod} ${lc}/>
-      <circle cx="80" cy="108" r="5" ${jnt}/>
-      <line x1="80" y1="108" x2="86" y2="138" ${lim} ${lc}/>
-      <circle cx="86" cy="138" r="4" fill="#c084fc"/>
     </g>
-  </svg>`;
-
-  const lunge=`<svg viewBox="0 0 140 155" width="105" height="120" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
-    <circle cx="70" cy="14" r="13" fill="url(#hg)" ${hed}/>
-    <line x1="70" y1="27" x2="70" y2="72" ${bod} ${lc}/>
-    <circle cx="70" cy="72" r="6" ${jnt}/>
-    <line x1="70" y1="42" x2="46" y2="60" ${lim} ${lc}/>
-    <circle cx="46" cy="60" r="4" ${jnt}/>
-    <line x1="70" y1="42" x2="94" y2="60" ${lim} ${lc}/>
-    <circle cx="94" cy="60" r="4" ${jnt}/>
-    <g style="transform-origin:70px 72px;animation:lngFwd 2s ease-in-out infinite">
-      <line x1="70" y1="72" x2="44" y2="108" ${bod} ${lc}/>
-      <circle cx="44" cy="108" r="5" ${jnt}/>
-      <line x1="44" y1="108" x2="22" y2="138" ${lim} ${lc}/>
-      <circle cx="22" cy="138" r="4" fill="#c084fc"/>
-    </g>
-    <g style="transform-origin:70px 72px;animation:lngBack 2s ease-in-out infinite">
-      <line x1="70" y1="72" x2="96" y2="108" ${bod} ${lc}/>
-      <circle cx="96" cy="108" r="5" ${jnt}/>
-      <line x1="96" y1="108" x2="116" y2="138" ${lim} ${lc}/>
-      <circle cx="116" cy="138" r="4" fill="#c084fc"/>
-    </g>
-  </svg>`;
-
-  const crunch=`<svg viewBox="0 0 150 105" width="112" height="90" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
-    <line x1="10" y1="95" x2="140" y2="95" stroke="#222" stroke-width="3" ${lc}/>
-    <g style="transform-origin:28px 58px;animation:crTorso 2s ease-in-out infinite">
-      <circle cx="18" cy="28" r="13" fill="url(#hg)" ${hed}/>
-      <line x1="18" y1="41" x2="28" y2="68" ${bod} ${lc}/>
-      <line x1="18" y1="52" x2="2" y2="66" ${lim} ${lc}/>
-      <circle cx="2" cy="66" r="4" ${jnt}/>
-    </g>
-    <line x1="28" y1="68" x2="68" y2="75" ${bod} ${lc}/>
-    <circle cx="68" cy="75" r="6" ${jnt}/>
-    <g style="transform-origin:68px 75px;animation:crLegL 2s ease-in-out infinite">
-      <line x1="68" y1="75" x2="98" y2="68" ${bod} ${lc}/>
-      <circle cx="98" cy="68" r="5" ${jnt}/>
-      <line x1="98" y1="68" x2="130" y2="78" ${lim} ${lc}/>
-      <circle cx="130" cy="78" r="4" fill="#c084fc"/>
-    </g>
-    <g style="transform-origin:68px 75px;animation:crLegR 2s ease-in-out infinite">
-      <line x1="68" y1="75" x2="100" y2="88" ${bod} ${lc}/>
-      <circle cx="100" cy="88" r="5" ${jnt}/>
-      <line x1="100" y1="88" x2="132" y2="95" ${lim} ${lc}/>
-      <circle cx="132" cy="95" r="4" fill="#c084fc"/>
-    </g>
-  </svg>`;
-
-  const lateral=`<svg viewBox="0 0 120 155" width="88" height="120" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
-    <circle cx="60" cy="14" r="13" fill="url(#hg)" ${hed}/>
-    <line x1="60" y1="27" x2="60" y2="76" ${bod} ${lc}/>
-    <circle cx="60" cy="76" r="6" ${jnt}/>
-    <line x1="60" y1="76" x2="38" y2="112" ${bod} ${lc}/>
-    <circle cx="38" cy="112" r="5" ${jnt}/>
-    <line x1="38" y1="112" x2="34" y2="142" ${lim} ${lc}/>
-    <line x1="60" y1="76" x2="82" y2="112" ${bod} ${lc}/>
-    <circle cx="82" cy="112" r="5" ${jnt}/>
-    <line x1="82" y1="112" x2="86" y2="142" ${lim} ${lc}/>
-    <circle cx="42" cy="42" r="5" ${jnt}/>
-    <g style="transform-origin:42px 42px;animation:latArmL 2s ease-in-out infinite">
-      <line x1="42" y1="42" x2="14" y2="52" ${lim} ${lc}/>
-      <circle cx="14" cy="52" r="4" ${jnt}/>
-      <line x1="14" y1="52" x2="6" y2="32" stroke="#ec4899" stroke-width="3" ${lc}/>
-    </g>
-    <circle cx="78" cy="42" r="5" ${jnt}/>
-    <g style="transform-origin:78px 42px;animation:latArmR 2s ease-in-out infinite">
-      <line x1="78" y1="42" x2="106" y2="52" ${lim} ${lc}/>
-      <circle cx="106" cy="52" r="4" ${jnt}/>
-      <line x1="106" y1="52" x2="114" y2="32" stroke="#ec4899" stroke-width="3" ${lc}/>
-    </g>
-  </svg>`;
-
-  const kick=`<svg viewBox="0 0 160 130" width="115" height="110" style="filter:drop-shadow(0 0 10px rgba(147,51,234,.45))">${grd}
-    <circle cx="30" cy="22" r="13" fill="url(#hg)" ${hed}/>
-    <line x1="30" y1="35" x2="62" y2="60" ${bod} ${lc}/>
-    <circle cx="62" cy="60" r="6" ${jnt}/>
-    <line x1="62" y1="60" x2="52" y2="95" ${bod} ${lc}/>
-    <circle cx="52" cy="95" r="5" ${jnt}/>
-    <line x1="52" y1="95" x2="42" y2="120" ${lim} ${lc}/>
-    <circle cx="42" cy="120" r="4" fill="#c084fc"/>
-    <line x1="30" y1="35" x2="14" y2="55" ${lim} ${lc}/>
-    <circle cx="14" cy="55" r="4" ${jnt}/>
-    <line x1="14" y1="55" x2="8" y2="38" stroke="#ec4899" stroke-width="3" ${lc}/>
-    <line x1="30" y1="35" x2="48" y2="52" ${lim} ${lc}/>
-    <circle cx="48" cy="52" r="4" ${jnt}/>
-    <g style="transform-origin:62px 60px;animation:kckLeg 2s ease-in-out infinite">
-      <line x1="62" y1="60" x2="90" y2="80" ${bod} ${lc}/>
-      <circle cx="90" cy="80" r="5" ${jnt}/>
-      <g style="transform-origin:90px 80px;animation:kckFore 2s ease-in-out infinite">
-        <line x1="90" y1="80" x2="130" y2="68" ${lim} ${lc}/>
-        <circle cx="130" cy="68" r="4" fill="#ec4899"/>
+    <g style="transform-origin:75px 110px;animation:sqKneeR 2s ease-in-out infinite">
+      <rect x="66" y="110" width="20" height="34" rx="10" fill="url(#sg)"/>
+      <g style="transform-origin:76px 144px;animation:sqCalfR 2s ease-in-out infinite">
+        <rect x="75" y="144" width="18" height="26" rx="9" fill="url(#sg)"/>
+        <ellipse cx="84" cy="171" rx="14" ry="5" fill="${shoe}"/>
       </g>
     </g>
   </svg>`;
 
-  const figs={squat,thrust,press,row,plank,jump,lunge,crunch,lateral,kick};
-  return figs[type]||figs.squat;
+  if(type==='thrust')return`<svg viewBox="0 0 185 120" width="130" height="100" ${FLT}>${G}
+    <line x1="5" y1="109" x2="180" y2="109" stroke="rgba(147,51,234,.3)" stroke-width="3" stroke-linecap="round"/>
+    <rect x="5" y="90" width="38" height="19" rx="5" fill="rgba(147,51,234,.18)" stroke="rgba(147,51,234,.3)" stroke-width="1.5"/>
+    ${Hd(23,64)}
+    <rect x="8" y="77" width="42" height="16" rx="7" fill="url(#ug)"/>
+    <rect x="3" y="77" width="12" height="8" rx="4" fill="url(#sg)" transform="rotate(-12,9,81)"/>
+    <rect x="46" y="77" width="12" height="8" rx="4" fill="url(#sg)" transform="rotate(12,52,81)"/>
+    <g style="transform-origin:95px 90px;animation:thUp 2s ease-in-out infinite">
+      <path d="M50,90C50,82 70,78 95,78C120,78 140,82 140,90L138,102L116,102L110,90L80,90L74,102L52,102Z" fill="${pc}"/>
+      <g style="transform-origin:74px 102px;animation:thLegBend 2s ease-in-out infinite">
+        <rect x="54" y="102" width="20" height="30" rx="10" fill="url(#sg)" transform="rotate(-14,64,102)"/>
+        <rect x="48" y="130" width="18" height="22" rx="9" fill="url(#sg)" transform="rotate(20,57,132)"/>
+        <ellipse cx="51" cy="152" rx="14" ry="5" fill="${shoe}" transform="rotate(6,51,152)"/>
+      </g>
+      <g style="transform-origin:116px 102px;animation:thLegBendR 2s ease-in-out infinite">
+        <rect x="116" y="102" width="20" height="30" rx="10" fill="url(#sg)" transform="rotate(14,126,102)"/>
+        <rect x="124" y="130" width="18" height="22" rx="9" fill="url(#sg)" transform="rotate(-20,133,132)"/>
+        <ellipse cx="136" cy="152" rx="14" ry="5" fill="${shoe}" transform="rotate(-6,136,152)"/>
+      </g>
+    </g>
+  </svg>`;
+
+  if(type==='press')return`<svg viewBox="0 0 130 180" width="95" height="142" ${FLT}>${G}
+    <ellipse cx="65" cy="176" rx="28" ry="5" fill="rgba(147,51,234,.15)"/>
+    ${Hd(65,22)}
+    <rect x="59" y="35" width="12" height="9" rx="5" fill="url(#sg)"/>
+    <path d="M46,44C47,41 55,38 65,38C75,38 83,41 84,44L80,84C80,87 73,90 65,90C57,90 50,87 50,84Z" fill="url(#ug)"/>
+    <path d="M51,53C55,58 65,61 79,53" stroke="${sc}" stroke-width="1.5" fill="none"/>
+    <path d="M50,84L46,110L62,110L65,100L68,110L84,110L80,84Z" fill="${pc}"/>
+    <rect x="46" y="110" width="18" height="34" rx="9" fill="url(#sg)"/>
+    <rect x="66" y="110" width="18" height="34" rx="9" fill="url(#sg)"/>
+    <ellipse cx="55" cy="145" rx="13" ry="5" fill="${shoe}"/>
+    <ellipse cx="75" cy="145" rx="13" ry="5" fill="${shoe}"/>
+    <g style="transform-origin:47px 53px;animation:prArm 2s ease-in-out infinite">
+      <rect x="32" y="47" width="13" height="26" rx="6.5" fill="url(#sg)" transform="rotate(18,47,53)"/>
+      <g style="transform-origin:38px 71px;animation:prFore 2s ease-in-out infinite">
+        <rect x="22" y="65" width="12" height="24" rx="6" fill="url(#sg)"/>
+        <ellipse cx="28" cy="56" rx="6" ry="6" fill="rgba(147,51,234,.3)" stroke="${pc}" stroke-width="1.5"/>
+      </g>
+    </g>
+    <g style="transform-origin:83px 53px;animation:prArmR 2s ease-in-out infinite">
+      <rect x="85" y="47" width="13" height="26" rx="6.5" fill="url(#sg)" transform="rotate(-18,83,53)"/>
+      <g style="transform-origin:92px 71px;animation:prForeR 2s ease-in-out infinite">
+        <rect x="96" y="65" width="12" height="24" rx="6" fill="url(#sg)"/>
+        <ellipse cx="102" cy="56" rx="6" ry="6" fill="rgba(147,51,234,.3)" stroke="${pc}" stroke-width="1.5"/>
+      </g>
+    </g>
+  </svg>`;
+
+  if(type==='row')return`<svg viewBox="0 0 175 130" width="126" height="108" ${FLT}>${G}
+    <line x1="5" y1="122" x2="170" y2="122" stroke="rgba(147,51,234,.25)" stroke-width="3" stroke-linecap="round"/>
+    ${Hd(30,34)}
+    <rect x="24" y="47" width="12" height="9" rx="4" fill="url(#sg)"/>
+    <path d="M22,56C23,53 28,52 36,55L72,68C78,74 73,82 65,80L30,70C24,68 21,62 22,56Z" fill="url(#ug)"/>
+    <rect x="65" y="80" width="18" height="7" rx="3" fill="${pc}"/>
+    <rect x="58" y="87" width="18" height="32" rx="9" fill="url(#sg)" transform="rotate(-5,67,87)"/>
+    <rect x="80" y="87" width="18" height="32" rx="9" fill="url(#sg)" transform="rotate(5,89,87)"/>
+    <ellipse cx="67" cy="120" rx="14" ry="5" fill="${shoe}"/>
+    <ellipse cx="89" cy="120" rx="14" ry="5" fill="${shoe}"/>
+    <rect x="18" y="56" width="12" height="22" rx="6" fill="url(#sg)" transform="rotate(-20,24,60)"/>
+    <rect x="8" y="74" width="11" height="18" rx="5" fill="url(#sg)" transform="rotate(-10,14,76)"/>
+    <g style="transform-origin:36px 62px;animation:rwPull 2s ease-in-out infinite">
+      <rect x="36" y="55" width="13" height="26" rx="6.5" fill="url(#sg)"/>
+      <g style="transform-origin:42px 81px;animation:rwPullF 2s ease-in-out infinite">
+        <rect x="34" y="81" width="12" height="24" rx="6" fill="url(#sg)"/>
+        <rect x="46" y="90" width="30" height="8" rx="4" fill="rgba(147,51,234,.4)" stroke="${pc}" stroke-width="1"/>
+      </g>
+    </g>
+  </svg>`;
+
+  if(type==='plank')return`<svg viewBox="0 0 190 110" width="136" height="92" ${FLT}>${G}
+    <line x1="5" y1="104" x2="185" y2="104" stroke="rgba(147,51,234,.25)" stroke-width="3" stroke-linecap="round"/>
+    <g style="animation:plBreath 3s ease-in-out infinite">
+      ${Hd(148,30)}
+      <rect x="136" y="43" width="12" height="8" rx="4" fill="url(#sg)"/>
+      <path d="M60,62C60,55 80,50 110,52L138,52C144,52 148,56 148,62L145,78C145,82 140,85 135,84L58,74C54,74 52,70 52,66Z" fill="url(#ug)"/>
+      <path d="M70,56C80,62 110,63 138,56" stroke="${sc}" stroke-width="1.5" fill="none"/>
+      <rect x="52" y="74" width="16" height="26" rx="8" fill="url(#sg)" transform="rotate(2,60,74)"/>
+      <rect x="30" y="76" width="16" height="26" rx="8" fill="url(#sg)" transform="rotate(2,38,76)"/>
+      <ellipse cx="20" cy="102" rx="16" ry="5.5" fill="${shoe}"/>
+      <ellipse cx="54" cy="100" rx="14" ry="5" fill="${shoe}"/>
+      <rect x="118" y="84" width="14" height="20" rx="7" fill="url(#sg)" transform="rotate(-5,125,84)"/>
+      <ellipse cx="125" cy="103" rx="10" ry="4" fill="${shoe}"/>
+      <rect x="100" y="82" width="14" height="20" rx="7" fill="url(#sg)" transform="rotate(-5,107,82)"/>
+      <ellipse cx="107" cy="100" rx="10" ry="4" fill="${shoe}"/>
+    </g>
+  </svg>`;
+
+  if(type==='jump')return`<svg viewBox="0 0 130 180" width="95" height="142" ${FLT}>${G}
+    <ellipse cx="65" cy="176" rx="28" ry="5" fill="rgba(147,51,234,.15)"/>
+    <g style="animation:jmpUp 1.4s ease-in-out infinite;transform-origin:65px 90px">
+      ${Hd(65,22)}
+      <rect x="59" y="35" width="12" height="9" rx="5" fill="url(#sg)"/>
+      <path d="M46,44C47,41 55,38 65,38C75,38 83,41 84,44L80,84C80,87 73,90 65,90C57,90 50,87 50,84Z" fill="url(#ug)"/>
+      <path d="M50,84L44,108L61,108L65,97L69,108L86,108L80,84Z" fill="${pc}"/>
+      <g style="transform-origin:47px 53px;animation:jmpArm 1.4s ease-in-out infinite">
+        <rect x="32" y="47" width="13" height="26" rx="6.5" fill="url(#sg)" transform="rotate(18,47,53)"/>
+        <rect x="22" y="69" width="12" height="22" rx="6" fill="url(#sg)" transform="rotate(22,32,71)"/>
+      </g>
+      <g style="transform-origin:83px 53px;animation:jmpArmR 1.4s ease-in-out infinite">
+        <rect x="85" y="47" width="13" height="26" rx="6.5" fill="url(#sg)" transform="rotate(-18,83,53)"/>
+        <rect x="96" y="69" width="12" height="22" rx="6" fill="url(#sg)" transform="rotate(-22,98,71)"/>
+      </g>
+      <g style="transform-origin:55px 108px;animation:jmpLeg 1.4s ease-in-out infinite">
+        <rect x="44" y="108" width="20" height="32" rx="10" fill="url(#sg)"/>
+        <rect x="36" y="138" width="18" height="26" rx="9" fill="url(#sg)"/>
+        <ellipse cx="45" cy="165" rx="14" ry="5" fill="${shoe}"/>
+      </g>
+      <g style="transform-origin:75px 108px;animation:jmpLegR 1.4s ease-in-out infinite">
+        <rect x="66" y="108" width="20" height="32" rx="10" fill="url(#sg)"/>
+        <rect x="76" y="138" width="18" height="26" rx="9" fill="url(#sg)"/>
+        <ellipse cx="85" cy="165" rx="14" ry="5" fill="${shoe}"/>
+      </g>
+    </g>
+  </svg>`;
+
+  if(type==='lunge')return`<svg viewBox="0 0 155 175" width="112" height="140" ${FLT}>${G}
+    <ellipse cx="75" cy="171" rx="40" ry="6" fill="rgba(147,51,234,.15)"/>
+    ${Hd(75,22)}
+    <rect x="69" y="35" width="12" height="9" rx="5" fill="url(#sg)"/>
+    <path d="M56,44C57,41 65,38 75,38C85,38 93,41 94,44L90,84C90,87 83,90 75,90C67,90 60,87 60,84Z" fill="url(#ug)"/>
+    <path d="M61,53C65,58 75,61 89,53" stroke="${sc}" stroke-width="1.5" fill="none"/>
+    <path d="M60,84L54,108L71,108L75,97L79,108L96,108L90,84Z" fill="${pc}"/>
+    <rect x="61" y="47" width="12" height="22" rx="6" fill="url(#sg)" transform="rotate(15,67,47)"/>
+    <rect x="51" y="65" width="11" height="18" rx="5" fill="url(#sg)" transform="rotate(22,57,65)"/>
+    <rect x="90" y="47" width="12" height="22" rx="6" fill="url(#sg)" transform="rotate(-15,96,47)"/>
+    <rect x="98" y="65" width="11" height="18" rx="5" fill="url(#sg)" transform="rotate(-22,103,65)"/>
+    <g style="transform-origin:65px 108px;animation:lngThF 2s ease-in-out infinite">
+      <rect x="54" y="108" width="20" height="34" rx="10" fill="url(#sg)"/>
+      <g style="transform-origin:64px 142px;animation:lngCaF 2s ease-in-out infinite">
+        <rect x="46" y="142" width="18" height="26" rx="9" fill="url(#sg)"/>
+        <ellipse cx="55" cy="169" rx="14" ry="5" fill="${shoe}"/>
+      </g>
+    </g>
+    <g style="transform-origin:85px 108px;animation:lngThB 2s ease-in-out infinite">
+      <rect x="76" y="108" width="20" height="34" rx="10" fill="url(#sg)"/>
+      <rect x="88" y="140" width="18" height="26" rx="9" fill="url(#sg)"/>
+      <ellipse cx="100" cy="167" rx="14" ry="5" fill="${shoe}"/>
+    </g>
+  </svg>`;
+
+  if(type==='crunch')return`<svg viewBox="0 0 185 118" width="134" height="100" ${FLT}>${G}
+    <line x1="5" y1="111" x2="180" y2="111" stroke="rgba(147,51,234,.25)" stroke-width="3" stroke-linecap="round"/>
+    <g style="transform-origin:32px 66px;animation:crUp 2s ease-in-out infinite">
+      ${Hd(20,34)}
+      <rect x="14" y="47" width="12" height="9" rx="4" fill="url(#sg)"/>
+      <path d="M12,56C13,53 18,52 24,54L42,62C46,68 42,76 36,74L16,68C12,66 11,60 12,56Z" fill="url(#ug)"/>
+      <rect x="6" y="62" width="10" height="18" rx="5" fill="url(#sg)" transform="rotate(-10,11,64)"/>
+      <rect x="3" y="78" width="9" height="15" rx="4" fill="url(#sg)" transform="rotate(-5,8,79)"/>
+    </g>
+    <path d="M42,72L76,78L110,76L144,72" stroke="${pc}" stroke-width="16" stroke-linecap="round" fill="none"/>
+    <path d="M42,72L76,78" stroke="url(#ug)" stroke-width="18" stroke-linecap="round" fill="none"/>
+    <g style="transform-origin:110px 76px;animation:crLgL 2s ease-in-out infinite">
+      <path d="M110,76L138,70" stroke="${sk}" stroke-width="18" stroke-linecap="round" fill="none"/>
+      <g style="transform-origin:138px 70px;animation:crLgR 2s ease-in-out infinite">
+        <path d="M138,70L162,78" stroke="${sh}" stroke-width="16" stroke-linecap="round" fill="none"/>
+        <ellipse cx="167" cy="80" rx="12" ry="5" fill="${shoe}" transform="rotate(-12,167,80)"/>
+      </g>
+    </g>
+    <path d="M76,78L110,76" stroke="${sk}" stroke-width="16" stroke-linecap="round" fill="none"/>
+  </svg>`;
+
+  if(type==='lateral')return`<svg viewBox="0 0 155 175" width="112" height="140" ${FLT}>${G}
+    <ellipse cx="75" cy="171" rx="28" ry="5" fill="rgba(147,51,234,.15)"/>
+    ${Hd(75,22)}
+    <rect x="69" y="35" width="12" height="9" rx="5" fill="url(#sg)"/>
+    <path d="M56,44C57,41 65,38 75,38C85,38 93,41 94,44L90,84C90,87 83,90 75,90C67,90 60,87 60,84Z" fill="url(#ug)"/>
+    <path d="M61,53C65,58 75,61 89,53" stroke="${sc}" stroke-width="1.5" fill="none"/>
+    <path d="M60,84L55,110L71,110L75,99L79,110L95,110L90,84Z" fill="${pc}"/>
+    <rect x="55" y="110" width="18" height="34" rx="9" fill="url(#sg)"/>
+    <rect x="75" y="110" width="18" height="34" rx="9" fill="url(#sg)"/>
+    <ellipse cx="64" cy="145" rx="13" ry="5" fill="${shoe}"/>
+    <ellipse cx="84" cy="145" rx="13" ry="5" fill="${shoe}"/>
+    <g style="transform-origin:58px 53px;animation:latAL 2s ease-in-out infinite">
+      <rect x="43" y="47" width="13" height="26" rx="6.5" fill="url(#sg)" transform="rotate(18,58,53)"/>
+      <rect x="33" y="69" width="12" height="22" rx="6" fill="url(#sg)" transform="rotate(22,43,71)"/>
+      <ellipse cx="28" cy="88" rx="7" ry="7" fill="rgba(147,51,234,.3)" stroke="${pc}" stroke-width="1.5"/>
+    </g>
+    <g style="transform-origin:92px 53px;animation:latAR 2s ease-in-out infinite">
+      <rect x="99" y="47" width="13" height="26" rx="6.5" fill="url(#sg)" transform="rotate(-18,92,53)"/>
+      <rect x="110" y="69" width="12" height="22" rx="6" fill="url(#sg)" transform="rotate(-22,112,71)"/>
+      <ellipse cx="128" cy="88" rx="7" ry="7" fill="rgba(147,51,234,.3)" stroke="${pc}" stroke-width="1.5"/>
+    </g>
+  </svg>`;
+
+  return`<svg viewBox="0 0 185 135" width="134" height="112" ${FLT}>${G}
+    <line x1="5" y1="128" x2="180" y2="128" stroke="rgba(147,51,234,.25)" stroke-width="3" stroke-linecap="round"/>
+    ${Hd(24,34)}
+    <rect x="18" y="47" width="12" height="9" rx="4" fill="url(#sg)"/>
+    <path d="M16,56C18,52 24,50 34,53L75,65C80,70 76,80 68,78L24,66C18,64 15,60 16,56Z" fill="url(#ug)"/>
+    <rect x="20" y="56" width="11" height="20" rx="5.5" fill="url(#sg)" transform="rotate(-15,26,58)"/>
+    <rect x="12" y="73" width="11" height="18" rx="5" fill="url(#sg)" transform="rotate(-5,18,74)"/>
+    <ellipse cx="11" cy="92" rx="10" ry="4" fill="${shoe}"/>
+    <rect x="52" y="65" width="11" height="20" rx="5.5" fill="url(#sg)" transform="rotate(-20,58,68)"/>
+    <rect x="44" y="82" width="11" height="18" rx="5" fill="url(#sg)" transform="rotate(-5,50,84)"/>
+    <ellipse cx="44" cy="101" rx="10" ry="4" fill="${shoe}"/>
+    <path d="M68,78L90,88L108,82" stroke="${pc}" stroke-width="16" stroke-linecap="round" fill="none"/>
+    <rect x="100" y="82" width="18" height="30" rx="9" fill="url(#sg)" transform="rotate(-10,109,82)"/>
+    <ellipse cx="104" cy="113" rx="12" ry="5" fill="${shoe}"/>
+    <g style="transform-origin:108px 82px;animation:kckBk 2s ease-in-out infinite">
+      <rect x="108" y="75" width="18" height="32" rx="9" fill="url(#sg)"/>
+      <g style="transform-origin:117px 107px;animation:kckCf 2s ease-in-out infinite">
+        <rect x="115" y="107" width="16" height="26" rx="8" fill="url(#sg)"/>
+        <ellipse cx="123" cy="134" rx="14" ry="5" fill="${shoe}"/>
+      </g>
+    </g>
+  </svg>`;
 }
 
 function renderActiveExercise(){
@@ -1214,7 +1229,7 @@ function renderActiveExercise(){
   document.getElementById('wa-reps').textContent=r.exercises[S.exIdx].reps;
   document.getElementById('wa-rest-time').textContent=r.exercises[S.exIdx].rest+'"';
   const type=getExType(S.altMode&&ex.name?ex.name:r.exercises[S.exIdx].name);
-  document.getElementById('wa-figure').innerHTML=makeFigure(type);
+  document.getElementById('wa-figure').innerHTML=makeFigure(type,S.altMode);
   const voiceTxt=ex.voiceGuide||ex.desc||'Realiza el ejercicio con buena técnica.';
   document.getElementById('wa-voice-txt').textContent='«'+voiceTxt+'»';
   // Alt panel
@@ -1262,25 +1277,39 @@ function toggleAlt(){
 }
 
 function switchToAlt(){
+  if(!S.workout)return;
+  const origEx=S.workout.exercises[S.exIdx];
   S.altMode=true;
   document.getElementById('alt-panel').classList.remove('show');
   document.getElementById('alt-arrow').textContent='▾';
   renderActiveExercise();
   toast('💡 Ejercicio alternativo activado');
+  const altDesc=origEx.alt?origEx.alt.desc:'Aquí tienes la alternativa sin máquina.';
+  setTimeout(()=>speak('¡Sin problema! Aquí va tu alternativa. '+altDesc+' ¡Tú puedes!'),400);
 }
 
 // ══ VOICE COMMANDS ══
 function initVoiceCmd(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SR){toast('Tu dispositivo no soporta comandos de voz');return false;}
-  S.sr=new SR();S.sr.lang='es-ES';S.sr.continuous=true;S.sr.interimResults=false;
-  S.sr.onresult=e=>{
-    const cmd=e.results[e.results.length-1][0].transcript.toLowerCase().trim();
-    toast('🎙 "'+cmd.slice(0,28)+'"');processCmd(cmd);
-  };
-  S.sr.onend=()=>{if(S.srActive)setTimeout(()=>{try{S.sr.start()}catch(e){}},400);};
-  S.sr.onerror=()=>{};
-  return true;
+  if(!SR){toast('Comandos de voz no disponibles en este dispositivo');return false;}
+  function makeRec(){
+    const r=new SR();r.lang='es-ES';r.continuous=false;r.interimResults=false;r.maxAlternatives=3;
+    r.onresult=e=>{
+      const cmd=Array.from(e.results[0]).map(a=>a.transcript).join(' ').toLowerCase().trim();
+      toast('🎙 "'+cmd.slice(0,30)+'"');processCmd(cmd);
+    };
+    r.onend=()=>{if(S.srActive)setTimeout(()=>{try{S.sr=makeRec();S.sr.start();}catch(ex){}},300);};
+    r.onerror=ev=>{if(ev.error==='not-allowed'){S.srActive=false;toast('🎙 Sin permiso de micrófono');updateListenBtn();}
+      else if(S.srActive)setTimeout(()=>{try{S.sr=makeRec();S.sr.start();}catch(ex){}},500);};
+    return r;
+  }
+  S.makeRec=makeRec;S.sr=makeRec();return true;
+}
+function updateListenBtn(){
+  const btn=document.getElementById('listen-btn');if(!btn)return;
+  const dot=document.getElementById('listen-dot');
+  if(S.srActive){btn.style.background='rgba(236,72,153,.3)';btn.style.borderColor='rgba(236,72,153,.6)';dot.style.opacity='1';dot.style.animation='wv .8s ease-in-out infinite alternate';}
+  else{btn.style.background='rgba(236,72,153,.15)';btn.style.borderColor='rgba(236,72,153,.35)';dot.style.opacity='0.4';dot.style.animation='none';}
 }
 function processCmd(cmd){
   if(/siguiente|listo|lista|hecha|hecho|serie|completa/.test(cmd)){
@@ -1307,21 +1336,16 @@ function processCmd(cmd){
   }
 }
 function toggleListen(){
-  if(!S.sr&&!initVoiceCmd())return;
+  if(!S.makeRec&&!initVoiceCmd())return;
   S.srActive=!S.srActive;
-  const btn=document.getElementById('listen-btn');
-  const dot=document.getElementById('listen-dot');
   if(S.srActive){
-    try{S.sr.start();}catch(e){}
-    btn.style.background='rgba(236,72,153,.3)';btn.style.borderColor='rgba(236,72,153,.6)';
-    dot.style.opacity='1';dot.style.animation='wv .8s ease-in-out infinite alternate';
-    speak('Entrenadora activada. Puedes decirme: siguiente serie, cuántas me faltan, ánimo, o máquina ocupada.');
+    try{S.sr.start();}catch(e){try{S.sr=S.makeRec();S.sr.start();}catch(ex){}}
+    speak('Entrenadora activada. Puedes decirme: siguiente serie, cuántas faltan, ánimo, o máquina ocupada.');
   } else {
     try{S.sr.stop();}catch(e){}
-    btn.style.background='rgba(236,72,153,.15)';btn.style.borderColor='rgba(236,72,153,.35)';
-    dot.style.opacity='0.4';dot.style.animation='none';
     speak('Comandos de voz desactivados.');
   }
+  updateListenBtn();
 }
 
 function toggleVoice(){
