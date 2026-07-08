@@ -1281,350 +1281,472 @@ function getExType(name){
 }
 
 function makeFigure(type,altMode){
-  const pc=altMode?'#f59e0b':'#8b5cf6';
-  const sc=altMode?'#d97706':'#ec4899';
-  const sk='#f4c2a1';const hr='#1a0808';const kn='#e0a882';const shoe='#2d1b69';
-  const FLT=`style="filter:drop-shadow(0 8px 22px rgba(139,92,246,.55))"`;
-  const G=`<defs><linearGradient id="tg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${pc}"/><stop offset="100%" stop-color="${sc}"/></linearGradient></defs>`;
-  const L=(d,c,w)=>`<path d="${d}" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`;
-  // Head with feminine hair bun, eyes, blush, smile
-  const Hd=(cx,cy,rot)=>{
-    const r=rot?`transform="rotate(${rot},${cx},${cy})"`:'';
-    return `<g ${r}>
-      <ellipse cx="${cx}" cy="${cy-11}" rx="18" ry="15" fill="${hr}"/>
-      <ellipse cx="${cx+11}" cy="${cy-9}" rx="9" ry="8" fill="${hr}"/>
-      <circle cx="${cx}" cy="${cy}" r="14" fill="${sk}"/>
-      <ellipse cx="${cx-6}" cy="${cy-2}" rx="2.8" ry="3.2" fill="${hr}"/>
-      <ellipse cx="${cx+5}" cy="${cy-2}" rx="2.8" ry="3.2" fill="${hr}"/>
-      <circle cx="${cx-5}" cy="${cy-3.5}" r="1.1" fill="white"/>
-      <circle cx="${cx+6}" cy="${cy-3.5}" r="1.1" fill="white"/>
-      <path d="M${cx-5},${cy+5}Q${cx},${cy+10}${cx+5},${cy+5}" stroke="#c07050" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-      <ellipse cx="${cx-8}" cy="${cy+2}" rx="4.5" ry="2.5" fill="rgba(236,72,153,.28)"/>
-      <ellipse cx="${cx+9}" cy="${cy+2}" rx="4.5" ry="2.5" fill="rgba(236,72,153,.28)"/>
+  const pc=altMode?'#d97706':'#7c3aed';
+  const sc=altMode?'#f59e0b':'#db2777';
+  const pc2=altMode?'#b45309':'#6d28d9';
+
+  // Skin tones with shading
+  const sk='#f5c5a3';   // base skin
+  const sk2='#e8a882';  // shadow skin
+  const sk3='#fad4b8';  // highlight skin
+  const hr='#1c0a0a';   // hair dark
+  const hr2='#2d1010';  // hair highlight
+  const shoe1='#1e1b4b';const shoe2='#312e81';
+
+  const FLT=`style="filter:drop-shadow(0 10px 28px rgba(109,40,217,.5))"`;
+
+  // Full defs: gradients for skin, outfit, floor
+  const G=`<defs>
+    <linearGradient id="tg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${pc}"/><stop offset="100%" stop-color="${sc}"/></linearGradient>
+    <linearGradient id="tg2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="${pc}"/><stop offset="100%" stop-color="${pc2}"/></linearGradient>
+    <linearGradient id="sk" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${sk3}"/><stop offset="60%" stop-color="${sk}"/><stop offset="100%" stop-color="${sk2}"/></linearGradient>
+    <linearGradient id="skv" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="${sk3}"/><stop offset="55%" stop-color="${sk}"/><stop offset="100%" stop-color="${sk2}"/></linearGradient>
+    <linearGradient id="hr" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${hr2}"/><stop offset="100%" stop-color="${hr}"/></linearGradient>
+    <linearGradient id="sh" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="${shoe2}"/><stop offset="100%" stop-color="${shoe1}"/></linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="${pc}" stop-opacity="0.3"/><stop offset="100%" stop-color="${pc}" stop-opacity="0"/></radialGradient>
+  </defs>`;
+
+  // ── BODY PART BUILDERS ──
+
+  // Head: oval face, big hair bun, eyes with lashes, lip, blush — very feminine
+  const Hd=(cx,cy,rotDeg=0)=>{
+    const tr=rotDeg?`transform="rotate(${rotDeg} ${cx} ${cy})"`:'';
+    return `<g ${tr}>
+      <!-- Neck -->
+      <path d="M${cx-6},${cy+14} L${cx-5},${cy+24} Q${cx},${cy+27} ${cx+5},${cy+24} L${cx+6},${cy+14}" fill="url(#skv)"/>
+      <!-- Hair back layer -->
+      <ellipse cx="${cx}" cy="${cy-2}" rx="17" ry="19" fill="url(#hr)"/>
+      <!-- Ponytail/bun -->
+      <path d="M${cx+10},${cy-18} C${cx+22},${cy-28} ${cx+26},${cy-20} ${cx+22},${cy-10} C${cx+18},${cy-4} ${cx+12},${cy-8} ${cx+10},${cy-18}Z" fill="${hr}"/>
+      <circle cx="${cx+20}" cy="${cy-20}" r="9" fill="${hr}"/>
+      <path d="M${cx+10},${cy-16} C${cx+14},${cy-22} ${cx+22},${cy-24} ${cx+24},${cy-18}" stroke="${hr2}" stroke-width="2" fill="none" opacity=".5"/>
+      <!-- Face -->
+      <ellipse cx="${cx}" cy="${cy}" rx="14.5" ry="16" fill="url(#sk)"/>
+      <!-- Ear -->
+      <ellipse cx="${cx-14}" cy="${cy+1}" rx="3.5" ry="5" fill="${sk}"/>
+      <!-- Eyebrows -->
+      <path d="M${cx-10},${cy-7} C${cx-7},${cy-9.5} ${cx-3},${cy-9.5} ${cx-1},${cy-8}" stroke="${hr}" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <path d="M${cx+2},${cy-8} C${cx+4},${cy-9.5} ${cx+8},${cy-9.5} ${cx+11},${cy-7}" stroke="${hr}" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <!-- Eyes (almond shape) -->
+      <path d="M${cx-10},${cy-3} C${cx-8},${cy-6} ${cx-3},${cy-6} ${cx-1},${cy-3} C${cx-3},${cy-1} ${cx-8},${cy-1} ${cx-10},${cy-3}Z" fill="white"/>
+      <circle cx="${cx-5.5}" cy="${cy-3}" r="3.2" fill="${hr}"/>
+      <circle cx="${cx-4.5}" cy="${cy-4}" r="1" fill="white"/>
+      <!-- Lash left -->
+      <path d="M${cx-10},${cy-3} C${cx-12},${cy-5} ${cx-13},${cy-6} ${cx-12},${cy-7}" stroke="${hr}" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M${cx-9},${cy-5.5} L${cx-11},${cy-8}" stroke="${hr}" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <path d="M${cx-1},${cy-3} C${cx+1},${cy-5} ${cx+2},${cy-6} ${cx+1},${cy-7}" stroke="${hr}" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <!-- Right eye -->
+      <path d="M${cx+2},${cy-3} C${cx+4},${cy-6} ${cx+9},${cy-6} ${cx+11},${cy-3} C${cx+9},${cy-1} ${cx+4},${cy-1} ${cx+2},${cy-3}Z" fill="white"/>
+      <circle cx="${cx+6.5}" cy="${cy-3}" r="3.2" fill="${hr}"/>
+      <circle cx="${cx+7.5}" cy="${cy-4}" r="1" fill="white"/>
+      <path d="M${cx+11},${cy-3} C${cx+13},${cy-5} ${cx+14},${cy-6} ${cx+13},${cy-7}" stroke="${hr}" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <!-- Nose subtle -->
+      <path d="M${cx},${cy-2} C${cx+1},${cy+1} ${cx+3},${cy+3} ${cx+2},${cy+4}" stroke="${sk2}" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <!-- Lips -->
+      <path d="M${cx-5},${cy+8} C${cx-3},${cy+6} ${cx},${cy+6.5} ${cx+5},${cy+8}" fill="${sk}" stroke="none"/>
+      <path d="M${cx-5},${cy+8} C${cx-3},${cy+10} ${cx},${cy+11} ${cx+5},${cy+8}" fill="#d4826a"/>
+      <path d="M${cx-5},${cy+8} C${cx-2},${cy+9.5} ${cx+2},${cy+9.5} ${cx+5},${cy+8}" stroke="#b86050" stroke-width=".8" fill="none"/>
+      <!-- Blush cheeks -->
+      <ellipse cx="${cx-10}" cy="${cy+3}" rx="5" ry="3" fill="rgba(236,72,153,.2)"/>
+      <ellipse cx="${cx+11}" cy="${cy+3}" rx="5" ry="3" fill="rgba(236,72,153,.2)"/>
     </g>`;
   };
-  // Organic torso with waist curve
-  const Torso=(cx,ty,by)=>`<path d="M${cx-20},${ty} C${cx-22},${ty+14} ${cx-18},${ty+24} ${cx-13},${by} C${cx-7},${by+6} ${cx+7},${by+6} ${cx+13},${by} C${cx+18},${ty+24} ${cx+22},${ty+14} ${cx+20},${ty} Q${cx+14},${ty-4} ${cx},${ty-5} Q${cx-14},${ty-4} ${cx-20},${ty}Z" fill="url(#tg)"/>`;
-  // Hips triangle
-  const Hips=(cx,hy)=>`<path d="M${cx-22},${hy} Q${cx},${hy+10} ${cx+22},${hy} L${cx+16},${hy+22} Q${cx},${hy+26} ${cx-16},${hy+22}Z" fill="${pc}" opacity=".88"/>`;
 
-  // ── SQUAT: deep squat, knees wide, body low, arms forward ──
+  // Torso: fitted sports bra top, natural hourglass
+  const Torso=(cx,ty,hy,w=22)=>`<g>
+    <!-- Sports bra / top -->
+    <path d="M${cx-w},${ty} C${cx-w-3},${ty+10} ${cx-w+4},${ty+22} ${cx-14},${hy}
+             C${cx-8},${hy+7} ${cx+8},${hy+7} ${cx+14},${hy}
+             C${cx+w-4},${ty+22} ${cx+w+3},${ty+10} ${cx+w},${ty}
+             Q${cx+16},${ty-5} ${cx},${ty-6} Q${cx-16},${ty-5} ${cx-w},${ty}Z" fill="url(#tg)"/>
+    <!-- Strap details -->
+    <path d="M${cx-10},${ty} L${cx-7},${ty-5}" stroke="${pc}" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".7"/>
+    <path d="M${cx+10},${ty} L${cx+7},${ty-5}" stroke="${pc}" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".7"/>
+    <!-- Highlight -->
+    <path d="M${cx-8},${ty+4} C${cx-6},${ty+2} ${cx+6},${ty+2} ${cx+8},${ty+4}" stroke="rgba(255,255,255,.22)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </g>`;
+
+  // Leggings / tight shorts hips+upper thigh
+  const Hips=(cx,hy,w=24)=>`<g>
+    <path d="M${cx-w},${hy} Q${cx},${hy+10} ${cx+w},${hy} L${cx+w-4},${hy+26} Q${cx},${hy+32} ${cx-w+4},${hy+26}Z" fill="url(#tg2)" opacity=".92"/>
+    <path d="M${cx-w},${hy} Q${cx-3},${hy+8} ${cx},${hy+8} Q${cx+3},${hy+8} ${cx+w},${hy}" stroke="rgba(255,255,255,.15)" stroke-width="1.5" fill="none"/>
+  </g>`;
+
+  // Arm segment: filled organic limb (from p1 to p2, tapers)
+  const Arm=(x1,y1,x2,y2,w1=11,w2=8,col='url(#sk)')=>{
+    const dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy)||1;
+    const nx=-dy/len,ny=dx/len;
+    return `<path d="M${x1+nx*w1},${y1+ny*w1} C${(x1+x2)/2+nx*w1},${(y1+y2)/2+ny*w1} ${(x1+x2)/2+nx*w2},${(y1+y2)/2+ny*w2} ${x2+nx*w2},${y2+ny*w2}
+                   L${x2-nx*w2},${y2-ny*w2} C${(x1+x2)/2-nx*w2},${(y1+y2)/2-ny*w2} ${(x1+x2)/2-nx*w1},${(y1+y2)/2-ny*w1} ${x1-nx*w1},${y1-ny*w1}Z"
+            fill="${col}" opacity="1"/>
+           <path d="M${x1+nx*(w1*.5)},${y1+ny*(w1*.5)} C${(x1+x2)/2+nx*(w1*.4)},${(y1+y2)/2+ny*(w1*.4)} ${x2+nx*(w2*.4)},${y2+ny*(w2*.4)} ${x2+nx*(w2*.2)},${y2+ny*(w2*.2)}"
+            stroke="${sk3}" stroke-width="1.5" fill="none" opacity=".45"/>`;
+  };
+
+  // Leg segment
+  const Leg=(x1,y1,x2,y2,w1=13,w2=10,col='url(#sk)')=>Arm(x1,y1,x2,y2,w1,w2,col);
+
+  // Knee circle
+  const Kn=(cx,cy,r=9)=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${sk2}"/><circle cx="${cx-2}" cy="${cy-2}" r="${r*.4}" fill="${sk3}" opacity=".6"/>`;
+
+  // Foot/shoe
+  const Shoe=(cx,cy,ang=0,flip=false)=>`<g transform="rotate(${ang} ${cx} ${cy})">
+    <ellipse cx="${cx+(flip?5:-5)}" cy="${cy}" rx="18" ry="7" fill="url(#sh)"/>
+    <ellipse cx="${cx+(flip?8:-8)}" cy="${cy-2}" rx="11" ry="4" fill="${shoe2}" opacity=".6"/>
+    <path d="M${cx+(flip?-10:-10)},${cy-2} Q${cx+(flip?12:12)},${cy-4} ${cx+(flip?18:18)},${cy}" stroke="rgba(255,255,255,.15)" stroke-width="1" fill="none"/>
+  </g>`;
+
+  // Floor shadow
+  const Shadow=(cx,cy,rx=40,ry=7)=>`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="rgba(109,40,217,.18)"/>`;
+
+  // ────────────────────────────────────────────────────────────────
+
+  // ── SQUAT: deep squat pose, knees wide, arms out front ──
   if(type==='squat'){
-    return`<svg viewBox="0 0 168 168" width="115" height="128" ${FLT}>${G}
-      <ellipse cx="84" cy="163" rx="38" ry="6" fill="rgba(139,92,246,.16)"/>
-      <g style="animation:sqBody 2.8s ease-in-out infinite;transform-origin:84px 80px">
-        ${Hd(84,22)}
-        ${L('M84,36 C84,40 84,44 84,48',sk,9)}
-        ${Torso(84,48,84)}
-        ${Hips(84,84)}
-        <!-- Left arm forward -->
-        ${L('M62,62 C52,70 40,76 28,82',sk,13)}
-        ${L('M28,82 C22,85 17,87 13,89',sk,11)}
-        <!-- Right arm forward -->
-        ${L('M106,62 C116,70 128,76 140,82',sk,13)}
-        ${L('M140,82 C146,85 151,87 155,89',sk,11)}
+    return`<svg viewBox="0 0 180 200" width="118" height="155" ${FLT}>${G}
+      ${Shadow(90,195,48,8)}
+      <g style="animation:sqBody 2.6s ease-in-out infinite;transform-origin:90px 115px">
+        ${Hd(90,28)}
+        <!-- Torso leaning slightly forward in squat -->
+        ${Torso(90,50,84,20)}
+        ${Hips(90,84,22)}
+        <!-- Left arm extended forward for balance -->
+        <g style="transform-origin:68px 66px">
+          ${Arm(68,66,34,90,10,8)}
+          ${Arm(34,90,16,108,8,7)}
+        </g>
+        <!-- Right arm extended forward -->
+        <g style="transform-origin:112px 66px">
+          ${Arm(112,66,146,90,10,8)}
+          ${Arm(146,90,164,108,8,7)}
+        </g>
+        <!-- Left thigh: diagonal down-left (squat position) -->
+        ${Leg(76,106,44,148,14,11,'url(#skv)')}
+        ${Kn(44,149,10)}
+        ${Leg(44,149,58,175,11,9,'url(#skv)')}
+        ${Shoe(52,180,0)}
+        <!-- Right thigh: diagonal down-right -->
+        ${Leg(104,106,136,148,14,11,'url(#skv)')}
+        ${Kn(136,149,10)}
+        ${Leg(136,149,122,175,11,9,'url(#skv)')}
+        ${Shoe(128,180,0,true)}
       </g>
-      <!-- Left leg: thigh diagonal out-left, calf back inward — ALREADY SQUATTED -->
-      ${L('M68,106 C56,118 42,128 32,138',sk,19)}
-      <circle cx="31" cy="139" r="10" fill="${kn}"/>
-      ${L('M31,139 C42,146 54,151 62,155',sk,16)}
-      <ellipse cx="68" cy="158" rx="22" ry="7" fill="${shoe}"/>
-      <!-- Right leg -->
-      ${L('M100,106 C112,118 126,128 136,138',sk,19)}
-      <circle cx="137" cy="139" r="10" fill="${kn}"/>
-      ${L('M137,139 C126,146 114,151 106,155',sk,16)}
-      <ellipse cx="100" cy="158" rx="22" ry="7" fill="${shoe}"/>
     </svg>`;
   }
 
-  // ── HIP THRUST: lying on back, hips raised HIGH, knees bent ──
+  // ── HIP THRUST: back on bench, hips raised high ──
   if(type==='thrust'){
-    return`<svg viewBox="0 0 210 128" width="148" height="102" ${FLT}>${G}
-      ${L('M5,120 H205','rgba(139,92,246,.25)',3)}
-      <!-- Bench block -->
-      <rect x="4" y="94" width="52" height="24" rx="8" fill="rgba(139,92,246,.18)" stroke="${pc}" stroke-width="1.5" opacity=".7"/>
-      <!-- Head resting on bench -->
-      ${Hd(26,78,0)}
-      <!-- Upper back / shoulders on bench -->
-      ${L('M26,92 C38,94 55,95 70,92',sk,12)}
-      <path d="M14,86 C22,90 42,92 68,88" stroke="${pc}" stroke-width="9" stroke-linecap="round" fill="none"/>
-      <!-- Left arm resting on floor -->
-      ${L('M10,90 C8,100 6,108 5,116',sk,11)}
-      <!-- Right arm reaching down -->
-      ${L('M56,90 C58,100 60,108 62,116',sk,11)}
-      <!-- Hips raised in animation -->
-      <g style="transform-origin:104px 82px;animation:thUp 2.5s ease-in-out infinite">
-        <path d="M68,90 C76,72 88,64 104,62 C122,62 136,70 148,86 L146,102 L60,102Z" fill="url(#tg)"/>
-        <!-- Left leg bent, foot flat -->
-        <g style="transform-origin:80px 102px;animation:thLegBend 2.5s ease-in-out infinite">
-          ${L('M80,102 C72,118 64,130 58,142',sk,18)}
-          <circle cx="57" cy="143" r="10" fill="${kn}"/>
-          ${L('M57,143 C55,150 53,156 52,162',sk,15)}
-          <ellipse cx="46" cy="165" rx="20" ry="7" fill="${shoe}"/>
+    return`<svg viewBox="0 0 220 155" width="158" height="118" ${FLT}>${G}
+      <line x1="8" y1="145" x2="212" y2="145" stroke="rgba(139,92,246,.3)" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Bench -->
+      <rect x="4" y="110" width="58" height="32" rx="10" fill="rgba(109,40,217,.2)" stroke="${pc}" stroke-width="1.5"/>
+      <rect x="4" y="108" width="58" height="8" rx="5" fill="${pc}" opacity=".35"/>
+      <!-- Head on bench -->
+      ${Hd(28,82,0)}
+      <!-- Shoulders/upper back on bench -->
+      ${Arm(22,100,66,104,14,12,'url(#tg)')}
+      <!-- Arms resting at sides -->
+      ${Arm(14,100,8,130,9,7,'url(#skv)')}
+      ${Arm(58,102,70,132,9,7,'url(#skv)')}
+      <!-- Animated hip lift -->
+      <g style="transform-origin:108px 90px;animation:thUp 2.4s ease-in-out infinite">
+        <!-- Hips/glutes raised -->
+        <path d="M66,106 C72,82 88,68 108,66 C130,66 148,78 158,100 L154,118 C138,126 80,126 64,118Z" fill="url(#tg)"/>
+        <!-- Band across hips (barbell effect) -->
+        <path d="M72,98 C88,88 126,88 148,96" stroke="rgba(255,255,255,.2)" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <!-- Left leg: knee bent, foot flat -->
+        <g style="transform-origin:82px 118px;animation:thLegBend 2.4s ease-in-out infinite">
+          ${Leg(82,118,62,146,13,11,'url(#skv)')}
+          ${Kn(62,147,9)}
+          ${Leg(62,147,56,158,10,9,'url(#skv)')}
+          ${Shoe(50,162,0)}
         </g>
-        <!-- Right leg bent, foot flat -->
-        <g style="transform-origin:128px 102px;animation:thLegBendR 2.5s ease-in-out infinite">
-          ${L('M128,102 C136,118 144,130 150,142',sk,18)}
-          <circle cx="151" cy="143" r="10" fill="${kn}"/>
-          ${L('M151,143 C153,150 155,156 156,162',sk,15)}
-          <ellipse cx="162" cy="165" rx="20" ry="7" fill="${shoe}"/>
+        <!-- Right leg -->
+        <g style="transform-origin:134px 118px;animation:thLegBendR 2.4s ease-in-out infinite">
+          ${Leg(134,118,154,146,13,11,'url(#skv)')}
+          ${Kn(154,147,9)}
+          ${Leg(154,147,158,158,10,9,'url(#skv)')}
+          ${Shoe(162,162,0,true)}
         </g>
       </g>
     </svg>`;
   }
 
-  // ── PRESS: arms raised OVERHEAD holding weights ──
+  // ── PRESS: overhead press, arms extending up ──
   if(type==='press'){
-    return`<svg viewBox="0 0 148 186" width="104" height="148" ${FLT}>${G}
-      <ellipse cx="74" cy="181" rx="30" ry="6" fill="rgba(139,92,246,.16)"/>
-      ${Hd(74,22)}
-      ${L('M74,36 C74,40 74,44 74,48',sk,9)}
-      ${Torso(74,48,84)}
-      ${Hips(74,84)}
-      <!-- Legs straight standing -->
-      ${L('M62,106 C60,122 58,138 57,154',sk,18)}
-      <circle cx="57" cy="155" r="10" fill="${kn}"/>
-      ${L('M57,155 C56,163 55,170 55,176',sk,15)}
-      <ellipse cx="49" cy="179" rx="19" ry="6" fill="${shoe}"/>
-      ${L('M86,106 C88,122 90,138 91,154',sk,18)}
-      <circle cx="91" cy="155" r="10" fill="${kn}"/>
-      ${L('M91,155 C92,163 93,170 93,176',sk,15)}
-      <ellipse cx="99" cy="179" rx="19" ry="6" fill="${shoe}"/>
-      <!-- Left arm UP overhead (already raised) with weight -->
-      <g style="transform-origin:54px 60px;animation:prArm 2.5s ease-in-out infinite">
-        ${L('M54,60 C44,48 36,34 30,20',sk,13)}
-        <g style="transform-origin:30px 20px;animation:prFore 2.5s ease-in-out infinite">
-          ${L('M30,20 C28,12 27,6 27,2',sk,11)}
-          <rect x="13" y="0" width="28" height="8" rx="4" fill="rgba(139,92,246,.5)" stroke="${pc}" stroke-width="1.5"/>
+    return`<svg viewBox="0 0 160 210" width="112" height="165" ${FLT}>${G}
+      ${Shadow(80,206,34,7)}
+      ${Hd(80,28)}
+      ${Torso(80,50,84)}
+      ${Hips(80,84)}
+      <!-- Left leg straight -->
+      ${Leg(68,110,65,148,13,11,'url(#skv)')}
+      ${Kn(65,149,9)}
+      ${Leg(65,149,62,174,10,8,'url(#skv)')}
+      ${Shoe(56,178,0)}
+      <!-- Right leg straight -->
+      ${Leg(92,110,95,148,13,11,'url(#skv)')}
+      ${Kn(95,149,9)}
+      ${Leg(95,149,98,174,10,8,'url(#skv)')}
+      ${Shoe(104,178,0,true)}
+      <!-- Left arm pressing up -->
+      <g style="transform-origin:62px 62px;animation:prArm 2.4s ease-in-out infinite">
+        ${Arm(62,62,42,34,11,9,'url(#sk)')}
+        <g style="transform-origin:42px 34px;animation:prFore 2.4s ease-in-out infinite">
+          ${Arm(42,34,36,8,9,7,'url(#sk)')}
+          <rect x="18" y="3" width="36" height="11" rx="5.5" fill="rgba(109,40,217,.55)" stroke="${pc}" stroke-width="1.5"/>
+          <rect x="14" y="5" width="8" height="7" rx="3" fill="${pc}"/><rect x="56" y="5" width="8" height="7" rx="3" fill="${pc}"/>
         </g>
       </g>
-      <!-- Right arm UP overhead with weight -->
-      <g style="transform-origin:94px 60px;animation:prArmR 2.5s ease-in-out infinite">
-        ${L('M94,60 C104,48 112,34 118,20',sk,13)}
-        <g style="transform-origin:118px 20px;animation:prForeR 2.5s ease-in-out infinite">
-          ${L('M118,20 C120,12 121,6 121,2',sk,11)}
-          <rect x="107" y="0" width="28" height="8" rx="4" fill="rgba(139,92,246,.5)" stroke="${pc}" stroke-width="1.5"/>
+      <!-- Right arm pressing up -->
+      <g style="transform-origin:98px 62px;animation:prArmR 2.4s ease-in-out infinite">
+        ${Arm(98,62,118,34,11,9,'url(#sk)')}
+        <g style="transform-origin:118px 34px;animation:prForeR 2.4s ease-in-out infinite">
+          ${Arm(118,34,124,8,9,7,'url(#sk)')}
+          <rect x="106" y="3" width="36" height="11" rx="5.5" fill="rgba(109,40,217,.55)" stroke="${pc}" stroke-width="1.5"/>
+          <rect x="102" y="5" width="8" height="7" rx="3" fill="${pc}"/><rect x="142" y="5" width="8" height="7" rx="3" fill="${pc}"/>
         </g>
       </g>
     </svg>`;
   }
 
-  // ── ROW: body bent forward 45°, arm pulling weight back ──
+  // ── ROW: hinged forward, pulling dumbbell up ──
   if(type==='row'){
-    return`<svg viewBox="0 0 195 138" width="140" height="112" ${FLT}>${G}
-      ${L('M5,130 H190','rgba(139,92,246,.25)',3)}
+    return`<svg viewBox="0 0 210 160" width="152" height="122" ${FLT}>${G}
+      <line x1="8" y1="152" x2="202" y2="152" stroke="rgba(139,92,246,.3)" stroke-width="2.5" stroke-linecap="round"/>
       <!-- Head tilted forward -->
-      ${Hd(36,30,15)}
-      <!-- Torso leaning forward diagonally -->
-      <path d="M18,50 C22,44 32,42 48,46 L90,60 C98,66 94,78 84,76 L34,62 C24,60 16,58 18,50Z" fill="url(#tg)"/>
-      ${L('M28,50 C30,44 32,38 34,33',sk,9)}
-      <!-- Support arm (left) on bench/knee -->
-      ${L('M20,60 C14,70 10,82 8,92',sk,12)}
-      ${L('M8,92 C7,100 6,108 5,116',sk,10)}
-      <!-- Both legs bent, supporting stance -->
-      ${L('M66,76 C64,92 62,108 61,122',sk,18)}
-      <circle cx="61" cy="123" r="10" fill="${kn}"/>
-      <ellipse cx="60" cy="127" rx="18" ry="6" fill="${shoe}"/>
-      ${L('M86,76 C88,92 90,108 92,122',sk,18)}
-      <circle cx="92" cy="123" r="10" fill="${kn}"/>
-      <ellipse cx="93" cy="127" rx="18" ry="6" fill="${shoe}"/>
-      <!-- Right arm pulling back with dumbbell -->
-      <g style="transform-origin:42px 62px;animation:rwPull 2.5s ease-in-out infinite">
-        ${L('M42,62 C52,54 64,46 76,40',sk,13)}
-        <g style="transform-origin:76px 40px;animation:rwPullF 2.5s ease-in-out infinite">
-          ${L('M76,40 C88,36 102,34 116,33',sk,11)}
-          <rect x="116" y="27" width="36" height="12" rx="6" fill="rgba(139,92,246,.45)" stroke="${pc}" stroke-width="1.5"/>
+      ${Hd(42,26,18)}
+      <!-- Torso hinged forward ~45° -->
+      <path d="M30,50 C32,42 46,40 62,44 L118,70 C128,76 124,92 112,90 L50,64 C38,60 28,60 30,50Z" fill="url(#tg)"/>
+      <!-- Neck connection -->
+      ${Arm(42,40,30,52,7,6,'url(#skv)')}
+      <!-- Support arm on knee (left arm straight) -->
+      ${Arm(32,60,22,90,10,8,'url(#sk)')}
+      ${Arm(22,90,18,120,8,7,'url(#sk)')}
+      <!-- Left leg: bent for support -->
+      ${Leg(52,92,44,130,13,11,'url(#skv)')}
+      ${Kn(44,131,9)}
+      ${Leg(44,131,42,148,10,8,'url(#skv)')}
+      ${Shoe(38,151,0)}
+      <!-- Right leg: slightly behind -->
+      ${Leg(112,90,120,130,13,11,'url(#skv)')}
+      ${Kn(120,131,9)}
+      ${Leg(120,131,122,148,10,8,'url(#skv)')}
+      ${Shoe(128,151,0,true)}
+      <!-- Right arm pulling up with dumbbell -->
+      <g style="transform-origin:60px 72px;animation:rwPull 2.4s ease-in-out infinite">
+        ${Arm(60,72,80,52,11,9,'url(#sk)')}
+        <g style="transform-origin:80px 52px;animation:rwPullF 2.4s ease-in-out infinite">
+          ${Arm(80,52,110,44,9,7,'url(#sk)')}
+          <rect x="110" y="36" width="38" height="14" rx="7" fill="rgba(109,40,217,.5)" stroke="${pc}" stroke-width="1.5"/>
+          <rect x="106" y="38" width="8" height="10" rx="4" fill="${pc}"/><rect x="148" y="38" width="8" height="10" rx="4" fill="${pc}"/>
         </g>
       </g>
     </svg>`;
   }
 
-  // ── PLANK: perfectly horizontal on forearms ──
+  // ── PLANK: rigid horizontal on forearms ──
   if(type==='plank'){
-    return`<svg viewBox="0 0 210 115" width="148" height="92" ${FLT}>${G}
-      ${L('M5,108 H205','rgba(139,92,246,.25)',3)}
-      <g style="animation:plBreath 3s ease-in-out infinite">
-        <!-- Head looking slightly down -->
-        ${Hd(170,32,0)}
-        ${L('M170,46 C164,50 158,53 152,56',sk,9)}
-        <!-- Horizontal body — torso is a long organic rectangle -->
-        <path d="M48,62 C48,55 72,50 108,52 C136,54 150,56 152,60 L150,76 C148,82 136,84 108,82 C72,80 48,76 48,68Z" fill="url(#tg)"/>
-        <!-- Right forearm (elbow on ground, near head) -->
-        ${L('M150,60 C152,50 154,40 156,32',sk,13)}
-        ${L('M156,32 C157,26 157,20 156,16',sk,11)}
-        <!-- Left elbow/forearm on ground -->
-        ${L('M150,74 C156,78 162,82 166,88',sk,11)}
-        <ellipse cx="168" cy="90" rx="14" ry="4.5" fill="${shoe}"/>
-        <!-- Feet (toes on ground, both together) -->
-        ${L('M48,65 C36,70 24,76 14,84',sk,16)}
-        <ellipse cx="10" cy="87" rx="14" ry="5" fill="${shoe}"/>
-        ${L('M52,73 C40,78 28,84 18,90',sk,16)}
-        <ellipse cx="14" cy="93" rx="14" ry="5" fill="${shoe}"/>
+    return`<svg viewBox="0 0 230 130" width="165" height="100" ${FLT}>${G}
+      <line x1="8" y1="122" x2="222" y2="122" stroke="rgba(139,92,246,.3)" stroke-width="2.5" stroke-linecap="round"/>
+      <g style="animation:plBreath 3.2s ease-in-out infinite">
+        <!-- Head facing down-forward -->
+        ${Hd(186,28,0)}
+        <!-- Neck -->
+        ${Arm(186,44,174,54,7,6,'url(#skv)')}
+        <!-- Whole body horizontal - torso leggings top -->
+        <path d="M56,72 C56,62 80,56 120,58 C148,60 162,62 172,58 L170,76 C158,82 146,84 120,82 C80,80 56,82 56,80Z" fill="url(#tg)"/>
+        <!-- Right forearm on ground (near body side) -->
+        ${Arm(170,62,178,48,10,8,'url(#sk)')}
+        <!-- Forearm flat on ground -->
+        <path d="M178,52 C188,52 200,54 210,58" stroke="${sk}" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <path d="M178,56 C188,56 200,58 210,62" stroke="${sk2}" stroke-width="4" stroke-linecap="round" fill="none" opacity=".5"/>
+        <!-- Left arm elbow on ground -->
+        ${Arm(60,76,52,92,10,8,'url(#sk)')}
+        <!-- Glutes/hips highlight -->
+        <path d="M90,60 C100,56 120,56 134,60" stroke="rgba(255,255,255,.18)" stroke-width="3" fill="none"/>
+        <!-- Left leg straight back -->
+        ${Leg(58,72,22,96,13,11,'url(#skv)')}
+        ${Kn(21,97,8)}
+        ${Leg(21,97,14,112,10,8,'url(#skv)')}
+        ${Shoe(8,116,5)}
+        <!-- Right leg -->
+        ${Leg(60,80,24,104,13,11,'url(#skv)')}
+        ${Kn(23,105,8)}
+        ${Leg(23,105,16,118,10,8,'url(#skv)')}
+        ${Shoe(10,121,5)}
       </g>
     </svg>`;
   }
 
-  // ── JUMP: star-jump position, arms HIGH, legs WIDE ──
+  // ── JUMP / BURPEE: explosive jump, arms up, legs spread ──
   if(type==='jump'){
-    return`<svg viewBox="0 0 200 195" width="138" height="152" ${FLT}>${G}
-      <ellipse cx="100" cy="190" rx="40" ry="6" fill="rgba(139,92,246,.16)"/>
-      <g style="animation:jmpUp 1.6s ease-in-out infinite;transform-origin:100px 95px">
-        ${Hd(100,22)}
-        ${L('M100,36 C100,40 100,44 100,48',sk,9)}
-        ${Torso(100,48,84)}
-        ${Hips(100,84)}
-        <!-- Left arm raised HIGH (star position) -->
-        <g style="transform-origin:78px 58px;animation:jmpArm 1.6s ease-in-out infinite">
-          ${L('M78,58 C64,44 48,32 34,22',sk,13)}
-          ${L('M34,22 C28,17 22,13 18,10',sk,11)}
+    return`<svg viewBox="0 0 220 215" width="152" height="165" ${FLT}>${G}
+      ${Shadow(110,210,50,8)}
+      <g style="animation:jmpUp 1.5s ease-in-out infinite;transform-origin:110px 110px">
+        ${Hd(110,24)}
+        ${Torso(110,48,82,21)}
+        ${Hips(110,82,23)}
+        <!-- Left arm swinging up-out -->
+        <g style="transform-origin:86px 62px;animation:jmpArm 1.5s ease-in-out infinite">
+          ${Arm(86,62,50,34,11,9,'url(#sk)')}
+          ${Arm(50,34,24,16,9,7,'url(#sk)')}
         </g>
-        <!-- Right arm raised HIGH -->
-        <g style="transform-origin:122px 58px;animation:jmpArmR 1.6s ease-in-out infinite">
-          ${L('M122,58 C136,44 152,32 166,22',sk,13)}
-          ${L('M166,22 C172,17 178,13 182,10',sk,11)}
+        <!-- Right arm swinging up-out -->
+        <g style="transform-origin:134px 62px;animation:jmpArmR 1.5s ease-in-out infinite">
+          ${Arm(134,62,170,34,11,9,'url(#sk)')}
+          ${Arm(170,34,196,16,9,7,'url(#sk)')}
         </g>
-        <!-- Left leg spread WIDE to the left -->
-        <g style="transform-origin:84px 106px;animation:jmpLeg 1.6s ease-in-out infinite">
-          ${L('M84,106 C72,122 58,138 44,154',sk,18)}
-          <circle cx="43" cy="155" r="10" fill="${kn}"/>
-          ${L('M43,155 C38,163 34,170 32,178',sk,15)}
-          <ellipse cx="26" cy="181" rx="20" ry="7" fill="${shoe}"/>
+        <!-- Left leg spread wide jumping -->
+        <g style="transform-origin:90px 106px;animation:jmpLeg 1.5s ease-in-out infinite">
+          ${Leg(90,106,58,148,14,12,'url(#skv)')}
+          ${Kn(57,149,9)}
+          ${Leg(57,149,46,174,11,9,'url(#skv)')}
+          ${Shoe(40,178,0)}
         </g>
-        <!-- Right leg spread WIDE to the right -->
-        <g style="transform-origin:116px 106px;animation:jmpLegR 1.6s ease-in-out infinite">
-          ${L('M116,106 C128,122 142,138 156,154',sk,18)}
-          <circle cx="157" cy="155" r="10" fill="${kn}"/>
-          ${L('M157,155 C162,163 166,170 168,178',sk,15)}
-          <ellipse cx="174" cy="181" rx="20" ry="7" fill="${shoe}"/>
+        <!-- Right leg spread wide -->
+        <g style="transform-origin:130px 106px;animation:jmpLegR 1.5s ease-in-out infinite">
+          ${Leg(130,106,162,148,14,12,'url(#skv)')}
+          ${Kn(163,149,9)}
+          ${Leg(163,149,174,174,11,9,'url(#skv)')}
+          ${Shoe(180,178,0,true)}
         </g>
       </g>
     </svg>`;
   }
 
-  // ── LUNGE: deep asymmetric — front knee bent 90°, back knee low ──
+  // ── LUNGE: deep split lunge, torso upright ──
   if(type==='lunge'){
-    return`<svg viewBox="0 0 185 188" width="128" height="150" ${FLT}>${G}
-      <ellipse cx="92" cy="183" rx="44" ry="6" fill="rgba(139,92,246,.16)"/>
-      <!-- Head -->
-      ${Hd(92,22)}
-      ${L('M92,36 C92,40 92,44 92,48',sk,9)}
-      ${Torso(92,48,84)}
-      ${Hips(92,84)}
-      <!-- Left arm slightly back for balance -->
-      ${L('M70,62 C60,68 50,76 42,86',sk,13)}
-      ${L('M42,86 C38,92 35,97 33,102',sk,11)}
-      <!-- Right arm forward -->
-      ${L('M114,62 C124,68 134,76 142,86',sk,13)}
-      ${L('M142,86 C146,92 149,97 151,102',sk,11)}
-      <!-- Front (left) leg: thigh forward-down, knee bent 90°, calf vertical DOWN -->
-      <g style="transform-origin:78px 106px;animation:lngThF 2.5s ease-in-out infinite">
-        ${L('M78,106 C66,118 52,130 40,142',sk,19)}
-        <circle cx="39" cy="143" r="10" fill="${kn}"/>
-        <g style="transform-origin:39px 143px;animation:lngCaF 2.5s ease-in-out infinite">
-          ${L('M39,143 C38,154 37,163 36,173',sk,16)}
-          <ellipse cx="32" cy="177" rx="22" ry="7" fill="${shoe}"/>
+    return`<svg viewBox="0 0 200 210" width="140" height="165" ${FLT}>${G}
+      ${Shadow(100,205,52,8)}
+      ${Hd(100,26)}
+      ${Torso(100,50,84)}
+      ${Hips(100,84)}
+      <!-- Left arm relaxed at side, slightly bent -->
+      ${Arm(76,64,62,94,10,8,'url(#sk)')}
+      ${Arm(62,94,54,114,8,7,'url(#sk)')}
+      <!-- Right arm -->
+      ${Arm(124,64,138,94,10,8,'url(#sk)')}
+      ${Arm(138,94,146,114,8,7,'url(#sk)')}
+      <!-- Front (left) leg: thigh forward-diagonal, calf straight down -->
+      <g style="transform-origin:84px 108px;animation:lngThF 2.5s ease-in-out infinite">
+        ${Leg(84,108,50,148,15,12,'url(#skv)')}
+        ${Kn(49,149,10)}
+        <g style="transform-origin:49px 149px;animation:lngCaF 2.5s ease-in-out infinite">
+          ${Leg(49,149,46,184,11,9,'url(#skv)')}
+          ${Shoe(40,188,0)}
         </g>
       </g>
-      <!-- Back (right) leg: thigh goes back-down, knee near ground, calf angled forward -->
-      <g style="transform-origin:106px 106px;animation:lngThB 2.5s ease-in-out infinite">
-        ${L('M106,106 C120,118 136,128 150,136',sk,19)}
-        <circle cx="151" cy="137" r="10" fill="${kn}"/>
-        ${L('M151,137 C152,150 152,161 152,172',sk,16)}
-        <ellipse cx="152" cy="176" rx="22" ry="7" fill="${shoe}"/>
+      <!-- Back (right) leg: thigh goes back, knee low near ground -->
+      <g style="transform-origin:116px 108px;animation:lngThB 2.5s ease-in-out infinite">
+        ${Leg(116,108,154,145,15,12,'url(#skv)')}
+        ${Kn(155,146,10)}
+        ${Leg(155,146,158,180,11,9,'url(#skv)')}
+        ${Shoe(162,184,0,true)}
       </g>
     </svg>`;
   }
 
-  // ── CRUNCH: lying down, upper body CURLING UP, knees bent ──
+  // ── CRUNCH: on floor, curling torso up ──
   if(type==='crunch'){
-    return`<svg viewBox="0 0 205 128" width="145" height="102" ${FLT}>${G}
-      ${L('M5,120 H200','rgba(139,92,246,.25)',3)}
-      <!-- Torso curling up (animated) -->
-      <g style="transform-origin:40px 68px;animation:crUp 2.5s ease-in-out infinite">
-        ${Hd(22,34)}
-        ${L('M22,48 C22,52 22,56 22,60',sk,9)}
-        <path d="M14,60 C16,54 24,52 32,56 L60,66 C66,72 62,82 54,80 L18,70 C12,68 10,62 14,60Z" fill="url(#tg)"/>
-        <!-- Arms reaching toward knees -->
-        ${L('M10,66 C4,76 2,86 2,98',sk,12)}
-        ${L('M2,98 C2,106 2,112 2,118',sk,10)}
-        <!-- Right arm reaching forward -->
-        ${L('M52,78 C62,74 74,72 86,72',sk,11)}
+    return`<svg viewBox="0 0 220 145" width="158" height="112" ${FLT}>${G}
+      <line x1="8" y1="136" x2="212" y2="136" stroke="rgba(139,92,246,.3)" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Lower body flat: hips and thighs -->
+      <path d="M56,86 C74,90 136,90 158,84 L156,100 Q106,108 56,100Z" fill="url(#tg2)" opacity=".9"/>
+      <!-- Legs bent up: thighs vertical, calves parallel to floor -->
+      ${Leg(78,92,88,62,13,11,'url(#skv)')}
+      ${Kn(88,61,9)}
+      ${Leg(88,61,120,58,10,9,'url(#skv)')}
+      ${Shoe(126,60,-5,true)}
+      ${Leg(130,90,140,60,13,11,'url(#skv)')}
+      ${Kn(140,59,9)}
+      ${Leg(140,59,172,56,10,9,'url(#skv)')}
+      ${Shoe(178,58,-5,true)}
+      <!-- Torso curling up animated -->
+      <g style="transform-origin:56px 82px;animation:crUp 2.4s ease-in-out infinite">
+        <!-- Back on floor / upper back -->
+        ${Arm(56,84,24,80,14,12,'url(#tg)')}
+        <!-- Neck + head -->
+        ${Arm(56,80,48,66,8,7,'url(#skv)')}
+        ${Hd(36,42,25)}
+        <!-- Arms reaching forward toward knees -->
+        ${Arm(62,82,88,68,9,8,'url(#sk)')}
+        ${Arm(88,68,112,62,8,7,'url(#sk)')}
+        ${Arm(48,86,28,108,9,8,'url(#sk)')}
+        ${Arm(28,108,18,126,7,6,'url(#sk)')}
       </g>
-      <!-- Lower body: hips and legs flat, knees bent -->
-      <path d="M58,80 C76,84 112,84 144,80 L142,92 Q92,98 58,92Z" fill="${pc}" opacity=".85"/>
-      <!-- Thighs going up (knees bent) -->
-      ${L('M72,88 C80,74 88,62 94,54',sk,18)}
-      <circle cx="95" cy="53" r="10" fill="${kn}"/>
-      ${L('M95,53 C106,56 118,62 128,70',sk,15)}
-      <ellipse cx="132" cy="73" rx="16" ry="6" fill="${shoe}" transform="rotate(-12,132,73)"/>
-      <!-- Other leg -->
-      ${L('M120,88 C128,74 136,62 142,54',sk,18)}
-      <circle cx="143" cy="53" r="10" fill="${kn}"/>
-      ${L('M143,53 C154,56 166,62 176,70',sk,15)}
-      <ellipse cx="180" cy="73" rx="16" ry="6" fill="${shoe}" transform="rotate(-12,180,73)"/>
     </svg>`;
   }
 
-  // ── LATERAL RAISE: arms spread like a T, holding weights ──
+  // ── LATERAL RAISE: T-pose, arms lifting dumbbells out ──
   if(type==='lateral'){
-    return`<svg viewBox="0 0 220 182" width="150" height="142" ${FLT}>${G}
-      <ellipse cx="110" cy="177" rx="32" ry="6" fill="rgba(139,92,246,.16)"/>
-      ${Hd(110,22)}
-      ${L('M110,36 C110,40 110,44 110,48',sk,9)}
-      ${Torso(110,48,84)}
-      ${Hips(110,84)}
-      <!-- Legs standing straight -->
-      ${L('M94,106 C92,122 90,140 89,156',sk,18)}
-      <circle cx="89" cy="157" r="10" fill="${kn}"/>
-      ${L('M89,157 C88,164 88,170 88,176',sk,15)}
-      <ellipse cx="82" cy="179" rx="20" ry="6" fill="${shoe}"/>
-      ${L('M126,106 C128,122 130,140 131,156',sk,18)}
-      <circle cx="131" cy="157" r="10" fill="${kn}"/>
-      ${L('M131,157 C132,164 132,170 132,176',sk,15)}
-      <ellipse cx="138" cy="179" rx="20" ry="6" fill="${shoe}"/>
-      <!-- Left arm raised out to SIDE (T-pose, already raised) -->
-      <g style="transform-origin:88px 62px;animation:latAL 2.5s ease-in-out infinite">
-        ${L('M88,62 C74,54 58,46 42,38',sk,13)}
-        ${L('M42,38 C34,34 26,31 20,29',sk,11)}
-        <!-- Dumbbell -->
-        <rect x="6" y="24" width="26" height="10" rx="5" fill="rgba(139,92,246,.45)" stroke="${pc}" stroke-width="1.5"/>
+    return`<svg viewBox="0 0 240 200" width="165" height="155" ${FLT}>${G}
+      ${Shadow(120,195,38,7)}
+      ${Hd(120,26)}
+      ${Torso(120,50,84)}
+      ${Hips(120,84)}
+      <!-- Left leg -->
+      ${Leg(104,110,100,148,13,11,'url(#skv)')}
+      ${Kn(100,149,9)}
+      ${Leg(100,149,98,174,10,8,'url(#skv)')}
+      ${Shoe(92,178,0)}
+      <!-- Right leg -->
+      ${Leg(136,110,140,148,13,11,'url(#skv)')}
+      ${Kn(140,149,9)}
+      ${Leg(140,149,142,174,10,8,'url(#skv)')}
+      ${Shoe(148,178,0,true)}
+      <!-- Left arm raising lateral with dumbbell -->
+      <g style="transform-origin:96px 64px;animation:latAL 2.4s ease-in-out infinite">
+        ${Arm(96,64,56,52,11,9,'url(#sk)')}
+        ${Arm(56,52,22,44,9,7,'url(#sk)')}
+        <!-- Dumbbell left -->
+        <rect x="4" y="36" width="20" height="14" rx="7" fill="${pc}"/>
+        <rect x="0" y="40" width="8" height="6" rx="3" fill="${pc2}"/>
+        <rect x="16" y="40" width="8" height="6" rx="3" fill="${pc2}"/>
+        <rect x="8" y="42" width="8" height="2" rx="1" fill="rgba(255,255,255,.3)"/>
       </g>
-      <!-- Right arm raised out to SIDE -->
-      <g style="transform-origin:132px 62px;animation:latAR 2.5s ease-in-out infinite">
-        ${L('M132,62 C146,54 162,46 178,38',sk,13)}
-        ${L('M178,38 C186,34 194,31 200,29',sk,11)}
-        <rect x="188" y="24" width="26" height="10" rx="5" fill="rgba(139,92,246,.45)" stroke="${pc}" stroke-width="1.5"/>
+      <!-- Right arm raising lateral -->
+      <g style="transform-origin:144px 64px;animation:latAR 2.4s ease-in-out infinite">
+        ${Arm(144,64,184,52,11,9,'url(#sk)')}
+        ${Arm(184,52,218,44,9,7,'url(#sk)')}
+        <!-- Dumbbell right -->
+        <rect x="216" y="36" width="20" height="14" rx="7" fill="${pc}"/>
+        <rect x="212" y="40" width="8" height="6" rx="3" fill="${pc2}"/>
+        <rect x="228" y="40" width="8" height="6" rx="3" fill="${pc2}"/>
+        <rect x="220" y="42" width="8" height="2" rx="1" fill="rgba(255,255,255,.3)"/>
       </g>
     </svg>`;
   }
 
-  // ── KICKBACK: on all fours, one leg kicking HIGH behind ──
-  return`<svg viewBox="0 0 210 145" width="148" height="115" ${FLT}>${G}
-    ${L('M5,136 H205','rgba(139,92,246,.25)',3)}
-    <!-- Head looking down-forward -->
-    ${Hd(30,30,0)}
-    ${L('M30,44 C30,48 30,52 30,56',sk,9)}
-    <!-- Torso horizontal on all fours -->
-    <path d="M22,56 C24,50 34,48 52,52 L112,64 C120,68 118,80 108,78 L48,66 C32,64 20,64 22,56Z" fill="url(#tg)"/>
-    <!-- Left support arm (front-left, elbow straight) -->
-    ${L('M24,58 C18,70 14,84 12,96',sk,13)}
-    ${L('M12,96 C11,106 10,114 10,122',sk,11)}
-    <ellipse cx="10" cy="125" rx="12" ry="4.5" fill="${shoe}"/>
-    <!-- Right support arm (elbow straight) -->
-    ${L('M48,54 C44,66 40,80 38,92',sk,13)}
-    ${L('M38,92 C37,102 36,110 36,118',sk,11)}
-    <ellipse cx="35" cy="121" rx="12" ry="4.5" fill="${shoe}"/>
-    <!-- Support knee (right leg on ground) -->
-    ${L('M80,76 C82,92 84,106 86,120',sk,18)}
-    <circle cx="86" cy="121" r="10" fill="${kn}"/>
-    <ellipse cx="86" cy="130" rx="16" ry="5" fill="${shoe}"/>
-    <!-- Kicking leg HIGH behind (thigh going up-back, calf extending) -->
-    <g style="transform-origin:108px 72px;animation:kckBk 2.5s ease-in-out infinite">
-      ${L('M108,72 C122,58 138,44 154,32',sk,19)}
-      <circle cx="155" cy="31" r="10" fill="${kn}"/>
-      <g style="transform-origin:155px 31px;animation:kckCf 2.5s ease-in-out infinite">
-        ${L('M155,31 C166,26 178,22 190,20',sk,16)}
-        <ellipse cx="196" cy="20" rx="16" ry="7" fill="${shoe}" transform="rotate(-8,196,20)"/>
+  // ── KICKBACK / default: on all fours, leg kicked high behind ──
+  return`<svg viewBox="0 0 230 160" width="165" height="122" ${FLT}>${G}
+    <line x1="8" y1="150" x2="222" y2="150" stroke="rgba(139,92,246,.3)" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Head looking forward-down -->
+    ${Hd(32,28,15)}
+    <!-- Neck -->
+    ${Arm(32,44,34,56,7,6,'url(#skv)')}
+    <!-- Torso horizontal on all-fours -->
+    <path d="M26,58 C28,50 44,46 66,50 L130,70 C140,74 138,88 126,86 L60,66 C42,64 24,68 26,58Z" fill="url(#tg)"/>
+    <!-- Left forearm on ground (near head) -->
+    ${Arm(28,60,14,82,10,8,'url(#sk)')}
+    ${Arm(14,82,10,108,8,7,'url(#sk)')}
+    ${Shoe(8,112,5)}
+    <!-- Right forearm on ground -->
+    ${Arm(52,56,38,78,10,8,'url(#sk)')}
+    ${Arm(38,78,34,104,8,7,'url(#sk)')}
+    ${Shoe(32,108,5)}
+    <!-- Support leg on ground -->
+    ${Leg(100,80,98,118,13,11,'url(#skv)')}
+    ${Kn(98,119,9)}
+    ${Leg(98,119,96,142,10,8,'url(#skv)')}
+    ${Shoe(90,146,0)}
+    <!-- Kicking leg HIGH animated -->
+    <g style="transform-origin:126px 78px;animation:kckBk 2.4s ease-in-out infinite">
+      ${Leg(126,78,164,46,14,12,'url(#skv)')}
+      ${Kn(165,45,10)}
+      <g style="transform-origin:165px 45px;animation:kckCf 2.4s ease-in-out infinite">
+        ${Leg(165,45,196,38,11,9,'url(#skv)')}
+        ${Shoe(202,36,-8,true)}
       </g>
     </g>
   </svg>`;
