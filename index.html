@@ -97,12 +97,48 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:-apple-system,
 .active-topbar{display:flex;justify-content:space-between;align-items:center;padding:10px 18px 10px;flex-shrink:0}
 .voice-btn{background:rgba(147,51,234,.2);border:1px solid rgba(147,51,234,.4);border-radius:10px;padding:7px 12px;font-size:11px;font-weight:700;color:#c084fc;cursor:pointer;display:flex;align-items:center;gap:5px}
 .voice-btn.off{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1);color:var(--m)}
-.prog-bar{height:3px;background:#1e1e3a;margin:0 18px 14px;border-radius:2px;overflow:hidden;flex-shrink:0}
+.prog-bar{height:4px;background:#1e1e3a;margin:0 18px 12px;border-radius:2px;overflow:hidden;flex-shrink:0}
 .prog-fill{height:100%;background:var(--grad);transition:width .5s ease}
-.figure-box{margin:0 18px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:14px;display:flex;gap:14px;align-items:center;flex-shrink:0}
-.figure-svg-wrap{width:90px;height:110px;flex-shrink:0;background:rgba(147,51,234,.08);border-radius:12px;display:flex;align-items:center;justify-content:center}
-.figure-info{flex:1;min-width:0}
-.fig-ex-num{font-size:9px;color:var(--d);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+/* ── REP COUNTER & SET DOTS ── */
+.set-card{margin:0 18px 8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:14px 16px;flex-shrink:0}
+.set-dots{display:flex;gap:8px;align-items:center;margin-top:4px}
+.set-dot{width:11px;height:11px;border-radius:50%;transition:all .3s}
+.rep-counter{background:rgba(139,92,246,.08);border:2px solid rgba(139,92,246,.22);border-radius:18px;padding:16px 14px 12px;text-align:center;cursor:pointer;transition:transform .12s,background .2s,border-color .2s,box-shadow .2s;-webkit-tap-highlight-color:transparent;margin-top:12px;position:relative;overflow:hidden}
+.rep-counter:active{transform:scale(.95);background:rgba(139,92,246,.22)}
+.rep-counter::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(139,92,246,.15),transparent 70%);pointer-events:none}
+.rep-counter.counting{border-color:#ec4899;background:rgba(236,72,153,.1);box-shadow:0 0 0 4px rgba(236,72,153,.12),0 8px 28px rgba(236,72,153,.25);animation:coachPulse 1.1s ease-in-out infinite}
+.rep-counter.paused{border-color:#fbbf24;background:rgba(251,191,36,.08);box-shadow:0 0 0 3px rgba(251,191,36,.12)}
+@keyframes coachPulse{0%,100%{box-shadow:0 0 0 4px rgba(236,72,153,.12),0 8px 28px rgba(236,72,153,.25)}50%{box-shadow:0 0 0 9px rgba(236,72,153,.06),0 8px 32px rgba(236,72,153,.4)}}
+.rep-num{font-size:58px;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;letter-spacing:-2px;transition:color .2s}
+.rep-num.pulse{animation:repPulse .22s ease}
+.rep-num.coach-count{-webkit-text-fill-color:transparent;background:linear-gradient(135deg,#ec4899,#f9a8d4);-webkit-background-clip:text}
+@keyframes repPulse{0%{transform:scale(1)}50%{transform:scale(1.22)}100%{transform:scale(1)}}
+.rep-label{font-size:9px;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:1.2px;margin-top:5px;transition:color .3s}
+.coach-bubble{margin:0 18px 8px;background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(236,72,153,.08));border:1px solid rgba(139,92,246,.2);border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:10px;flex-shrink:0;min-height:44px}
+.coach-avatar{width:32px;height:32px;border-radius:10px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.coach-text{font-size:11px;color:rgba(255,255,255,.7);line-height:1.4;font-style:italic;flex:1}
+/* ── REST SCREEN NEXT EX PREVIEW ── */
+.rest-next-card{margin:0 18px 10px;background:rgba(255,255,255,.05);border:1px solid rgba(139,92,246,.2);border-radius:18px;padding:14px;display:flex;gap:14px;align-items:center;flex-shrink:0}
+.rest-next-fig{width:72px;height:82px;background:rgba(139,92,246,.1);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+/* ── VIDEO PLAYER ── */
+.ex-video{margin:0 18px 8px;border-radius:22px;overflow:hidden;position:relative;background:#000;flex-shrink:0;box-shadow:0 14px 44px rgba(139,92,246,.45),0 0 0 1px rgba(139,92,246,.22)}
+.evp-badge{position:absolute;top:11px;left:13px;background:linear-gradient(135deg,#7c3aed,#9333ea);border-radius:8px;padding:4px 10px;font-size:8px;font-weight:900;color:#fff;letter-spacing:1.2px;z-index:3;text-transform:uppercase;box-shadow:0 2px 8px rgba(124,58,237,.5)}
+.evp-muscles-badge{position:absolute;top:11px;right:13px;background:rgba(0,0,0,.65);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:4px 10px;font-size:8px;color:rgba(255,255,255,.55);z-index:3;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.evp-scene{height:210px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 108%,rgba(139,92,246,.35) 0%,rgba(20,6,40,.9) 55%,#000 100%);position:relative}
+.evp-tip-bar{position:absolute;bottom:52px;left:0;right:0;text-align:center;z-index:3;pointer-events:none;padding:0 20px}
+.evp-tip-pill{display:inline-block;background:rgba(0,0,0,.78);backdrop-filter:blur(14px);border:1px solid rgba(139,92,246,.55);border-radius:20px;padding:5px 16px;font-size:10px;font-weight:700;color:#ddd6fe;transition:opacity .32s ease,transform .32s ease;letter-spacing:.2px}
+.evp-tip-pill.fade{opacity:0;transform:translateY(7px)}
+.evp-controls{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.5) 65%,transparent 100%);padding:7px 14px 11px;z-index:4}
+.evp-tl{height:2.5px;background:rgba(255,255,255,.14);border-radius:2px;overflow:hidden;margin-bottom:7px}
+.evp-tl-fill{height:100%;width:0%;background:linear-gradient(90deg,#8b5cf6,#ec4899);border-radius:2px;animation:tlFill 2.5s linear infinite}
+@keyframes tlFill{0%{width:0%}100%{width:100%}}
+.evp-ctrl-row{display:flex;align-items:center;gap:9px}
+.evp-play-btn{width:30px;height:30px;border-radius:9px;background:rgba(139,92,246,.82);border:none;color:#fff;font-size:12px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(139,92,246,.4)}
+.evp-ex-title{font-size:12px;font-weight:900;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.evp-ex-sub{font-size:9px;color:rgba(255,255,255,.42);margin-top:1px}
+.evp-live{font-size:8px;font-weight:800;color:#ec4899;letter-spacing:.6px;background:rgba(236,72,153,.14);border:1px solid rgba(236,72,153,.35);padding:3px 9px;border-radius:6px;flex-shrink:0}
+.wa-info-card{margin:0 18px 8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:11px 14px;flex-shrink:0}
+.fig-ex-num{font-size:9px;color:var(--d);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
 .fig-ex-name{font-size:17px;font-weight:900;margin-bottom:4px;line-height:1.1}
 .fig-muscles{font-size:10px;color:var(--m);margin-bottom:8px}
 .fig-tip{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:9px;padding:7px 10px;font-size:10px;color:#fcd34d;line-height:1.4}
@@ -111,7 +147,7 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:-apple-system,
 .set-row{display:flex;justify-content:center;gap:24px;margin-top:14px}
 .voice-card{margin:0 18px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(147,51,234,.2);border-radius:14px;padding:12px;display:flex;align-items:center;gap:12px;flex-shrink:0}
 .voice-wave{display:flex;align-items:flex-end;gap:3px;height:22px}
-.voice-wave span{background:var(--grad);border-radius:2px;width:3px;animation:wv 1.2s ease-in-out infinite}
+.voice-wave span{background:var(--grad);border-radius:2px;width:3px;animation:wv 1.2.5s ease-in-out infinite}
 .voice-wave span:nth-child(2){animation-delay:.15s}
 .voice-wave span:nth-child(3){animation-delay:.3s}
 .voice-wave span:nth-child(4){animation-delay:.15s}
@@ -167,39 +203,39 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:-apple-system,
 .uc-box{background:rgba(255,255,255,.04);border-radius:9px;padding:8px;text-align:center}
 .uc-val{font-size:14px;font-weight:700;color:#c084fc}
 .uc-lbl{font-size:8px;color:var(--d);margin-top:2px}
-/* STICK FIGURE ANIMATIONS */
-@keyframes sqBody{0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(26px) scaleY(.9)}}
-@keyframes sqKneeL{0%,100%{transform:rotate(0)}50%{transform:rotate(50deg)}}
-@keyframes sqKneeR{0%,100%{transform:rotate(0)}50%{transform:rotate(-50deg)}}
-@keyframes sqCalfL{0%,100%{transform:rotate(0)}50%{transform:rotate(-42deg)}}
-@keyframes sqCalfR{0%,100%{transform:rotate(0)}50%{transform:rotate(42deg)}}
-@keyframes sqArmL{0%,100%{transform:rotate(0)}50%{transform:rotate(-32deg)}}
-@keyframes sqArmR{0%,100%{transform:rotate(0)}50%{transform:rotate(32deg)}}
-@keyframes thUp{0%,100%{transform:translateY(0) rotate(0)}45%{transform:translateY(-26px) rotate(-18deg)}}
-@keyframes thLegBend{0%,100%{transform:rotate(0)}45%{transform:rotate(-22deg)}}
-@keyframes thLegBendR{0%,100%{transform:rotate(0)}45%{transform:rotate(22deg)}}
-@keyframes prArm{0%,100%{transform:rotate(0)}50%{transform:rotate(-78deg)}}
-@keyframes prArmR{0%,100%{transform:rotate(0)}50%{transform:rotate(78deg)}}
-@keyframes prFore{0%,100%{transform:rotate(35deg)}50%{transform:rotate(-10deg)}}
-@keyframes prForeR{0%,100%{transform:rotate(-35deg)}50%{transform:rotate(10deg)}}
-@keyframes rwPull{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(45deg)}}
-@keyframes rwPullF{0%,100%{transform:rotate(15deg)}50%{transform:rotate(-30deg)}}
-@keyframes plBreath{0%,100%{transform:scaleY(1) translateY(0)}50%{transform:scaleY(1.03) translateY(-1px)}}
-@keyframes jmpUp{0%,100%{transform:translateY(0)}40%{transform:translateY(-28px)}}
-@keyframes jmpLeg{0%,100%{transform:rotate(0)}40%{transform:rotate(28deg)}}
-@keyframes jmpLegR{0%,100%{transform:rotate(0)}40%{transform:rotate(-28deg)}}
-@keyframes jmpArm{0%,100%{transform:rotate(0)}40%{transform:rotate(-72deg)}}
-@keyframes jmpArmR{0%,100%{transform:rotate(0)}40%{transform:rotate(72deg)}}
-@keyframes lngThF{0%,100%{transform:rotate(0)}50%{transform:rotate(38deg)}}
-@keyframes lngCaF{0%,100%{transform:rotate(0)}50%{transform:rotate(-32deg)}}
-@keyframes lngThB{0%,100%{transform:rotate(0)}50%{transform:rotate(-30deg)}}
-@keyframes crUp{0%,100%{transform:rotate(0)}50%{transform:rotate(-42deg)}}
-@keyframes crLgL{0%,100%{transform:rotate(0)}50%{transform:rotate(22deg)}}
-@keyframes crLgR{0%,100%{transform:rotate(0)}50%{transform:rotate(-22deg)}}
-@keyframes latAL{0%,100%{transform:rotate(0)}50%{transform:rotate(-82deg)}}
-@keyframes latAR{0%,100%{transform:rotate(0)}50%{transform:rotate(82deg)}}
-@keyframes kckBk{0%,100%{transform:rotate(0)}50%{transform:rotate(-68deg)}}
-@keyframes kckCf{0%,100%{transform:rotate(0)}50%{transform:rotate(32deg)}}
+/* ── FIGURE ANIMATIONS — dramatic full range of motion ── */
+@keyframes sqBody{0%{transform:translateY(0) scaleY(1)}15%{transform:translateY(4px) scaleY(.98)}50%{transform:translateY(42px) scaleY(.86)}85%{transform:translateY(4px) scaleY(.98)}100%{transform:translateY(0) scaleY(1)}}
+@keyframes sqKneeL{0%,100%{transform:rotate(0)}50%{transform:rotate(70deg)}}
+@keyframes sqKneeR{0%,100%{transform:rotate(0)}50%{transform:rotate(-70deg)}}
+@keyframes sqCalfL{0%,100%{transform:rotate(0)}50%{transform:rotate(-58deg)}}
+@keyframes sqCalfR{0%,100%{transform:rotate(0)}50%{transform:rotate(58deg)}}
+@keyframes sqArmL{0%,100%{transform:rotate(0)}50%{transform:rotate(-40deg)}}
+@keyframes sqArmR{0%,100%{transform:rotate(0)}50%{transform:rotate(40deg)}}
+@keyframes thUp{0%{transform:translateY(0) rotate(0)}20%{transform:translateY(-10px) rotate(-8deg)}50%{transform:translateY(-42px) rotate(-24deg)}80%{transform:translateY(-10px) rotate(-8deg)}100%{transform:translateY(0) rotate(0)}}
+@keyframes thLegBend{0%,100%{transform:rotate(0)}50%{transform:rotate(-28deg)}}
+@keyframes thLegBendR{0%,100%{transform:rotate(0)}50%{transform:rotate(28deg)}}
+@keyframes prArm{0%,100%{transform:rotate(0)}50%{transform:rotate(-95deg)}}
+@keyframes prArmR{0%,100%{transform:rotate(0)}50%{transform:rotate(95deg)}}
+@keyframes prFore{0%,100%{transform:rotate(30deg)}50%{transform:rotate(-15deg)}}
+@keyframes prForeR{0%,100%{transform:rotate(-30deg)}50%{transform:rotate(15deg)}}
+@keyframes rwPull{0%,100%{transform:rotate(-15deg)}50%{transform:rotate(55deg)}}
+@keyframes rwPullF{0%,100%{transform:rotate(18deg)}50%{transform:rotate(-35deg)}}
+@keyframes plBreath{0%,100%{transform:scaleY(1) translateY(0)}50%{transform:scaleY(1.04) translateY(-2px)}}
+@keyframes jmpUp{0%,100%{transform:translateY(0)}35%{transform:translateY(-38px)}65%{transform:translateY(-38px)}}
+@keyframes jmpLeg{0%,100%{transform:rotate(0)}35%,65%{transform:rotate(36deg)}}
+@keyframes jmpLegR{0%,100%{transform:rotate(0)}35%,65%{transform:rotate(-36deg)}}
+@keyframes jmpArm{0%,100%{transform:rotate(0)}35%,65%{transform:rotate(-88deg)}}
+@keyframes jmpArmR{0%,100%{transform:rotate(0)}35%,65%{transform:rotate(88deg)}}
+@keyframes lngThF{0%,100%{transform:rotate(0)}50%{transform:rotate(45deg)}}
+@keyframes lngCaF{0%,100%{transform:rotate(0)}50%{transform:rotate(-40deg)}}
+@keyframes lngThB{0%,100%{transform:rotate(0)}50%{transform:rotate(-38deg)}}
+@keyframes crUp{0%,100%{transform:rotate(0)}40%{transform:rotate(-52deg)}60%{transform:rotate(-52deg)}}
+@keyframes crLgL{0%,100%{transform:rotate(0)}50%{transform:rotate(26deg)}}
+@keyframes crLgR{0%,100%{transform:rotate(0)}50%{transform:rotate(-26deg)}}
+@keyframes latAL{0%,100%{transform:rotate(0)}45%{transform:rotate(-92deg)}55%{transform:rotate(-92deg)}}
+@keyframes latAR{0%,100%{transform:rotate(0)}45%{transform:rotate(92deg)}55%{transform:rotate(92deg)}}
+@keyframes kckBk{0%,100%{transform:rotate(0)}40%{transform:rotate(-85deg)}60%{transform:rotate(-85deg)}}
+@keyframes kckCf{0%,100%{transform:rotate(0)}50%{transform:rotate(40deg)}}
 </style>
 </head>
 <body>
@@ -351,82 +387,132 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:-apple-system,
     <button class="voice-btn" id="voice-btn" onclick="toggleVoice()">🎙 Voz ON</button>
   </div>
   <div class="prog-bar"><div class="prog-fill" id="wa-prog-fill" style="width:0%"></div></div>
-  <div class="figure-box">
-    <div class="figure-svg-wrap" id="wa-figure"></div>
-    <div class="figure-info">
-      <div class="fig-ex-num" id="wa-ex-num">Ejercicio 1 de 8</div>
-      <div class="fig-ex-name" id="wa-ex-name">Cargando...</div>
-      <div class="fig-muscles" id="wa-ex-muscles">...</div>
-      <div class="fig-tip" id="wa-ex-tip">...</div>
+  <!-- ═══ VIDEO PLAYER ═══ -->
+  <div class="ex-video">
+    <div class="evp-badge">▶ TÉCNICA</div>
+    <div class="evp-muscles-badge" id="evp-muscles-badge">Glúteos · Piernas</div>
+    <div class="evp-scene" id="wa-figure"></div>
+    <div class="evp-tip-bar"><div class="evp-tip-pill" id="evp-tip">Cargando técnica...</div></div>
+    <div class="evp-controls">
+      <div class="evp-tl"><div class="evp-tl-fill" id="evp-tl-fill"></div></div>
+      <div class="evp-ctrl-row">
+        <button class="evp-play-btn" id="evp-play-btn" onclick="toggleVideoPlay()">⏸</button>
+        <div style="flex:1;min-width:0">
+          <div class="evp-ex-title" id="wa-ex-name">Cargando...</div>
+          <div class="evp-ex-sub" id="wa-ex-num">Ejercicio 1 de 8</div>
+        </div>
+        <div class="evp-live">● LIVE</div>
+      </div>
     </div>
   </div>
+  <!-- Info below video -->
+  <div class="wa-info-card">
+    <div style="font-size:9px;color:var(--d);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px" id="wa-ex-muscles">Músculos</div>
+    <div style="font-size:11px;color:rgba(255,255,255,.6);line-height:1.5;font-style:italic" id="wa-ex-tip">Cargando instrucciones...</div>
+  </div>
+  <!-- ═══ SET TRACKER + REP COUNTER ═══ -->
   <div class="set-card">
-    <div style="font-size:11px;color:rgba(255,255,255,.75);font-weight:700;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">SERIE ACTUAL</div>
-    <div class="set-big" id="wa-set-cur">1</div>
-    <div style="font-size:12px;color:rgba(255,255,255,.65);margin-top:2px" id="wa-set-total">de 4 series</div>
-    <div class="set-row">
-      <div style="text-align:center"><div style="font-size:24px;font-weight:800" id="wa-reps">12</div><div style="font-size:9px;color:rgba(255,255,255,.6);margin-top:1px">Reps</div></div>
-      <div style="text-align:center"><div style="font-size:24px;font-weight:800" id="wa-rest-time">30"</div><div style="font-size:9px;color:rgba(255,255,255,.6);margin-top:1px">Descanso</div></div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div>
+        <div style="font-size:9px;color:var(--d);text-transform:uppercase;letter-spacing:.5px;font-weight:700">PROGRESO DE SERIES</div>
+        <div class="set-dots" id="set-dots"></div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:9px;color:var(--d);text-transform:uppercase;letter-spacing:.5px;font-weight:700">DESCANSO</div>
+        <div style="font-size:22px;font-weight:900;color:#c084fc;margin-top:3px" id="wa-rest-time">30"</div>
+      </div>
     </div>
-  </div>
-  <div class="voice-card" id="voice-card">
-    <div class="voice-wave"><span></span><span></span><span></span><span></span></div>
-    <div style="font-size:11px;color:var(--m);line-height:1.5;flex:1;font-style:italic" id="wa-voice-txt">Preparando instrucciones de voz...</div>
-  </div>
-  <button id="listen-btn" onclick="toggleListen()" style="margin:0 18px 10px;background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.35);border-radius:13px;padding:11px 16px;display:flex;align-items:center;gap:10px;width:calc(100% - 36px);cursor:pointer;flex-shrink:0">
-    <span style="font-size:18px">🎤</span>
-    <div style="text-align:left;flex:1">
-      <div style="font-size:12px;color:#f9a8d4;font-weight:700">Comandos de Voz — Habla con tu entrenadora</div>
-      <div style="font-size:9px;color:rgba(249,168,212,.6);margin-top:1px">Di: "siguiente", "cuántas faltan", "máquina ocupada", "ánimo"</div>
+    <!-- BIG TAP REP COUNTER -->
+    <div class="rep-counter" onclick="countRep()" id="rep-counter-box">
+      <div class="rep-num" id="rep-count">12</div>
+      <div class="rep-label" id="rep-label">Di "empecé" o toca cada repetición</div>
     </div>
-    <span id="listen-dot" style="width:8px;height:8px;border-radius:50%;background:#f9a8d4;opacity:0.4"></span>
-  </button>
-  <button class="alt-btn" onclick="toggleAlt()">
-    <span style="font-size:18px">🏗️</span>
-    <div><div style="font-size:12px;color:#fbbf24;font-weight:700">¿Máquina ocupada?</div><div style="font-size:10px;color:rgba(251,191,36,.6)">Ver ejercicio alternativo sin máquina</div></div>
-    <span style="margin-left:auto;color:#fbbf24;font-size:14px" id="alt-arrow">▾</span>
-  </button>
-  <div class="alt-panel" id="alt-panel">
+    <!-- hidden compat elements -->
+    <div style="display:none" id="wa-set-cur">1</div>
+    <div style="display:none" id="wa-set-total">de 4 series</div>
+    <div style="display:none" id="wa-reps">12</div>
+  </div>
+  <!-- ═══ COACH BUBBLE ═══ -->
+  <div class="coach-bubble" id="coach-bubble">
+    <div class="coach-avatar">💪</div>
+    <div class="coach-text" id="wa-voice-txt">Tu entrenadora está lista...</div>
+  </div>
+  <!-- ═══ VOICE + ALT ═══ -->
+  <div style="display:flex;gap:8px;margin:0 18px 8px;flex-shrink:0">
+    <button id="listen-btn" onclick="toggleListen()" style="flex:1;background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.35);border-radius:13px;padding:10px 12px;display:flex;align-items:center;gap:8px;cursor:pointer">
+      <span style="font-size:16px">🎤</span>
+      <div style="text-align:left;flex:1">
+        <div style="font-size:11px;color:#f9a8d4;font-weight:700" id="listen-label">Entrenadora</div>
+        <div style="font-size:8px;color:rgba(249,168,212,.55)" id="listen-sublabel">Di "empecé" para contar reps</div>
+      </div>
+      <span id="listen-dot" style="width:8px;height:8px;border-radius:50%;background:#f9a8d4;opacity:0.4;flex-shrink:0"></span>
+    </button>
+    <button onclick="toggleAlt()" style="flex:1;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25);border-radius:13px;padding:10px 12px;display:flex;align-items:center;gap:8px;cursor:pointer">
+      <span style="font-size:16px">🏗️</span>
+      <div style="text-align:left;flex:1">
+        <div style="font-size:11px;color:#fbbf24;font-weight:700">Alternativa</div>
+        <div style="font-size:8px;color:rgba(251,191,36,.55)" id="alt-arrow">Sin máquina ▾</div>
+      </div>
+    </button>
+  </div>
+  <div class="alt-panel" id="alt-panel" style="margin:0 18px 8px">
     <div style="font-size:11px;color:#fbbf24;font-weight:800;margin-bottom:6px">💡 Alternativa sin máquina</div>
-    <div style="font-size:14px;font-weight:800;margin-bottom:6px" id="alt-name">...</div>
+    <div style="font-size:13px;font-weight:800;margin-bottom:5px" id="alt-name">...</div>
     <div style="font-size:11px;color:var(--m);line-height:1.5" id="alt-desc">...</div>
-    <button style="margin-top:10px;background:rgba(251,191,36,.15);border:1px solid rgba(251,191,36,.3);border-radius:10px;padding:8px 14px;font-size:11px;font-weight:700;color:#fbbf24;cursor:pointer;width:100%" onclick="switchToAlt()">Usar este ejercicio</button>
+    <button style="margin-top:8px;background:rgba(251,191,36,.15);border:1px solid rgba(251,191,36,.3);border-radius:10px;padding:8px;font-size:11px;font-weight:700;color:#fbbf24;cursor:pointer;width:100%" onclick="switchToAlt()">Usar este ejercicio →</button>
   </div>
-  <div style="padding:4px 18px 20px;flex-shrink:0">
-    <button class="btn-grad" onclick="completeSet()" style="font-size:15px">✓ Serie Completada</button>
+  <div style="padding:4px 18px 18px;flex-shrink:0">
+    <button class="btn-grad" onclick="completeSet()" style="font-size:16px;padding:16px;letter-spacing:.3px">✓ Serie Completada</button>
   </div>
 </div>
 
 <!-- REST TIMER -->
-<div class="screen" id="s-rest" style="background:linear-gradient(180deg,#0a0a1a,#120828)">
+<div class="screen" id="s-rest" style="background:linear-gradient(180deg,#06061a,#100822)">
   <div class="sbar"><span>9:41</span><span>▲▲ 🔋</span></div>
-  <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 18px;flex-shrink:0">
-    <span style="font-size:12px;color:var(--m);font-weight:600">⏱ Descansa</span>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 18px 4px;flex-shrink:0">
+    <div>
+      <div style="font-size:11px;color:var(--m);font-weight:700">⏱ DESCANSA Y RECUPERA</div>
+      <div style="font-size:9px;color:var(--d);margin-top:1px">Tu cuerpo está trabajando, incluso ahora</div>
+    </div>
     <button onclick="skipRest()" style="background:rgba(147,51,234,.2);border:1px solid rgba(147,51,234,.4);border-radius:10px;padding:7px 14px;font-size:11px;font-weight:700;color:#c084fc;cursor:pointer">Saltar →</button>
   </div>
-  <div class="rest-center">
-    <div class="ring-wrap">
-      <svg width="180" height="180" viewBox="0 0 180 180">
+  <!-- Timer ring -->
+  <div style="display:flex;flex-direction:column;align-items:center;padding:10px 0 8px;flex-shrink:0">
+    <div style="position:relative;width:160px;height:160px">
+      <svg width="160" height="160" viewBox="0 0 180 180" style="position:absolute;inset:0">
         <defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#9333ea"/><stop offset="100%" stop-color="#ec4899"/></linearGradient></defs>
-        <circle cx="90" cy="90" r="80" fill="none" stroke="#1e1e3a" stroke-width="10"/>
-        <circle id="rest-ring" cx="90" cy="90" r="80" fill="none" stroke="url(#rg)" stroke-width="10" stroke-linecap="round" stroke-dasharray="502.6" stroke-dashoffset="0"/>
+        <circle cx="90" cy="90" r="80" fill="none" stroke="#1a1a32" stroke-width="11"/>
+        <circle id="rest-ring" cx="90" cy="90" r="80" fill="none" stroke="url(#rg)" stroke-width="11" stroke-linecap="round" stroke-dasharray="502.6" stroke-dashoffset="0" transform="rotate(-90 90 90)"/>
       </svg>
-      <div class="ring-time">
-        <div class="ring-sec" id="rest-sec">30</div>
-        <div style="font-size:11px;color:var(--m)">segundos</div>
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+        <div style="font-size:44px;font-weight:900;color:#fff;line-height:1" id="rest-sec">30</div>
+        <div style="font-size:10px;color:var(--m);margin-top:2px">segundos</div>
       </div>
     </div>
-    <div style="font-size:14px;font-weight:700;margin-bottom:4px" id="rest-next-name">Siguiente ejercicio</div>
-    <div style="font-size:11px;color:var(--m)" id="rest-next-info">Serie X · Y reps</div>
   </div>
-  <div class="tips-grid">
-    <div class="tip-box"><div style="font-size:20px;margin-bottom:5px">💧</div><div style="font-size:10px;font-weight:700;margin-bottom:2px">Hidratación</div><div style="font-size:9px;color:var(--m);line-height:1.4">Toma un sorbo de agua ahora</div></div>
-    <div class="tip-box"><div style="font-size:20px;margin-bottom:5px">🧘</div><div style="font-size:10px;font-weight:700;margin-bottom:2px">Respira</div><div style="font-size:9px;color:var(--m);line-height:1.4">Inhala 4s, exhala 4s</div></div>
-    <div class="tip-box"><div style="font-size:20px;margin-bottom:5px">💪</div><div style="font-size:10px;font-weight:700;margin-bottom:2px">Técnica</div><div style="font-size:9px;color:var(--m);line-height:1.4">Repasa la postura</div></div>
-    <div class="tip-box"><div style="font-size:20px;margin-bottom:5px">🔥</div><div style="font-size:10px;font-weight:700;margin-bottom:2px">Motivación</div><div style="font-size:9px;color:var(--m);line-height:1.4" id="rest-tip">¡Vas excelente!</div></div>
+  <!-- Next exercise card -->
+  <div class="rest-next-card">
+    <div class="rest-next-fig" id="rest-next-figure"></div>
+    <div style="flex:1;min-width:0">
+      <div style="font-size:9px;color:#c084fc;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">PRÓXIMO EJERCICIO</div>
+      <div style="font-size:14px;font-weight:900;line-height:1.2;margin-bottom:4px" id="rest-next-name">Siguiente</div>
+      <div style="font-size:10px;color:var(--m)" id="rest-next-info">Serie 1 · 12 reps</div>
+      <div style="font-size:9px;color:rgba(255,255,255,.35);margin-top:5px" id="rest-next-tip"></div>
+    </div>
+  </div>
+  <!-- Coach message during rest -->
+  <div style="margin:0 18px 10px;background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(236,72,153,.06));border:1px solid rgba(139,92,246,.18);border-radius:14px;padding:10px 14px;display:flex;gap:10px;align-items:center;flex-shrink:0">
+    <div style="font-size:22px">💜</div>
+    <div style="font-size:11px;color:rgba(255,255,255,.65);line-height:1.5;font-style:italic" id="rest-tip">¡Excelente trabajo! Mantén el ritmo.</div>
+  </div>
+  <!-- Quick tips row -->
+  <div style="display:flex;gap:8px;margin:0 18px 12px;flex-shrink:0">
+    <div style="flex:1;background:rgba(255,255,255,.04);border-radius:12px;padding:10px 8px;text-align:center"><div style="font-size:18px;margin-bottom:3px">💧</div><div style="font-size:8px;color:var(--m);font-weight:600">Hidratación</div></div>
+    <div style="flex:1;background:rgba(255,255,255,.04);border-radius:12px;padding:10px 8px;text-align:center"><div style="font-size:18px;margin-bottom:3px">🧘</div><div style="font-size:8px;color:var(--m);font-weight:600">Respira</div></div>
+    <div style="flex:1;background:rgba(255,255,255,.04);border-radius:12px;padding:10px 8px;text-align:center"><div style="font-size:18px;margin-bottom:3px">💪</div><div style="font-size:8px;color:var(--m);font-weight:600">Postura</div></div>
   </div>
   <div style="padding:0 18px 20px;flex-shrink:0">
-    <button class="btn-grad" onclick="skipRest()">Continuar ahora →</button>
+    <button class="btn-grad" onclick="skipRest()" style="font-size:15px">¡Lista! Continuar →</button>
   </div>
 </div>
 
@@ -448,24 +534,21 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:-apple-system,
 </div>
 
 <!-- NUTRITION -->
-<div class="screen" id="s-nutrition" style="background:linear-gradient(180deg,#0a0a1a,#120828)">
+<div class="screen" id="s-nutrition" style="background:linear-gradient(180deg,#06061a,#100822)">
   <div class="sbar"><span>9:41</span><span>▲▲ 🔋</span></div>
-  <div style="padding:12px 18px 14px;flex-shrink:0">
-    <div style="font-size:24px;font-weight:800">Nutrición 🥗</div>
-    <div style="font-size:12px;color:var(--m);margin-top:3px">Recetas para mujeres colombianas</div>
+  <div style="padding:10px 18px 6px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between">
+    <div>
+      <div style="font-size:23px;font-weight:900;letter-spacing:-.5px">Plan Semanal ✨</div>
+      <div style="font-size:11px;color:var(--m);margin-top:2px">Recetas premium para tu semana</div>
+    </div>
+    <button onclick="openAllRecipes()" style="background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:7px 13px;font-size:11px;font-weight:700;color:#c084fc;cursor:pointer">+ Recetas</button>
   </div>
-  <div class="store-row">
-    <span class="sbadge" id="sb-d1" style="background:rgba(234,179,8,.12);border-color:rgba(234,179,8,.3);color:#fde047" onclick="toggleStore('D1')">D1</span>
-    <span class="sbadge" id="sb-ara" style="background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.3);color:#4ade80" onclick="toggleStore('Ara')">Ara</span>
-    <span class="sbadge" id="sb-dol" style="background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.3);color:#60a5fa" onclick="toggleStore('Dolarciyt')">Dolarciyt</span>
-  </div>
-  <div class="meal-tabs" id="meal-tabs">
-    <div class="meal-tab on" onclick="setMeal(0,this)">Desayuno</div>
-    <div class="meal-tab" onclick="setMeal(1,this)">Almuerzo</div>
-    <div class="meal-tab" onclick="setMeal(2,this)">Cena</div>
-    <div class="meal-tab" onclick="setMeal(3,this)">Snack</div>
-  </div>
-  <div id="recipe-list" style="flex:1;overflow-y:auto"></div>
+  <!-- Day selector -->
+  <div id="nutri-day-bar" style="display:flex;gap:8px;padding:8px 18px;overflow-x:auto;flex-shrink:0;scrollbar-width:none"></div>
+  <!-- Daily macro banner -->
+  <div id="nutri-macro-banner" style="margin:0 18px 8px;background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(236,72,153,.12));border:1px solid rgba(139,92,246,.25);border-radius:16px;padding:12px 16px;flex-shrink:0"></div>
+  <!-- Meals for selected day -->
+  <div id="nutri-day-meals" style="flex:1;overflow-y:auto;padding:0 18px 8px"></div>
   <div class="tabbar">
     <button class="tab-item" onclick="go('home')"><span class="tab-ico">🏠</span><span class="tab-lbl">Inicio</span></button>
     <button class="tab-item" onclick="go('workouts')"><span class="tab-ico">💪</span><span class="tab-lbl">Entrena</span></button>
@@ -473,6 +556,26 @@ html,body{height:100%;overflow:hidden;background:#000;font-family:-apple-system,
     <button class="tab-item" onclick="go('progress')"><span class="tab-ico">📊</span><span class="tab-lbl">Progreso</span></button>
     <button class="tab-item" onclick="go('profile')"><span class="tab-ico">👩</span><span class="tab-lbl">Perfil</span></button>
   </div>
+</div>
+<!-- All Recipes screen -->
+<div class="screen" id="s-allrecipes" style="background:linear-gradient(180deg,#06061a,#100822)">
+  <div class="sbar"><span>9:41</span><span>▲▲ 🔋</span></div>
+  <div style="padding:10px 18px 8px;flex-shrink:0;display:flex;align-items:center;gap:12px">
+    <button onclick="go('nutrition')" style="background:rgba(255,255,255,.08);border:none;border-radius:10px;padding:7px 12px;color:#fff;font-size:13px;cursor:pointer">← Volver</button>
+    <div style="font-size:18px;font-weight:800">Recetas 🍽️</div>
+  </div>
+  <div class="meal-tabs" id="meal-tabs" style="flex-shrink:0">
+    <div class="meal-tab on" onclick="setMeal(0,this)">Desayuno</div>
+    <div class="meal-tab" onclick="setMeal(1,this)">Almuerzo</div>
+    <div class="meal-tab" onclick="setMeal(2,this)">Cena</div>
+    <div class="meal-tab" onclick="setMeal(3,this)">Snack</div>
+  </div>
+  <div class="store-row" style="flex-shrink:0">
+    <span class="sbadge" id="sb-d1" style="background:rgba(234,179,8,.12);border-color:rgba(234,179,8,.3);color:#fde047" onclick="toggleStore('D1')">D1</span>
+    <span class="sbadge" id="sb-ara" style="background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.3);color:#4ade80" onclick="toggleStore('Ara')">Ara</span>
+    <span class="sbadge" id="sb-dol" style="background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.3);color:#60a5fa" onclick="toggleStore('Dolarciyt')">Dolarciyt</span>
+  </div>
+  <div id="recipe-list" style="flex:1;overflow-y:auto"></div>
 </div>
 
 <!-- PROGRESS -->
@@ -658,6 +761,79 @@ const WORKOUTS=[
    ]}
 ];
 
+const WEEKLY_PLAN=[
+  {day:'Lun',full:'Lunes',kcal:1520,prot:112,carbs:158,fat:40,color:'#8b5cf6',
+   D:{e:'🥣',n:'Avena Proteica con Frutas Tropicales',kcal:360,prot:22,carbs:54,fat:7,
+      ing:['½ taza avena en hojuelas','1 taza leche de almendras','1 scoop proteína vainilla','½ mango picado','½ banano','1 cdta miel'],
+      steps:['Calienta la leche y mezcla con avena, deja 3 min.','Agrega proteína en polvo y revuelve bien.','Sirve con mango, banano y un toque de miel.'],tip:'Prepara la noche anterior y refrigera. ¡Lista al despertar!'},
+   A:{e:'🍗',n:'Bowl de Pollo al Limón con Quinoa',kcal:520,prot:48,carbs:52,fat:12,
+      ing:['150g pechuga de pollo','½ taza quinoa cocida','1 taza espinacas','½ aguacate','Limón, ajo, aceite oliva','Tomate cherry'],
+      steps:['Sazona el pollo con limón, ajo y sal.','Cocina en sartén 6-7 min por lado.','Sirve sobre quinoa con espinacas y aguacate.','Aliña con limón y aceite de oliva.'],tip:'La quinoa tiene todos los aminoácidos esenciales, ideal post-entrenamiento.'},
+   C:{e:'🥗',n:'Ensalada de Atún con Aguacate y Huevo',kcal:340,prot:34,carbs:18,fat:16,
+      ing:['1 lata atún en agua','1 huevo duro','½ aguacate','Lechuga, tomate, pepino','Limón, sal, aceite'],
+      steps:['Mezcla atún escurrido con aguacate triturado.','Agrega huevo picado, tomate y pepino.','Sirve sobre lechuga fresca.','Aliña con limón y un hilo de aceite.'],tip:'Rico en omega-3 y proteína de alta calidad.'}},
+  {day:'Mar',full:'Martes',kcal:1490,prot:108,carbs:162,fat:38,color:'#ec4899',
+   D:{e:'🥚',n:'Tortilla Fit de Espinacas y Queso Bajo en Grasa',kcal:290,prot:26,carbs:8,fat:16,
+      ing:['3 claras + 1 huevo entero','Puñado espinacas','2 cdas queso bajo en grasa','Tomate cherry','Spray de cocina'],
+      steps:['Bate huevos con sal y pimienta.','Sofríe espinacas 1 min en sartén.','Vierte huevo, agrega queso y tomates.','Dobla y cocina 1 min más.'],tip:'Alta proteína y muy baja en carbos. Perfecta para días de descanso.'},
+   A:{e:'🫘',n:'Sopa de Lentejas con Verduras Colombianas',kcal:420,prot:28,carbs:62,fat:6,
+      ing:['1 taza lentejas rojas','Zanahoria, papa criolla, apio','Cebolla, ajo, tomate','Cilantro fresco','Caldo bajo en sodio'],
+      steps:['Sofríe cebolla, ajo y tomate 3 min.','Agrega lentejas y verduras picadas.','Cubre con caldo y cocina 20 min.','Sirve con cilantro fresco picado.'],tip:'Las lentejas son la mejor fuente de proteína vegetal colombiana.'},
+   C:{e:'🐟',n:'Tilapia al Vapor con Brócoli y Arroz Integral',kcal:400,prot:42,carbs:44,fat:8,
+      ing:['180g filete de tilapia','1 taza brócoli','½ taza arroz integral','Limón, ajo, jengibre','Salsa de soya baja en sodio'],
+      steps:['Sazona la tilapia con limón y ajo.','Cocina al vapor 8-10 min.','Sirve con brócoli al vapor y arroz.','Riega con salsa de soya y jengibre.'],tip:'La tilapia es económica, alta en proteína y baja en grasa.'}},
+  {day:'Mié',full:'Miércoles',kcal:1550,prot:118,carbs:155,fat:44,color:'#06b6d4',
+   D:{e:'🥤',n:'Smoothie Verde Proteico Tropical',kcal:310,prot:24,carbs:36,fat:8,
+      ing:['1 scoop proteína vainilla','Puñado espinacas baby','½ banano congelado','½ taza leche de coco lite','½ taza piña','Hielo'],
+      steps:['Pon todo en la licuadora.','Licúa 60 segundos a alta velocidad.','Sirve inmediatamente o en termo.'],tip:'Ideal pre-entrenamiento: energía de los carbos y proteína para el músculo.'},
+   A:{e:'🥩',n:'Pechuga Rellena con Queso y Espinacas',kcal:490,prot:52,carbs:22,fat:18,
+      ing:['180g pechuga de pollo','2 cdas queso bajo en grasa','Espinacas frescas','Tomate seco','Ajo, orégano, aceite oliva'],
+      steps:['Abre la pechuga como un libro.','Rellena con queso, espinacas y tomate.','Cierra con palillos y sella en sartén.','Hornea a 190°C por 22 min.'],tip:'Plato premium que se prepara en menos de 30 min.'},
+   C:{e:'🥣',n:'Crema de Zapallo con Proteína',kcal:320,prot:28,carbs:38,fat:10,
+      ing:['2 tazas zapallo (auyama) cocido','1 scoop proteína neutra','Caldo de pollo bajo sodio','Cebolla, ajo, cúrcuma','Leche de coco 1 cda'],
+      steps:['Cocina zapallo con cebolla y ajo.','Licúa con caldo hasta cremosa.','Calienta y mezcla con proteína.','Sirve con cúrcuma y leche de coco.'],tip:'El zapallo (auyama) es rico en betacarotenos y muy saciante.'}},
+  {day:'Jue',full:'Jueves',kcal:1480,prot:110,carbs:160,fat:38,color:'#f59e0b',
+   D:{e:'🫐',n:'Pancakes Proteicos de Banano',kcal:350,prot:24,carbs:42,fat:9,
+      ing:['1 banano maduro','3 claras de huevo','½ scoop proteína vainilla','1 cda harina de avena','Canela, vainilla','Frutos rojos para decorar'],
+      steps:['Tritura banano y mezcla con claras.','Agrega proteína, harina y canela.','Cocina en sartén antiadherente porciones pequeñas.','Decora con frutos rojos.'],tip:'Sin azúcar añadida y con proteína completa. Irresistibles y nutritivos.'},
+   A:{e:'🌯',n:'Wrap Integral de Pavo y Guacamole',kcal:440,prot:38,carbs:42,fat:14,
+      ing:['2 tortillas integrales','120g pechuga de pavo cocida','½ aguacate','Lechuga, tomate, cebolla morada','Limón, cilantro, sal'],
+      steps:['Tritura aguacate con limón y sal.','Calienta el pavo en sartén con especias.','Arma el wrap con guacamole, pavo y verduras.','Enrolla bien y parte en diagonal.'],tip:'Para llevar: envuelve en papel film. Aguanta 4 horas fuera de nevera.'},
+   C:{e:'🥦',n:'Salteado de Tofu con Brócoli y Arroz',kcal:360,prot:30,carbs:44,fat:12,
+      ing:['150g tofu firme','2 tazas brócoli','½ taza arroz integral','Salsa de soya, ajo, jengibre','Aceite de sésamo','Semillas de sésamo'],
+      steps:['Corta el tofu y dóralo en wok 4 min.','Agrega ajo, jengibre y brócoli.','Saltea 3 min y añade salsa de soya.','Sirve sobre arroz con sésamo.'],tip:'El tofu absorbe todos los sabores del salteado. Proteína completa vegana.'}},
+  {day:'Vie',full:'Viernes',kcal:1580,prot:122,carbs:165,fat:42,color:'#10b981',
+   D:{e:'🍓',n:'Bowl de Yogur Griego con Granola y Frutas',kcal:340,prot:28,carbs:40,fat:10,
+      ing:['200g yogur griego 0% grasa','¼ taza granola sin azúcar','Fresas y arándanos','1 cda mantequilla de maní','Miel 1 cdta'],
+      steps:['Vierte el yogur en un bowl bonito.','Agrega granola, frutas y maní.','Rocía con un hilo de miel.','¡Listo en 3 minutos!'],tip:'El yogur griego tiene el doble de proteína que el normal. Busca el 0% grasa.'},
+   A:{e:'🍲',n:'Sancocho Fit de Pollo (Versión Ligera)',kcal:480,prot:44,carbs:52,fat:10,
+      ing:['180g muslo de pollo sin piel','Papa criolla, yuca, zanahoria','Cebolla, ajo, cilantro, comino','Mazorca pequeña','Caldo bajo en sodio'],
+      steps:['Cocina el pollo en caldo con ajo y cebolla.','Agrega las verduras en orden de dureza.','Cocina 25 min hasta que todo esté tierno.','Sirve con cilantro y limón fresco.'],tip:'El sancocho colombiano puede ser muy fit: sin pollo con piel y controlando la yuca.'},
+   C:{e:'🥬',n:'Ensalada de Pollo Asado y Quinoa',kcal:420,prot:40,carbs:38,fat:14,
+      ing:['150g pollo asado desmenuzado','½ taza quinoa cocida','Mix de lechugas','Pepino, tomate, aguacate','Aderezo: limón, mostaza, aceite'],
+      steps:['Mezcla lechugas con quinoa fría.','Agrega pollo, pepino, tomate y aguacate.','Bate el aderezo y vierte sobre la ensalada.','Come inmediatamente.'],tip:'La quinoa como carbohidrato en la cena es perfecta: saciante y con proteína.'}},
+  {day:'Sáb',full:'Sábado',kcal:1620,prot:116,carbs:175,fat:48,color:'#f43f5e',
+   D:{e:'🧇',n:'Waffles Proteicos de Avena y Banano',kcal:390,prot:26,carbs:52,fat:10,
+      ing:['½ taza avena molida','1 banano','2 huevos','1 scoop proteína','Canela, vainilla','Fresas para servir'],
+      steps:['Licúa todos los ingredientes hasta suave.','Calienta la waflera y engrasa con spray.','Vierte la mezcla y cocina 4 min.','Sirve con fresas frescas.'],tip:'El fin de semana mereces un desayuno especial ¡sin culpas!'},
+   A:{e:'🥘',n:'Bandeja Paisa Fit (Versión Saludable)',kcal:580,prot:50,carbs:62,fat:16,
+      ing:['100g carne molida baja en grasa','½ taza frijoles cocidos','½ taza arroz integral','1 huevo poché','Hogao natural (tomate + cebolla)','¼ aguacate'],
+      steps:['Cocina la carne con hogao y especias.','Sirve arroz, frijoles, carne y aguacate.','Prepara el huevo poché: agua hirviendo con vinagre.','Arma el plato con todos los elementos.'],tip:'La bandeja paisa puede ser fit: menos grasa, sin chicharrón y con arroz integral.'},
+   C:{e:'🍜',n:'Sopa de Pollo y Vegetales Anti-Inflamatoria',kcal:350,prot:34,carbs:32,fat:10,
+      ing:['150g pollo deshebrado','Zanahoria, apio, cebolla','Jengibre fresco, cúrcuma','Fideos de arroz','Cilantro, limón'],
+      steps:['Cocina pollo con jengibre y cúrcuma.','Saca y desmenuza el pollo.','Agrega verduras y fideos al caldo.','Sirve con cilantro y limón.'],tip:'La cúrcuma y el jengibre son antiinflamatorios naturales perfectos para la recuperación muscular.'}},
+  {day:'Dom',full:'Domingo',kcal:1450,prot:104,carbs:148,fat:42,color:'#a855f7',
+   D:{e:'🍳',n:'Desayuno Energético de Domingo',kcal:380,prot:28,carbs:38,fat:14,
+      ing:['2 huevos revueltos','2 tajadas de pan integral','½ aguacate','Tomate en rodajas','Queso bajo en grasa','Café negro o té verde'],
+      steps:['Prepara los huevos revueltos a tu gusto.','Tuesta el pan y unta aguacate.','Arma el plato con tomate y queso.','Disfruta con tu bebida favorita.'],tip:'El domingo es para disfrutar sin estrés. Este desayuno te llena de energía para toda la semana.'},
+   A:{e:'🫕',n:'Cazuela de Mariscos Fit',kcal:440,prot:42,carbs:38,fat:12,
+      ing:['200g mix de mariscos (camarón, calamares)','½ taza arroz integral','1 taza leche de coco lite','Tomate, cebolla, ajo','Cilantro, limón, ají'],
+      steps:['Sofríe cebolla, ajo y tomate 3 min.','Agrega mariscos y cocina 5 min.','Añade leche de coco y cocina 3 min más.','Sirve sobre arroz con cilantro y limón.'],tip:'Los mariscos son bajos en grasa y ricos en zinc y proteína de alta calidad.'},
+   C:{e:'🫐',n:'Smoothie Bowl Morado de Cierre de Semana',kcal:290,prot:22,carbs:40,fat:10,
+      ing:['½ taza arándanos congelados','1 scoop proteína de vainilla','½ banano','¼ taza leche de almendras','Toppings: granola, coco rallado, kiwi'],
+      steps:['Licúa arándanos, banano y leche hasta cremoso.','Vierte en bowl y decora con toppings.','¡Fotografía antes de comer!'],tip:'Los arándanos son los campeones del antioxidante. Tu cuerpo los agradecerá.'}}
+];
+
 const RECIPES=[
   {id:1,name:'Avena Proteica con Frutos Rojos',emoji:'🥣',meal:'Desayuno',kcal:320,prot:18,carbs:45,fat:8,stores:['D1','Ara'],portable:true,prepTime:10,ingredients:['Avena en hojuelas (D1)','Leche o bebida vegetal (D1)','Proteína en polvo (Ara)','Frutos rojos o banano (Ara)','Miel de abeja (D1)'],steps:['Calienta la leche en el microondas 2 minutos.','Mezcla con la avena y deja reposar 3 minutos.','Agrega la proteína en polvo y revuelve bien.','Agrega las frutas y un toque de miel.','Empaca en un recipiente si es para llevar.'],tip:'Prepara la noche anterior y guarda en nevera. En la mañana, lista para llevar.'},
   {id:2,name:'Tortilla Fit de Espinacas',emoji:'🥚',meal:'Desayuno',kcal:280,prot:22,carbs:8,fat:18,stores:['D1'],portable:false,prepTime:8,ingredients:['Huevos (D1)','Espinacas frescas (D1)','Tomate (D1)','Sal y pimienta','Aceite de oliva o spray (Ara)'],steps:['Bate 3 huevos con sal y pimienta.','Calienta el sartén con spray antiadherente.','Sofríe espinacas 1 minuto y agrega el huevo.','Añade tomate en rodajas y dobla la tortilla.','Lista en 8 minutos.'],tip:'Alta en proteína y perfecta para el día de entrenamiento intenso.'},
@@ -680,8 +856,9 @@ const MEALS=['Desayuno','Almuerzo','Cena','Snack'];
 let S={
   screen:'splash',voiceOn:true,
   workout:null,exIdx:0,setIdx:0,wStart:null,altMode:false,
-  mealIdx:0,stores:{D1:true,Ara:true,Dolarciyt:true},
-  obStep:1,obData:{},currentRoutine:null,restTimer:null
+  mealIdx:0,weekDay:0,stores:{D1:true,Ara:true,Dolarciyt:true},
+  obStep:1,obData:{},currentRoutine:null,restTimer:null,
+  videoPlaying:true,tipInterval:null,tipIdx:0
 };
 
 // ══ STORAGE ══
@@ -967,266 +1144,417 @@ function makeFigure(type,altMode){
   const pc=altMode?'#f59e0b':'#8b5cf6';
   const sc=altMode?'#d97706':'#ec4899';
   const sk='#f4c2a1';const hr='#1a0808';const kn='#e0a882';const shoe='#2d1b69';
-  const FLT=`style="filter:drop-shadow(0 6px 18px rgba(139,92,246,.5))"`;
+  const FLT=`style="filter:drop-shadow(0 8px 22px rgba(139,92,246,.55))"`;
   const G=`<defs><linearGradient id="tg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${pc}"/><stop offset="100%" stop-color="${sc}"/></linearGradient></defs>`;
   const L=(d,c,w)=>`<path d="${d}" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`;
-  const Hd=(cx,cy)=>`<ellipse cx="${cx}" cy="${cy-10}" rx="17" ry="14" fill="${hr}"/><circle cx="${cx+15}" cy="${cy-8}" r="8" fill="${hr}"/><circle cx="${cx}" cy="${cy}" r="15" fill="${sk}"/><circle cx="${cx-5}" cy="${cy-3}" r="3" fill="${hr}"/><circle cx="${cx+5}" cy="${cy-3}" r="3" fill="${hr}"/><circle cx="${cx-4}" cy="${cy-4.5}" r="1.2" fill="white"/><circle cx="${cx+6}" cy="${cy-4.5}" r="1.2" fill="white"/><path d="M${cx-5},${cy+5}Q${cx},${cy+10}${cx+5},${cy+5}" stroke="#c07050" stroke-width="2" fill="none" stroke-linecap="round"/><ellipse cx="${cx-9}" cy="${cy+3}" rx="5" ry="3" fill="rgba(236,72,153,.25)"/><ellipse cx="${cx+9}" cy="${cy+3}" rx="5" ry="3" fill="rgba(236,72,153,.25)"/>`;
+  // Head with feminine hair bun, eyes, blush, smile
+  const Hd=(cx,cy,rot)=>{
+    const r=rot?`transform="rotate(${rot},${cx},${cy})"`:'';
+    return `<g ${r}>
+      <ellipse cx="${cx}" cy="${cy-11}" rx="18" ry="15" fill="${hr}"/>
+      <ellipse cx="${cx+11}" cy="${cy-9}" rx="9" ry="8" fill="${hr}"/>
+      <circle cx="${cx}" cy="${cy}" r="14" fill="${sk}"/>
+      <ellipse cx="${cx-6}" cy="${cy-2}" rx="2.8" ry="3.2" fill="${hr}"/>
+      <ellipse cx="${cx+5}" cy="${cy-2}" rx="2.8" ry="3.2" fill="${hr}"/>
+      <circle cx="${cx-5}" cy="${cy-3.5}" r="1.1" fill="white"/>
+      <circle cx="${cx+6}" cy="${cy-3.5}" r="1.1" fill="white"/>
+      <path d="M${cx-5},${cy+5}Q${cx},${cy+10}${cx+5},${cy+5}" stroke="#c07050" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <ellipse cx="${cx-8}" cy="${cy+2}" rx="4.5" ry="2.5" fill="rgba(236,72,153,.28)"/>
+      <ellipse cx="${cx+9}" cy="${cy+2}" rx="4.5" ry="2.5" fill="rgba(236,72,153,.28)"/>
+    </g>`;
+  };
+  // Organic torso with waist curve
+  const Torso=(cx,ty,by)=>`<path d="M${cx-20},${ty} C${cx-22},${ty+14} ${cx-18},${ty+24} ${cx-13},${by} C${cx-7},${by+6} ${cx+7},${by+6} ${cx+13},${by} C${cx+18},${ty+24} ${cx+22},${ty+14} ${cx+20},${ty} Q${cx+14},${ty-4} ${cx},${ty-5} Q${cx-14},${ty-4} ${cx-20},${ty}Z" fill="url(#tg)"/>`;
+  // Hips triangle
+  const Hips=(cx,hy)=>`<path d="M${cx-22},${hy} Q${cx},${hy+10} ${cx+22},${hy} L${cx+16},${hy+22} Q${cx},${hy+26} ${cx-16},${hy+22}Z" fill="${pc}" opacity=".88"/>`;
 
-  if(type==='squat')return`<svg viewBox="0 0 134 180" width="100" height="142" ${FLT}>${G}
-    <ellipse cx="67" cy="176" rx="30" ry="5" fill="rgba(139,92,246,.18)"/>
-    <g style="animation:sqBody 2s ease-in-out infinite;transform-origin:67px 88px">
-      ${Hd(67,24)}
-      ${L('M67,39 L67,47',sk,9)}
-      <path d="M43,50 C39,66 41,83 45,93 Q67,99 89,93 C93,83 95,66 91,50 Q83,45 67,43 Q51,45 43,50Z" fill="url(#tg)"/>
-      <path d="M45,93 L49,110 L64,106 L67,99 L70,106 L85,110 L89,93Z" fill="${pc}" opacity=".85"/>
-      <g style="transform-origin:45px 62px;animation:sqArmL 2s ease-in-out infinite">
-        ${L('M45,62 C37,70 27,76 18,80',sk,13)}
-        ${L('M18,80 C14,85 11,88 9,91',sk,11)}
+  // ── SQUAT: deep squat, knees wide, body low, arms forward ──
+  if(type==='squat'){
+    return`<svg viewBox="0 0 168 168" width="115" height="128" ${FLT}>${G}
+      <ellipse cx="84" cy="163" rx="38" ry="6" fill="rgba(139,92,246,.16)"/>
+      <g style="animation:sqBody 2.8s ease-in-out infinite;transform-origin:84px 80px">
+        ${Hd(84,22)}
+        ${L('M84,36 C84,40 84,44 84,48',sk,9)}
+        ${Torso(84,48,84)}
+        ${Hips(84,84)}
+        <!-- Left arm forward -->
+        ${L('M62,62 C52,70 40,76 28,82',sk,13)}
+        ${L('M28,82 C22,85 17,87 13,89',sk,11)}
+        <!-- Right arm forward -->
+        ${L('M106,62 C116,70 128,76 140,82',sk,13)}
+        ${L('M140,82 C146,85 151,87 155,89',sk,11)}
       </g>
-      <g style="transform-origin:89px 62px;animation:sqArmR 2s ease-in-out infinite">
-        ${L('M89,62 C97,70 107,76 116,80',sk,13)}
-        ${L('M116,80 C120,85 123,88 125,91',sk,11)}
-      </g>
-    </g>
-    <g style="transform-origin:53px 110px;animation:sqKneeL 2s ease-in-out infinite">
-      ${L('M53,110 C47,124 41,136 36,148',sk,17)}
-      <circle cx="36" cy="149" r="9" fill="${kn}"/>
-      <g style="transform-origin:36px 149px;animation:sqCalfL 2s ease-in-out infinite">
-        ${L('M36,149 C33,160 30,167 28,174',sk,14)}
-        <ellipse cx="22" cy="176" rx="19" ry="6" fill="${shoe}"/>
-      </g>
-    </g>
-    <g style="transform-origin:81px 110px;animation:sqKneeR 2s ease-in-out infinite">
-      ${L('M81,110 C87,124 93,136 98,148',sk,17)}
-      <circle cx="98" cy="149" r="9" fill="${kn}"/>
-      <g style="transform-origin:98px 149px;animation:sqCalfR 2s ease-in-out infinite">
-        ${L('M98,149 C101,160 104,167 106,174',sk,14)}
-        <ellipse cx="112" cy="176" rx="19" ry="6" fill="${shoe}"/>
-      </g>
-    </g>
-  </svg>`;
+      <!-- Left leg: thigh diagonal out-left, calf back inward — ALREADY SQUATTED -->
+      ${L('M68,106 C56,118 42,128 32,138',sk,19)}
+      <circle cx="31" cy="139" r="10" fill="${kn}"/>
+      ${L('M31,139 C42,146 54,151 62,155',sk,16)}
+      <ellipse cx="68" cy="158" rx="22" ry="7" fill="${shoe}"/>
+      <!-- Right leg -->
+      ${L('M100,106 C112,118 126,128 136,138',sk,19)}
+      <circle cx="137" cy="139" r="10" fill="${kn}"/>
+      ${L('M137,139 C126,146 114,151 106,155',sk,16)}
+      <ellipse cx="100" cy="158" rx="22" ry="7" fill="${shoe}"/>
+    </svg>`;
+  }
 
-  if(type==='thrust')return`<svg viewBox="0 0 192 122" width="135" height="97" ${FLT}>${G}
-    ${L('M5,114 H187','rgba(139,92,246,.3)',3)}
-    <rect x="5" y="92" width="48" height="22" rx="7" fill="rgba(139,92,246,.18)" stroke="rgba(139,92,246,.3)" stroke-width="1.5"/>
-    ${Hd(22,72)}
-    ${L('M22,87 C36,92 54,92 64,88',sk,12)}
-    <path d="M10,80 C20,84 40,86 62,82" stroke="${pc}" stroke-width="8" stroke-linecap="round" fill="none"/>
-    ${L('M6,88 C5,96 5,103 5,110',sk,11)}
-    ${L('M48,88 C52,96 56,102 58,108',sk,11)}
-    <g style="transform-origin:96px 90px;animation:thUp 2s ease-in-out infinite">
-      <path d="M62,88 C70,78 80,72 96,72 C114,72 126,78 134,88 L132,102 L110,102 L102,88 L90,88 L82,102 L60,102Z" fill="url(#tg)"/>
-      <g style="transform-origin:74px 102px;animation:thLegBend 2s ease-in-out infinite">
-        ${L('M74,102 C68,115 62,126 58,138',sk,17)}
-        <circle cx="58" cy="139" r="9" fill="${kn}"/>
-        ${L('M58,139 C56,148 54,155 53,161',sk,14)}
-        <ellipse cx="48" cy="164" rx="19" ry="6" fill="${shoe}"/>
+  // ── HIP THRUST: lying on back, hips raised HIGH, knees bent ──
+  if(type==='thrust'){
+    return`<svg viewBox="0 0 210 128" width="148" height="102" ${FLT}>${G}
+      ${L('M5,120 H205','rgba(139,92,246,.25)',3)}
+      <!-- Bench block -->
+      <rect x="4" y="94" width="52" height="24" rx="8" fill="rgba(139,92,246,.18)" stroke="${pc}" stroke-width="1.5" opacity=".7"/>
+      <!-- Head resting on bench -->
+      ${Hd(26,78,0)}
+      <!-- Upper back / shoulders on bench -->
+      ${L('M26,92 C38,94 55,95 70,92',sk,12)}
+      <path d="M14,86 C22,90 42,92 68,88" stroke="${pc}" stroke-width="9" stroke-linecap="round" fill="none"/>
+      <!-- Left arm resting on floor -->
+      ${L('M10,90 C8,100 6,108 5,116',sk,11)}
+      <!-- Right arm reaching down -->
+      ${L('M56,90 C58,100 60,108 62,116',sk,11)}
+      <!-- Hips raised in animation -->
+      <g style="transform-origin:104px 82px;animation:thUp 2.5s ease-in-out infinite">
+        <path d="M68,90 C76,72 88,64 104,62 C122,62 136,70 148,86 L146,102 L60,102Z" fill="url(#tg)"/>
+        <!-- Left leg bent, foot flat -->
+        <g style="transform-origin:80px 102px;animation:thLegBend 2.5s ease-in-out infinite">
+          ${L('M80,102 C72,118 64,130 58,142',sk,18)}
+          <circle cx="57" cy="143" r="10" fill="${kn}"/>
+          ${L('M57,143 C55,150 53,156 52,162',sk,15)}
+          <ellipse cx="46" cy="165" rx="20" ry="7" fill="${shoe}"/>
+        </g>
+        <!-- Right leg bent, foot flat -->
+        <g style="transform-origin:128px 102px;animation:thLegBendR 2.5s ease-in-out infinite">
+          ${L('M128,102 C136,118 144,130 150,142',sk,18)}
+          <circle cx="151" cy="143" r="10" fill="${kn}"/>
+          ${L('M151,143 C153,150 155,156 156,162',sk,15)}
+          <ellipse cx="162" cy="165" rx="20" ry="7" fill="${shoe}"/>
+        </g>
       </g>
-      <g style="transform-origin:118px 102px;animation:thLegBendR 2s ease-in-out infinite">
-        ${L('M118,102 C124,115 130,126 134,138',sk,17)}
-        <circle cx="134" cy="139" r="9" fill="${kn}"/>
-        ${L('M134,139 C136,148 138,155 139,161',sk,14)}
-        <ellipse cx="144" cy="164" rx="19" ry="6" fill="${shoe}"/>
-      </g>
-    </g>
-  </svg>`;
+    </svg>`;
+  }
 
-  if(type==='press')return`<svg viewBox="0 0 136 178" width="100" height="140" ${FLT}>${G}
-    <ellipse cx="68" cy="174" rx="28" ry="5" fill="rgba(139,92,246,.18)"/>
-    ${Hd(68,24)}
-    ${L('M68,39 L68,47',sk,9)}
-    <path d="M44,50 C40,66 42,83 46,93 Q68,99 90,93 C94,83 96,66 92,50 Q84,45 68,43 Q52,45 44,50Z" fill="url(#tg)"/>
-    <path d="M46,93 L50,110 L65,106 L68,99 L71,106 L86,110 L90,93Z" fill="${pc}" opacity=".85"/>
-    ${L('M52,110 C50,124 49,140 48,156',sk,17)}
-    <circle cx="48" cy="157" r="9" fill="${kn}"/>
-    ${L('M48,157 C47,163 47,168 47,173',sk,14)}
-    <ellipse cx="42" cy="175" rx="17" ry="5.5" fill="${shoe}"/>
-    ${L('M84,110 C86,124 87,140 88,156',sk,17)}
-    <circle cx="88" cy="157" r="9" fill="${kn}"/>
-    ${L('M88,157 C89,163 89,168 89,173',sk,14)}
-    <ellipse cx="94" cy="175" rx="17" ry="5.5" fill="${shoe}"/>
-    <g style="transform-origin:47px 59px;animation:prArm 2s ease-in-out infinite">
-      ${L('M47,59 C39,67 29,74 22,81',sk,13)}
-      <g style="transform-origin:22px 81px;animation:prFore 2s ease-in-out infinite">
-        ${L('M22,81 C18,72 14,62 12,52',sk,11)}
-        <ellipse cx="11" cy="49" rx="8" ry="5" fill="rgba(139,92,246,.4)" stroke="${pc}" stroke-width="1.5"/>
+  // ── PRESS: arms raised OVERHEAD holding weights ──
+  if(type==='press'){
+    return`<svg viewBox="0 0 148 186" width="104" height="148" ${FLT}>${G}
+      <ellipse cx="74" cy="181" rx="30" ry="6" fill="rgba(139,92,246,.16)"/>
+      ${Hd(74,22)}
+      ${L('M74,36 C74,40 74,44 74,48',sk,9)}
+      ${Torso(74,48,84)}
+      ${Hips(74,84)}
+      <!-- Legs straight standing -->
+      ${L('M62,106 C60,122 58,138 57,154',sk,18)}
+      <circle cx="57" cy="155" r="10" fill="${kn}"/>
+      ${L('M57,155 C56,163 55,170 55,176',sk,15)}
+      <ellipse cx="49" cy="179" rx="19" ry="6" fill="${shoe}"/>
+      ${L('M86,106 C88,122 90,138 91,154',sk,18)}
+      <circle cx="91" cy="155" r="10" fill="${kn}"/>
+      ${L('M91,155 C92,163 93,170 93,176',sk,15)}
+      <ellipse cx="99" cy="179" rx="19" ry="6" fill="${shoe}"/>
+      <!-- Left arm UP overhead (already raised) with weight -->
+      <g style="transform-origin:54px 60px;animation:prArm 2.5s ease-in-out infinite">
+        ${L('M54,60 C44,48 36,34 30,20',sk,13)}
+        <g style="transform-origin:30px 20px;animation:prFore 2.5s ease-in-out infinite">
+          ${L('M30,20 C28,12 27,6 27,2',sk,11)}
+          <rect x="13" y="0" width="28" height="8" rx="4" fill="rgba(139,92,246,.5)" stroke="${pc}" stroke-width="1.5"/>
+        </g>
       </g>
-    </g>
-    <g style="transform-origin:89px 59px;animation:prArmR 2s ease-in-out infinite">
-      ${L('M89,59 C97,67 107,74 114,81',sk,13)}
-      <g style="transform-origin:114px 81px;animation:prForeR 2s ease-in-out infinite">
-        ${L('M114,81 C118,72 122,62 124,52',sk,11)}
-        <ellipse cx="125" cy="49" rx="8" ry="5" fill="rgba(139,92,246,.4)" stroke="${pc}" stroke-width="1.5"/>
+      <!-- Right arm UP overhead with weight -->
+      <g style="transform-origin:94px 60px;animation:prArmR 2.5s ease-in-out infinite">
+        ${L('M94,60 C104,48 112,34 118,20',sk,13)}
+        <g style="transform-origin:118px 20px;animation:prForeR 2.5s ease-in-out infinite">
+          ${L('M118,20 C120,12 121,6 121,2',sk,11)}
+          <rect x="107" y="0" width="28" height="8" rx="4" fill="rgba(139,92,246,.5)" stroke="${pc}" stroke-width="1.5"/>
+        </g>
       </g>
-    </g>
-  </svg>`;
+    </svg>`;
+  }
 
-  if(type==='row')return`<svg viewBox="0 0 180 130" width="132" height="108" ${FLT}>${G}
-    ${L('M5,122 H175','rgba(139,92,246,.25)',3)}
-    ${Hd(30,34)}
-    ${L('M30,49 L30,57',sk,9)}
-    <path d="M28,57 C30,53 38,52 46,55 L78,66 C84,72 80,82 72,80 L28,70 C22,68 20,62 28,57Z" fill="url(#tg)"/>
-    ${L('M66,80 C68,94 70,108 70,120',sk,17)}
-    <circle cx="70" cy="121" r="9" fill="${kn}"/>
-    <ellipse cx="70" cy="124" rx="17" ry="5" fill="${shoe}"/>
-    ${L('M84,80 C86,94 88,108 88,120',sk,17)}
-    <circle cx="88" cy="121" r="9" fill="${kn}"/>
-    <ellipse cx="88" cy="124" rx="17" ry="5" fill="${shoe}"/>
-    ${L('M20,68 C14,76 10,86 8,94',sk,12)}
-    ${L('M8,94 C6,100 5,106 5,112',sk,10)}
-    <g style="transform-origin:36px 64px;animation:rwPull 2s ease-in-out infinite">
-      ${L('M36,64 C38,57 40,48 42,42',sk,13)}
-      <g style="transform-origin:42px 42px;animation:rwPullF 2s ease-in-out infinite">
-        ${L('M42,42 C48,38 56,36 64,34',sk,11)}
-        <rect x="64" y="29" width="32" height="10" rx="5" fill="rgba(139,92,246,.4)" stroke="${pc}" stroke-width="1"/>
+  // ── ROW: body bent forward 45°, arm pulling weight back ──
+  if(type==='row'){
+    return`<svg viewBox="0 0 195 138" width="140" height="112" ${FLT}>${G}
+      ${L('M5,130 H190','rgba(139,92,246,.25)',3)}
+      <!-- Head tilted forward -->
+      ${Hd(36,30,15)}
+      <!-- Torso leaning forward diagonally -->
+      <path d="M18,50 C22,44 32,42 48,46 L90,60 C98,66 94,78 84,76 L34,62 C24,60 16,58 18,50Z" fill="url(#tg)"/>
+      ${L('M28,50 C30,44 32,38 34,33',sk,9)}
+      <!-- Support arm (left) on bench/knee -->
+      ${L('M20,60 C14,70 10,82 8,92',sk,12)}
+      ${L('M8,92 C7,100 6,108 5,116',sk,10)}
+      <!-- Both legs bent, supporting stance -->
+      ${L('M66,76 C64,92 62,108 61,122',sk,18)}
+      <circle cx="61" cy="123" r="10" fill="${kn}"/>
+      <ellipse cx="60" cy="127" rx="18" ry="6" fill="${shoe}"/>
+      ${L('M86,76 C88,92 90,108 92,122',sk,18)}
+      <circle cx="92" cy="123" r="10" fill="${kn}"/>
+      <ellipse cx="93" cy="127" rx="18" ry="6" fill="${shoe}"/>
+      <!-- Right arm pulling back with dumbbell -->
+      <g style="transform-origin:42px 62px;animation:rwPull 2.5s ease-in-out infinite">
+        ${L('M42,62 C52,54 64,46 76,40',sk,13)}
+        <g style="transform-origin:76px 40px;animation:rwPullF 2.5s ease-in-out infinite">
+          ${L('M76,40 C88,36 102,34 116,33',sk,11)}
+          <rect x="116" y="27" width="36" height="12" rx="6" fill="rgba(139,92,246,.45)" stroke="${pc}" stroke-width="1.5"/>
+        </g>
       </g>
-    </g>
-  </svg>`;
+    </svg>`;
+  }
 
-  if(type==='plank')return`<svg viewBox="0 0 192 108" width="140" height="90" ${FLT}>${G}
-    ${L('M5,102 H187','rgba(139,92,246,.25)',3)}
-    <g style="animation:plBreath 3s ease-in-out infinite">
-      ${Hd(152,30)}
-      ${L('M152,45 C148,50 144,53 140,56',sk,9)}
-      <path d="M58,64 C58,57 78,52 108,54 L138,56 C144,56 150,60 150,66 L148,78 C148,82 142,85 136,84 L56,74 C52,74 50,70 50,66Z" fill="url(#tg)"/>
-      ${L('M138,58 C140,48 141,38 142,30',sk,13)}
-      ${L('M142,30 C142,24 141,18 140,14',sk,11)}
-      ${L('M54,72 C40,78 26,84 16,92',sk,15)}
-      <ellipse cx="12" cy="95" rx="14" ry="5" fill="${shoe}"/>
-      ${L('M70,72 C56,78 42,84 32,92',sk,15)}
-      <ellipse cx="28" cy="95" rx="14" ry="5" fill="${shoe}"/>
-      ${L('M54,74 C42,80 30,86 18,90',sk,12)}
-      ${L('M18,90 C14,93 10,96 9,100',sk,10)}
-    </g>
-  </svg>`;
+  // ── PLANK: perfectly horizontal on forearms ──
+  if(type==='plank'){
+    return`<svg viewBox="0 0 210 115" width="148" height="92" ${FLT}>${G}
+      ${L('M5,108 H205','rgba(139,92,246,.25)',3)}
+      <g style="animation:plBreath 3s ease-in-out infinite">
+        <!-- Head looking slightly down -->
+        ${Hd(170,32,0)}
+        ${L('M170,46 C164,50 158,53 152,56',sk,9)}
+        <!-- Horizontal body — torso is a long organic rectangle -->
+        <path d="M48,62 C48,55 72,50 108,52 C136,54 150,56 152,60 L150,76 C148,82 136,84 108,82 C72,80 48,76 48,68Z" fill="url(#tg)"/>
+        <!-- Right forearm (elbow on ground, near head) -->
+        ${L('M150,60 C152,50 154,40 156,32',sk,13)}
+        ${L('M156,32 C157,26 157,20 156,16',sk,11)}
+        <!-- Left elbow/forearm on ground -->
+        ${L('M150,74 C156,78 162,82 166,88',sk,11)}
+        <ellipse cx="168" cy="90" rx="14" ry="4.5" fill="${shoe}"/>
+        <!-- Feet (toes on ground, both together) -->
+        ${L('M48,65 C36,70 24,76 14,84',sk,16)}
+        <ellipse cx="10" cy="87" rx="14" ry="5" fill="${shoe}"/>
+        ${L('M52,73 C40,78 28,84 18,90',sk,16)}
+        <ellipse cx="14" cy="93" rx="14" ry="5" fill="${shoe}"/>
+      </g>
+    </svg>`;
+  }
 
-  if(type==='jump')return`<svg viewBox="0 0 136 182" width="100" height="144" ${FLT}>${G}
-    <ellipse cx="68" cy="178" rx="30" ry="5" fill="rgba(139,92,246,.18)"/>
-    <g style="animation:jmpUp 1.4s ease-in-out infinite;transform-origin:68px 90px">
-      ${Hd(68,24)}
-      ${L('M68,39 L68,47',sk,9)}
-      <path d="M44,50 C40,66 42,83 46,93 Q68,99 90,93 C94,83 96,66 92,50 Q84,45 68,43 Q52,45 44,50Z" fill="url(#tg)"/>
-      <path d="M46,93 L50,110 L65,106 L68,99 L71,106 L86,110 L90,93Z" fill="${pc}" opacity=".85"/>
-      <g style="transform-origin:46px 60px;animation:jmpArm 1.4s ease-in-out infinite">
-        ${L('M46,60 C36,52 25,44 16,38',sk,13)}
-        ${L('M16,38 C12,34 8,30 6,27',sk,11)}
+  // ── JUMP: star-jump position, arms HIGH, legs WIDE ──
+  if(type==='jump'){
+    return`<svg viewBox="0 0 200 195" width="138" height="152" ${FLT}>${G}
+      <ellipse cx="100" cy="190" rx="40" ry="6" fill="rgba(139,92,246,.16)"/>
+      <g style="animation:jmpUp 1.6s ease-in-out infinite;transform-origin:100px 95px">
+        ${Hd(100,22)}
+        ${L('M100,36 C100,40 100,44 100,48',sk,9)}
+        ${Torso(100,48,84)}
+        ${Hips(100,84)}
+        <!-- Left arm raised HIGH (star position) -->
+        <g style="transform-origin:78px 58px;animation:jmpArm 1.6s ease-in-out infinite">
+          ${L('M78,58 C64,44 48,32 34,22',sk,13)}
+          ${L('M34,22 C28,17 22,13 18,10',sk,11)}
+        </g>
+        <!-- Right arm raised HIGH -->
+        <g style="transform-origin:122px 58px;animation:jmpArmR 1.6s ease-in-out infinite">
+          ${L('M122,58 C136,44 152,32 166,22',sk,13)}
+          ${L('M166,22 C172,17 178,13 182,10',sk,11)}
+        </g>
+        <!-- Left leg spread WIDE to the left -->
+        <g style="transform-origin:84px 106px;animation:jmpLeg 1.6s ease-in-out infinite">
+          ${L('M84,106 C72,122 58,138 44,154',sk,18)}
+          <circle cx="43" cy="155" r="10" fill="${kn}"/>
+          ${L('M43,155 C38,163 34,170 32,178',sk,15)}
+          <ellipse cx="26" cy="181" rx="20" ry="7" fill="${shoe}"/>
+        </g>
+        <!-- Right leg spread WIDE to the right -->
+        <g style="transform-origin:116px 106px;animation:jmpLegR 1.6s ease-in-out infinite">
+          ${L('M116,106 C128,122 142,138 156,154',sk,18)}
+          <circle cx="157" cy="155" r="10" fill="${kn}"/>
+          ${L('M157,155 C162,163 166,170 168,178',sk,15)}
+          <ellipse cx="174" cy="181" rx="20" ry="7" fill="${shoe}"/>
+        </g>
       </g>
-      <g style="transform-origin:90px 60px;animation:jmpArmR 1.4s ease-in-out infinite">
-        ${L('M90,60 C100,52 111,44 120,38',sk,13)}
-        ${L('M120,38 C124,34 128,30 130,27',sk,11)}
-      </g>
-      <g style="transform-origin:55px 110px;animation:jmpLeg 1.4s ease-in-out infinite">
-        ${L('M55,110 C49,124 43,138 38,152',sk,17)}
-        <circle cx="38" cy="153" r="9" fill="${kn}"/>
-        ${L('M38,153 C34,161 31,167 29,174',sk,14)}
-        <ellipse cx="23" cy="177" rx="19" ry="6" fill="${shoe}"/>
-      </g>
-      <g style="transform-origin:81px 110px;animation:jmpLegR 1.4s ease-in-out infinite">
-        ${L('M81,110 C87,124 93,138 98,152',sk,17)}
-        <circle cx="98" cy="153" r="9" fill="${kn}"/>
-        ${L('M98,153 C102,161 105,167 107,174',sk,14)}
-        <ellipse cx="113" cy="177" rx="19" ry="6" fill="${shoe}"/>
-      </g>
-    </g>
-  </svg>`;
+    </svg>`;
+  }
 
-  if(type==='lunge')return`<svg viewBox="0 0 160 180" width="116" height="142" ${FLT}>${G}
-    <ellipse cx="80" cy="176" rx="40" ry="5" fill="rgba(139,92,246,.18)"/>
-    ${Hd(80,24)}
-    ${L('M80,39 L80,47',sk,9)}
-    <path d="M56,50 C52,66 54,83 58,93 Q80,99 102,93 C106,83 108,66 104,50 Q96,45 80,43 Q64,45 56,50Z" fill="url(#tg)"/>
-    <path d="M58,93 L62,110 L77,106 L80,99 L83,106 L98,110 L102,93Z" fill="${pc}" opacity=".85"/>
-    ${L('M65,52 C59,60 53,68 47,78',sk,13)}
-    ${L('M47,78 C43,84 40,88 38,92',sk,11)}
-    ${L('M95,52 C101,60 107,68 113,78',sk,13)}
-    ${L('M113,78 C117,84 120,88 122,92',sk,11)}
-    <g style="transform-origin:68px 110px;animation:lngThF 2s ease-in-out infinite">
-      ${L('M68,110 C62,124 56,136 50,150',sk,17)}
-      <circle cx="50" cy="151" r="9" fill="${kn}"/>
-      <g style="transform-origin:50px 151px;animation:lngCaF 2s ease-in-out infinite">
-        ${L('M50,151 C47,162 44,169 42,175',sk,14)}
-        <ellipse cx="36" cy="177" rx="19" ry="6" fill="${shoe}"/>
+  // ── LUNGE: deep asymmetric — front knee bent 90°, back knee low ──
+  if(type==='lunge'){
+    return`<svg viewBox="0 0 185 188" width="128" height="150" ${FLT}>${G}
+      <ellipse cx="92" cy="183" rx="44" ry="6" fill="rgba(139,92,246,.16)"/>
+      <!-- Head -->
+      ${Hd(92,22)}
+      ${L('M92,36 C92,40 92,44 92,48',sk,9)}
+      ${Torso(92,48,84)}
+      ${Hips(92,84)}
+      <!-- Left arm slightly back for balance -->
+      ${L('M70,62 C60,68 50,76 42,86',sk,13)}
+      ${L('M42,86 C38,92 35,97 33,102',sk,11)}
+      <!-- Right arm forward -->
+      ${L('M114,62 C124,68 134,76 142,86',sk,13)}
+      ${L('M142,86 C146,92 149,97 151,102',sk,11)}
+      <!-- Front (left) leg: thigh forward-down, knee bent 90°, calf vertical DOWN -->
+      <g style="transform-origin:78px 106px;animation:lngThF 2.5s ease-in-out infinite">
+        ${L('M78,106 C66,118 52,130 40,142',sk,19)}
+        <circle cx="39" cy="143" r="10" fill="${kn}"/>
+        <g style="transform-origin:39px 143px;animation:lngCaF 2.5s ease-in-out infinite">
+          ${L('M39,143 C38,154 37,163 36,173',sk,16)}
+          <ellipse cx="32" cy="177" rx="22" ry="7" fill="${shoe}"/>
+        </g>
       </g>
-    </g>
-    <g style="transform-origin:92px 110px;animation:lngThB 2s ease-in-out infinite">
-      ${L('M92,110 C98,124 104,136 110,150',sk,17)}
-      <circle cx="110" cy="151" r="9" fill="${kn}"/>
-      ${L('M110,151 C113,162 116,169 118,175',sk,14)}
-      <ellipse cx="124" cy="177" rx="19" ry="6" fill="${shoe}"/>
-    </g>
-  </svg>`;
-
-  if(type==='crunch')return`<svg viewBox="0 0 190 118" width="136" height="100" ${FLT}>${G}
-    ${L('M5,112 H185','rgba(139,92,246,.25)',3)}
-    <g style="transform-origin:34px 66px;animation:crUp 2s ease-in-out infinite">
-      ${Hd(20,34)}
-      ${L('M20,49 L20,57',sk,9)}
-      <path d="M12,57 C14,53 20,52 26,55 L46,62 C50,68 46,78 38,76 L16,68 C12,66 10,60 12,57Z" fill="url(#tg)"/>
-      ${L('M8,64 C4,72 2,80 2,90',sk,12)}
-      ${L('M2,90 C2,98 2,104 2,110',sk,10)}
-    </g>
-    ${L('M46,72 L80,78 L114,76 L148,72',pc,18)}
-    <g style="transform-origin:114px 76px;animation:crLgL 2s ease-in-out infinite">
-      ${L('M114,76 C126,70 138,66 150,64',sk,18)}
-      <circle cx="151" cy="64" r="9" fill="${kn}"/>
-      <g style="transform-origin:151px 64px;animation:crLgR 2s ease-in-out infinite">
-        ${L('M151,64 C160,68 168,74 174,81',sk,14)}
-        <ellipse cx="178" cy="84" rx="13" ry="5" fill="${shoe}" transform="rotate(-10,178,84)"/>
+      <!-- Back (right) leg: thigh goes back-down, knee near ground, calf angled forward -->
+      <g style="transform-origin:106px 106px;animation:lngThB 2.5s ease-in-out infinite">
+        ${L('M106,106 C120,118 136,128 150,136',sk,19)}
+        <circle cx="151" cy="137" r="10" fill="${kn}"/>
+        ${L('M151,137 C152,150 152,161 152,172',sk,16)}
+        <ellipse cx="152" cy="176" rx="22" ry="7" fill="${shoe}"/>
       </g>
-    </g>
-    ${L('M80,78 L114,76',sk,17)}
-  </svg>`;
+    </svg>`;
+  }
 
-  if(type==='lateral')return`<svg viewBox="0 0 160 178" width="116" height="140" ${FLT}>${G}
-    <ellipse cx="80" cy="174" rx="28" ry="5" fill="rgba(139,92,246,.18)"/>
-    ${Hd(80,24)}
-    ${L('M80,39 L80,47',sk,9)}
-    <path d="M56,50 C52,66 54,83 58,93 Q80,99 102,93 C106,83 108,66 104,50 Q96,45 80,43 Q64,45 56,50Z" fill="url(#tg)"/>
-    <path d="M58,93 L62,110 L77,106 L80,99 L83,106 L98,110 L102,93Z" fill="${pc}" opacity=".85"/>
-    ${L('M60,110 C58,124 57,140 56,156',sk,17)}
-    <circle cx="56" cy="157" r="9" fill="${kn}"/>
-    ${L('M56,157 C55,163 55,168 55,172',sk,14)}
-    <ellipse cx="50" cy="175" rx="17" ry="5.5" fill="${shoe}"/>
-    ${L('M100,110 C102,124 103,140 104,156',sk,17)}
-    <circle cx="104" cy="157" r="9" fill="${kn}"/>
-    ${L('M104,157 C105,163 105,168 105,172',sk,14)}
-    <ellipse cx="110" cy="175" rx="17" ry="5.5" fill="${shoe}"/>
-    <g style="transform-origin:60px 59px;animation:latAL 2s ease-in-out infinite">
-      ${L('M60,59 C50,53 38,47 28,43',sk,13)}
-      ${L('M28,43 C22,40 16,38 12,37',sk,11)}
-      <ellipse cx="7" cy="36" rx="8" ry="5.5" fill="rgba(139,92,246,.4)" stroke="${pc}" stroke-width="1.5" transform="rotate(-20,7,36)"/>
-    </g>
-    <g style="transform-origin:100px 59px;animation:latAR 2s ease-in-out infinite">
-      ${L('M100,59 C110,53 122,47 132,43',sk,13)}
-      ${L('M132,43 C138,40 144,38 148,37',sk,11)}
-      <ellipse cx="153" cy="36" rx="8" ry="5.5" fill="rgba(139,92,246,.4)" stroke="${pc}" stroke-width="1.5" transform="rotate(20,153,36)"/>
-    </g>
-  </svg>`;
+  // ── CRUNCH: lying down, upper body CURLING UP, knees bent ──
+  if(type==='crunch'){
+    return`<svg viewBox="0 0 205 128" width="145" height="102" ${FLT}>${G}
+      ${L('M5,120 H200','rgba(139,92,246,.25)',3)}
+      <!-- Torso curling up (animated) -->
+      <g style="transform-origin:40px 68px;animation:crUp 2.5s ease-in-out infinite">
+        ${Hd(22,34)}
+        ${L('M22,48 C22,52 22,56 22,60',sk,9)}
+        <path d="M14,60 C16,54 24,52 32,56 L60,66 C66,72 62,82 54,80 L18,70 C12,68 10,62 14,60Z" fill="url(#tg)"/>
+        <!-- Arms reaching toward knees -->
+        ${L('M10,66 C4,76 2,86 2,98',sk,12)}
+        ${L('M2,98 C2,106 2,112 2,118',sk,10)}
+        <!-- Right arm reaching forward -->
+        ${L('M52,78 C62,74 74,72 86,72',sk,11)}
+      </g>
+      <!-- Lower body: hips and legs flat, knees bent -->
+      <path d="M58,80 C76,84 112,84 144,80 L142,92 Q92,98 58,92Z" fill="${pc}" opacity=".85"/>
+      <!-- Thighs going up (knees bent) -->
+      ${L('M72,88 C80,74 88,62 94,54',sk,18)}
+      <circle cx="95" cy="53" r="10" fill="${kn}"/>
+      ${L('M95,53 C106,56 118,62 128,70',sk,15)}
+      <ellipse cx="132" cy="73" rx="16" ry="6" fill="${shoe}" transform="rotate(-12,132,73)"/>
+      <!-- Other leg -->
+      ${L('M120,88 C128,74 136,62 142,54',sk,18)}
+      <circle cx="143" cy="53" r="10" fill="${kn}"/>
+      ${L('M143,53 C154,56 166,62 176,70',sk,15)}
+      <ellipse cx="180" cy="73" rx="16" ry="6" fill="${shoe}" transform="rotate(-12,180,73)"/>
+    </svg>`;
+  }
 
-  return`<svg viewBox="0 0 192 135" width="138" height="113" ${FLT}>${G}
-    ${L('M5,128 H187','rgba(139,92,246,.25)',3)}
-    ${Hd(24,32)}
-    ${L('M24,47 L24,55',sk,9)}
-    <path d="M16,55 C18,51 24,50 32,53 L74,65 C80,70 76,80 68,78 L22,66 C16,64 14,58 16,55Z" fill="url(#tg)"/>
-    ${L('M18,58 C12,68 9,78 8,88',sk,12)}
-    ${L('M8,88 C7,96 6,102 5,108',sk,10)}
-    <ellipse cx="5" cy="111" rx="11" ry="4" fill="${shoe}"/>
-    ${L('M54,64 C50,74 48,84 46,92',sk,12)}
-    ${L('M46,92 C44,98 42,104 40,110',sk,10)}
-    <ellipse cx="39" cy="113" rx="11" ry="4" fill="${shoe}"/>
-    ${L('M68,78 C86,86 104,84 112,82',sk,17)}
-    <g style="transform-origin:112px 82px;animation:kckBk 2s ease-in-out infinite">
-      ${L('M112,82 C118,70 122,58 124,46',sk,17)}
-      <circle cx="124" cy="45" r="9" fill="${kn}"/>
-      <g style="transform-origin:124px 45px;animation:kckCf 2s ease-in-out infinite">
-        ${L('M124,45 C132,44 142,46 152,50',sk,14)}
-        <ellipse cx="157" cy="53" rx="17" ry="6" fill="${shoe}" transform="rotate(8,157,53)"/>
+  // ── LATERAL RAISE: arms spread like a T, holding weights ──
+  if(type==='lateral'){
+    return`<svg viewBox="0 0 220 182" width="150" height="142" ${FLT}>${G}
+      <ellipse cx="110" cy="177" rx="32" ry="6" fill="rgba(139,92,246,.16)"/>
+      ${Hd(110,22)}
+      ${L('M110,36 C110,40 110,44 110,48',sk,9)}
+      ${Torso(110,48,84)}
+      ${Hips(110,84)}
+      <!-- Legs standing straight -->
+      ${L('M94,106 C92,122 90,140 89,156',sk,18)}
+      <circle cx="89" cy="157" r="10" fill="${kn}"/>
+      ${L('M89,157 C88,164 88,170 88,176',sk,15)}
+      <ellipse cx="82" cy="179" rx="20" ry="6" fill="${shoe}"/>
+      ${L('M126,106 C128,122 130,140 131,156',sk,18)}
+      <circle cx="131" cy="157" r="10" fill="${kn}"/>
+      ${L('M131,157 C132,164 132,170 132,176',sk,15)}
+      <ellipse cx="138" cy="179" rx="20" ry="6" fill="${shoe}"/>
+      <!-- Left arm raised out to SIDE (T-pose, already raised) -->
+      <g style="transform-origin:88px 62px;animation:latAL 2.5s ease-in-out infinite">
+        ${L('M88,62 C74,54 58,46 42,38',sk,13)}
+        ${L('M42,38 C34,34 26,31 20,29',sk,11)}
+        <!-- Dumbbell -->
+        <rect x="6" y="24" width="26" height="10" rx="5" fill="rgba(139,92,246,.45)" stroke="${pc}" stroke-width="1.5"/>
+      </g>
+      <!-- Right arm raised out to SIDE -->
+      <g style="transform-origin:132px 62px;animation:latAR 2.5s ease-in-out infinite">
+        ${L('M132,62 C146,54 162,46 178,38',sk,13)}
+        ${L('M178,38 C186,34 194,31 200,29',sk,11)}
+        <rect x="188" y="24" width="26" height="10" rx="5" fill="rgba(139,92,246,.45)" stroke="${pc}" stroke-width="1.5"/>
+      </g>
+    </svg>`;
+  }
+
+  // ── KICKBACK: on all fours, one leg kicking HIGH behind ──
+  return`<svg viewBox="0 0 210 145" width="148" height="115" ${FLT}>${G}
+    ${L('M5,136 H205','rgba(139,92,246,.25)',3)}
+    <!-- Head looking down-forward -->
+    ${Hd(30,30,0)}
+    ${L('M30,44 C30,48 30,52 30,56',sk,9)}
+    <!-- Torso horizontal on all fours -->
+    <path d="M22,56 C24,50 34,48 52,52 L112,64 C120,68 118,80 108,78 L48,66 C32,64 20,64 22,56Z" fill="url(#tg)"/>
+    <!-- Left support arm (front-left, elbow straight) -->
+    ${L('M24,58 C18,70 14,84 12,96',sk,13)}
+    ${L('M12,96 C11,106 10,114 10,122',sk,11)}
+    <ellipse cx="10" cy="125" rx="12" ry="4.5" fill="${shoe}"/>
+    <!-- Right support arm (elbow straight) -->
+    ${L('M48,54 C44,66 40,80 38,92',sk,13)}
+    ${L('M38,92 C37,102 36,110 36,118',sk,11)}
+    <ellipse cx="35" cy="121" rx="12" ry="4.5" fill="${shoe}"/>
+    <!-- Support knee (right leg on ground) -->
+    ${L('M80,76 C82,92 84,106 86,120',sk,18)}
+    <circle cx="86" cy="121" r="10" fill="${kn}"/>
+    <ellipse cx="86" cy="130" rx="16" ry="5" fill="${shoe}"/>
+    <!-- Kicking leg HIGH behind (thigh going up-back, calf extending) -->
+    <g style="transform-origin:108px 72px;animation:kckBk 2.5s ease-in-out infinite">
+      ${L('M108,72 C122,58 138,44 154,32',sk,19)}
+      <circle cx="155" cy="31" r="10" fill="${kn}"/>
+      <g style="transform-origin:155px 31px;animation:kckCf 2.5s ease-in-out infinite">
+        ${L('M155,31 C166,26 178,22 190,20',sk,16)}
+        <ellipse cx="196" cy="20" rx="16" ry="7" fill="${shoe}" transform="rotate(-8,196,20)"/>
       </g>
     </g>
   </svg>`;
 }
 
+// ── TECHNIQUE TIPS PER EXERCISE TYPE ──
+const EX_TIPS={
+  squat:['Rodillas al ancho de cadera','Espalda recta, pecho arriba','Baja hasta 90° mínimo','Talones siempre en el piso','Inhala bajando, exhala subiendo','Rodillas no sobrepasen los pies'],
+  thrust:['Espalda apoyada en el banco','Caderas bien arriba en el tope','Aprieta glúteos con fuerza','Pies planos y firmes en el piso','Mantén el core activado','Pausa 1 seg en la cima'],
+  press:['Pies juntos, espalda neutra','Sube los codos al nivel del hombro','Extiende completamente los brazos','Baja lento y controlado','No arquees la espalda lumbar','Activa el core al presionar'],
+  row:['Espalda plana, nunca redonda','Codo cerca del cuerpo al jalar','Aprieta la espalda en lo alto','Control total en el descenso','Mira al piso, cuello neutro','Respira al bajar el peso'],
+  plank:['Cadera completamente nivelada','Abdomen duro como una tabla','Respira profundo y constante','Cuello neutro, mira al suelo','Aprieta los glúteos también','No dejes caer la cadera'],
+  jump:['Aterriza con rodillas suaves','Brazos bien arriba al saltar','Pies juntos antes de cada salto','Activa el core sin parar','Ritmo constante y fluido','Punta del pie al aterrizar'],
+  lunge:['Rodilla delantera a 90°','Rodilla trasera cerca del piso','Torso completamente erecto','Da un paso bien amplio','Empuja desde el talón delantero','Caderas al frente, no giradas'],
+  crunch:['Manos detrás de la nuca, suave','No jales el cuello hacia arriba','Exhala al contraer el abdomen','Espalda baja pegada al piso','Sube con el abdomen, no el cuello','Baja lentamente para más intensidad'],
+  lateral:['Codos ligeramente flexionados','Sube hasta la altura del hombro','Baja sin dejar caer el peso','No uses impulso del cuerpo','Pausa 1 seg en el punto alto','Mantén los hombros abajo'],
+  kick:['Cuatro puntas bien estables','Pierna llega paralela al piso','Aprieta el glúteo en la cima','Cadera completamente nivelada','Solo la pierna, no el tronco','Inhala abajo, exhala arriba'],
+};
+
+// ── VIDEO PLAYER CONTROLS ──
+function startVideoPlayer(type){
+  clearInterval(S.tipInterval);
+  S.videoPlaying=true;
+  S.tipIdx=0;
+  const tips=EX_TIPS[type]||['Mantén la técnica perfecta','Core siempre activado','Respira de manera controlada'];
+  const tipEl=document.getElementById('evp-tip');
+  if(tipEl){tipEl.classList.remove('fade');tipEl.textContent=tips[0];}
+  // Restart timeline animation
+  const tl=document.getElementById('evp-tl-fill');
+  if(tl){tl.style.animationPlayState='running';}
+  // Resume SVG animations
+  const fig=document.getElementById('wa-figure');
+  if(fig)fig.querySelectorAll('*').forEach(e=>{if(e.style.animation)e.style.animationPlayState='running';});
+  // Update play button
+  const btn=document.getElementById('evp-play-btn');
+  if(btn)btn.textContent='⏸';
+  // Cycle tips every 2.2s
+  S.tipInterval=setInterval(()=>{
+    if(!S.videoPlaying)return;
+    const el=document.getElementById('evp-tip');
+    if(!el)return;
+    el.classList.add('fade');
+    setTimeout(()=>{
+      S.tipIdx=(S.tipIdx+1)%tips.length;
+      el.textContent=tips[S.tipIdx];
+      el.classList.remove('fade');
+    },330);
+  },2200);
+}
+
+function toggleVideoPlay(){
+  S.videoPlaying=!S.videoPlaying;
+  const playing=S.videoPlaying;
+  // Toggle SVG animations
+  const fig=document.getElementById('wa-figure');
+  if(fig)fig.querySelectorAll('*').forEach(e=>{if(e.style.animation||e.getAttribute('style')?.includes('animation'))e.style.animationPlayState=playing?'running':'paused';});
+  // Toggle timeline
+  const tl=document.getElementById('evp-tl-fill');
+  if(tl)tl.style.animationPlayState=playing?'running':'paused';
+  // Update button
+  const btn=document.getElementById('evp-play-btn');
+  if(btn)btn.textContent=playing?'⏸':'▶';
+  // Tip cycling
+  if(!playing){clearInterval(S.tipInterval);}
+  else{const type=getExType(S.workout?.exercises[S.exIdx]?.name||'');startVideoPlayer(type);}
+}
+
 function renderActiveExercise(){
+  stopCoachCounting();
+  coachCountMode='idle';
   const r=S.workout;
   const ex=S.altMode&&r.exercises[S.exIdx].alt?{...r.exercises[S.exIdx],...r.exercises[S.exIdx].alt,tip:r.exercises[S.exIdx].alt.desc}:r.exercises[S.exIdx];
   const total=r.exercises.length;
@@ -1235,14 +1563,33 @@ function renderActiveExercise(){
   document.getElementById('wa-prog-txt').textContent=`${S.exIdx+1} / ${total}`;
   document.getElementById('wa-ex-num').textContent=`Ejercicio ${S.exIdx+1} de ${total}`;
   document.getElementById('wa-ex-name').textContent=ex.name;
-  document.getElementById('wa-ex-muscles').textContent=ex.muscles||r.exercises[S.exIdx].muscles;
+  const muscles=ex.muscles||r.exercises[S.exIdx].muscles||'';
+  document.getElementById('wa-ex-muscles').textContent=muscles;
+  const musclesBadge=document.getElementById('evp-muscles-badge');
+  if(musclesBadge)musclesBadge.textContent=muscles;
   document.getElementById('wa-ex-tip').textContent='💡 '+(ex.tip||ex.desc||'');
+  const totalSets=r.exercises[S.exIdx].sets;
+  const totalReps=parseInt(r.exercises[S.exIdx].reps)||12;
   document.getElementById('wa-set-cur').textContent=S.setIdx+1;
-  document.getElementById('wa-set-total').textContent=`de ${r.exercises[S.exIdx].sets} series`;
+  document.getElementById('wa-set-total').textContent=`de ${totalSets} series`;
   document.getElementById('wa-reps').textContent=r.exercises[S.exIdx].reps;
   document.getElementById('wa-rest-time').textContent=r.exercises[S.exIdx].rest+'"';
+  // Init rep counter
+  S.repCount=totalReps;
+  const repEl=document.getElementById('rep-count');
+  if(repEl){repEl.textContent=totalReps;repEl.classList.remove('coach-count','pulse');}
+  const box=document.getElementById('rep-counter-box');
+  if(box){box.classList.remove('counting','paused');box.style.background='rgba(139,92,246,.08)';box.style.borderColor='rgba(139,92,246,.22)';box.style.boxShadow='';}
+  const lbl=document.getElementById('rep-label');
+  if(lbl){lbl.textContent='Di "empecé" o toca cada repetición';lbl.style.color='';}
+  updateCoachBubble('idle','Di "empecé" cuando comiences — te cuento cada rep 💜');
+  updateListenBtn();
+  // Update set dots
+  updateSetDots();
   const type=getExType(S.altMode&&ex.name?ex.name:r.exercises[S.exIdx].name);
   document.getElementById('wa-figure').innerHTML=makeFigure(type,S.altMode);
+  // Start video player with tips for this exercise type
+  startVideoPlayer(type);
   const voiceTxt=ex.voiceGuide||ex.desc||'Realiza el ejercicio con buena técnica.';
   document.getElementById('wa-voice-txt').textContent='«'+voiceTxt+'»';
   // Alt panel
@@ -1261,24 +1608,61 @@ function renderActiveExercise(){
 }
 
 function completeSet(){
-  if(navigator.vibrate)navigator.vibrate(30);
+  if(navigator.vibrate)navigator.vibrate([30,20,30]);
   const r=S.workout;
   const ex=r.exercises[S.exIdx];
-  speak('¡Serie completada! Muy bien.');
   S.setIdx++;
+  const serieVoice=[
+    '¡Primera serie completada! Estás empezando con todo.',
+    '¡Dos series down! Eres imparable.',
+    '¡Tercera serie lista! Cada una te hace más fuerte.',
+    '¡Cuarta serie completada! Eso es dedicación pura.',
+    '¡Serie completada! Sigue así campeona.'
+  ];
+  const msg=serieVoice[Math.min(S.setIdx-1,serieVoice.length-1)];
   if(S.setIdx>=ex.sets){
+    // All sets done — move to next exercise
     S.setIdx=0;S.exIdx++;S.altMode=false;
-    if(S.exIdx>=r.exercises.length){finishWorkout();return;}
+    if(S.exIdx>=r.exercises.length){speak('¡Felicitaciones! Completaste todo el entrenamiento. ¡Eres una campeona!');finishWorkout();return;}
     const nextEx=r.exercises[S.exIdx];
-    document.getElementById('rest-next-name').textContent=nextEx.name;
-    document.getElementById('rest-next-info').textContent=`Serie 1 · ${nextEx.reps} reps`;
-    document.getElementById('rest-tip').textContent='¡Vas genial! Ya casi terminas.';
+    // Populate rest screen next exercise
+    const restNameEl=document.getElementById('rest-next-name');
+    if(restNameEl)restNameEl.textContent=nextEx.name;
+    const restInfoEl=document.getElementById('rest-next-info');
+    if(restInfoEl)restInfoEl.textContent=`Serie 1 de ${nextEx.sets} · ${nextEx.reps} reps`;
+    const restFigEl=document.getElementById('rest-next-figure');
+    if(restFigEl){const nt=getExType(nextEx.name);restFigEl.innerHTML=`<div style="transform:scale(.55);transform-origin:center;width:130px;height:150px;display:flex;align-items:center;justify-content:center">${makeFigure(nt,false)}</div>`;}
+    const restTipEl=document.getElementById('rest-next-tip');
+    if(restTipEl){const nt=getExType(nextEx.name);const tips=EX_TIPS[nt]||[];restTipEl.textContent=tips[0]||'Mantén la técnica perfecta';}
+    const restCoachEl=document.getElementById('rest-tip');
+    if(restCoachEl){const left=r.exercises.length-S.exIdx;restCoachEl.textContent=left<=1?'¡Último ejercicio! Dalo todo.':'¡'+r.exercises.length+' ejercicios completados! '+left+' por hacer.';}
+    speak(msg+' Descansa '+ex.rest+' segundos.');
     startRest(ex.rest||45);
   }else{
+    // Same exercise, next set
+    updateSetDots();
     document.getElementById('wa-set-cur').textContent=S.setIdx+1;
-    const tips=['¡Excelente! Esa es tu fuerza.','¡Increíble! Sigue así.','¡Eso es! No pares.','¡Muy bien! Cada serie cuenta.'];
-    toast(tips[S.setIdx%4]+' Serie '+(S.setIdx+1)+' de '+ex.sets);
-    if(S.voiceOn)speak(tips[S.setIdx%4]+' Descansa '+ex.rest+' segundos y prepárate para la siguiente serie.');
+    const reps=parseInt(ex.reps)||12;
+    S.repCount=reps;
+    const repEl=document.getElementById('rep-count');
+    if(repEl)repEl.textContent=reps;
+    const box=document.getElementById('rep-counter-box');
+    if(box){box.style.background='rgba(139,92,246,.08)';box.style.borderColor='rgba(139,92,246,.22)';}
+    const setsLeft=ex.sets-S.setIdx;
+    toast('✓ Serie '+S.setIdx+' completada · '+setsLeft+' más');
+    // Populate rest screen for same exercise
+    const restNameEl2=document.getElementById('rest-next-name');
+    if(restNameEl2)restNameEl2.textContent=ex.name+' — Serie '+(S.setIdx+1);
+    const restInfoEl2=document.getElementById('rest-next-info');
+    if(restInfoEl2)restInfoEl2.textContent=`Serie ${S.setIdx+1} de ${ex.sets} · ${ex.reps} reps`;
+    const restFigEl2=document.getElementById('rest-next-figure');
+    if(restFigEl2){const nt=getExType(ex.name);restFigEl2.innerHTML=`<div style="transform:scale(.55);transform-origin:center;width:130px;height:150px;display:flex;align-items:center;justify-content:center">${makeFigure(nt,S.altMode)}</div>`;}
+    const restTipEl2=document.getElementById('rest-next-tip');
+    if(restTipEl2){const nt=getExType(ex.name);const tips=EX_TIPS[nt]||[];restTipEl2.textContent=tips[S.setIdx%tips.length]||'';}
+    const restCoachEl2=document.getElementById('rest-tip');
+    if(restCoachEl2)restCoachEl2.textContent=setsLeft===1?'¡Última serie! Dalo todo.':'Quedan '+setsLeft+' series. ¡Puedes!';
+    speak(msg+' Descansa '+ex.rest+' segundos y prepárate para la serie '+(S.setIdx+1)+'.');
+    startRest(ex.rest||30);
   }
 }
 
@@ -1301,62 +1685,321 @@ function switchToAlt(){
   setTimeout(()=>speak('¡Sin problema! Aquí va tu alternativa. '+altDesc+' ¡Tú puedes!'),400);
 }
 
+// ══ REP COUNTER & SET DOTS ══
+function countRep(){
+  if(S.repCount===undefined||S.repCount===null)return;
+  if(S.repCount<=0)return;
+  S.repCount--;
+  const el=document.getElementById('rep-count');
+  if(el){
+    el.textContent=S.repCount;
+    el.classList.remove('pulse');
+    void el.offsetWidth;
+    el.classList.add('pulse');
+  }
+  if(navigator.vibrate)navigator.vibrate(12);
+  if(S.repCount===0){
+    const box=document.getElementById('rep-counter-box');
+    if(box){box.style.background='rgba(16,185,129,.15)';box.style.borderColor='rgba(16,185,129,.4)';}
+    speak('¡Perfecto! Serie completada. ¡Eres increíble!');
+    setTimeout(()=>completeSet(),800);
+  } else if(S.repCount<=3&&S.voiceOn){
+    speak(S.repCount+'');
+  } else if(S.repCount<=Math.floor((S.workout?.exercises[S.exIdx]?.reps||12)/2)&&S.voiceOn){
+    const halfway=['¡Mitad del camino, sigue!','¡Ya más de la mitad!','¡Vamos, no pares!'];
+    if(S.repCount===Math.floor((S.workout?.exercises[S.exIdx]?.reps||12)/2))
+      speak(halfway[Math.floor(Math.random()*halfway.length)]);
+  }
+  // Update coach bubble text dynamically
+  const coachEl=document.getElementById('wa-voice-txt');
+  if(coachEl&&S.repCount>0){
+    const tips=['¡Mantén la técnica!','¡Respira bien!','¡Fuerza!','¡Tú puedes!','¡No pares!','¡Vamos!'];
+    if(S.repCount%3===0) coachEl.textContent=tips[Math.floor(Math.random()*tips.length)];
+  }
+}
+
+function updateSetDots(){
+  const dots=document.getElementById('set-dots');
+  if(!dots||!S.workout)return;
+  const total=S.workout.exercises[S.exIdx]?.sets||4;
+  dots.innerHTML=Array.from({length:total},(_,i)=>{
+    const done=i<S.setIdx;
+    const current=i===S.setIdx;
+    const bg=done?'linear-gradient(135deg,#9333ea,#ec4899)':current?'rgba(147,51,234,.45)':'rgba(255,255,255,.12)';
+    const border=current?'2px solid #9333ea':'2px solid transparent';
+    const size=current?'14px':'11px';
+    return `<div class="set-dot" style="background:${bg};border:${border};width:${size};height:${size}"></div>`;
+  }).join('');
+}
+
+// ══ COACH VOICE COUNTING SYSTEM ══
+// States: idle | counting | paused
+// "empecé"/"ya"/"listo" → start counting at rhythm
+// "espere"/"cansada"/"pausa" → pause + encouragement
+// "sigo"/"continúa"/"lista" → resume
+// "siguiente"/"serie" → complete set manually
+
+const COACH_COUNT_PHRASES={
+  start:[
+    '¡Vamos! Cuenta conmigo:',
+    '¡Arriba! Aquí vamos:',
+    '¡Eso es! Empezamos:',
+    '¡Fuerza! Conmigo:'
+  ],
+  mid:['¡Bien!','¡Eso!','¡Fuerza!','¡Vamos!','¡Perfecto!','¡Sigue!'],
+  half:['¡Mitad del camino!','¡Ya más de la mitad, no pares!','¡Increíble, sigue!'],
+  last3:['¡Casi!','¡Dos más!','¡Última!'],
+  pause:[
+    'Tranquila, respira. Cuando estés lista di "sigo" y seguimos juntas.',
+    'Tómate tu tiempo. Inhala por la nariz, exhala por la boca. Di "sigo" cuando puedas.',
+    'Está bien descansar. Tu cuerpo lo necesita. Cuando te sientas lista, di "sigo".',
+    'Respira profundo. Cada segundo que descansas tu músculo se recupera. Di "sigo" cuando puedas.'
+  ],
+  resume:[
+    '¡Aquí vamos de nuevo! Vamos en:',
+    '¡Eso! Seguimos desde el',
+    '¡Eres fuerte! Continuamos:'
+  ],
+  done:[
+    '¡Seeerie completada! ¡Eres una campeona!',
+    '¡Increíble trabajo! ¡Serie terminada!',
+    '¡Lo lograste! Esa es tu fuerza.',
+    '¡Perfecta! ¡Una serie menos!'
+  ]
+};
+
+let coachCountTimer=null;
+let coachCountMode='idle'; // idle | counting | paused
+let coachCurrentRep=0;
+let coachTotalReps=12;
+let coachRepDelay=2200; // ms between reps (adjustable)
+
+function startCoachCounting(fromRep){
+  stopCoachCounting();
+  coachCountMode='counting';
+  coachCurrentRep=fromRep||S.repCount||12;
+  coachTotalReps=parseInt(S.workout?.exercises[S.exIdx]?.reps)||12;
+  const box=document.getElementById('rep-counter-box');
+  const lbl=document.getElementById('rep-label');
+  if(box){box.classList.remove('paused');box.classList.add('counting');}
+  if(lbl){lbl.textContent='¡Entrenadora contando! Di "espere" para pausar';lbl.style.color='#f9a8d4';}
+  updateCoachBubble('counting','¡Vamos! Cuenta cada repetición...');
+  updateListenBtn();
+  // Speak "vamos" intro then start rhythm
+  const intro=COACH_COUNT_PHRASES.start[Math.floor(Math.random()*COACH_COUNT_PHRASES.start.length)];
+  speak(intro);
+  // Start counting loop with delay for the intro
+  const delay=speechSynthesis.speaking?1200:600;
+  setTimeout(()=>runCoachTick(),delay);
+}
+
+function runCoachTick(){
+  if(coachCountMode!=='counting')return;
+  if(coachCurrentRep<=0){doneCoachSet();return;}
+  // Speak the number
+  const sayNum=coachCurrentRep;
+  // Add flair at milestones
+  let phrase=''+sayNum;
+  const half=Math.floor(coachTotalReps/2);
+  if(sayNum===half)phrase=COACH_COUNT_PHRASES.half[Math.floor(Math.random()*COACH_COUNT_PHRASES.half.length)]+' '+sayNum+'...';
+  else if(sayNum===3)phrase='¡Tres más! '+sayNum+', ';
+  else if(sayNum===2)phrase='¡Dos más!';
+  else if(sayNum===1)phrase='¡Última!';
+  else if(sayNum%3===0&&sayNum!==coachTotalReps)phrase=COACH_COUNT_PHRASES.mid[Math.floor(Math.random()*COACH_COUNT_PHRASES.mid.length)]+' '+sayNum+'.';
+  speak(phrase);
+  // Update visual rep counter
+  coachCurrentRep--;
+  S.repCount=coachCurrentRep;
+  const el=document.getElementById('rep-count');
+  if(el){
+    el.textContent=coachCurrentRep;
+    el.classList.remove('pulse');void el.offsetWidth;el.classList.add('pulse');
+    if(!el.classList.contains('coach-count'))el.classList.add('coach-count');
+  }
+  if(navigator.vibrate)navigator.vibrate(10);
+  if(coachCurrentRep>0){
+    coachCountTimer=setTimeout(()=>runCoachTick(),coachRepDelay);
+  } else {
+    setTimeout(()=>doneCoachSet(),coachRepDelay*.4);
+  }
+}
+
+function doneCoachSet(){
+  stopCoachCounting();
+  const box=document.getElementById('rep-counter-box');
+  const lbl=document.getElementById('rep-label');
+  if(box){box.classList.remove('counting','paused');box.style.background='rgba(16,185,129,.15)';box.style.borderColor='rgba(16,185,129,.5)';}
+  if(lbl){lbl.textContent='¡Serie terminada!';lbl.style.color='#34d399';}
+  const donePhrase=COACH_COUNT_PHRASES.done[Math.floor(Math.random()*COACH_COUNT_PHRASES.done.length)];
+  updateCoachBubble('done',donePhrase);
+  speak(donePhrase);
+  if(navigator.vibrate)navigator.vibrate([40,30,40]);
+  setTimeout(()=>completeSet(),900);
+}
+
+function pauseCoachCounting(reason){
+  if(coachCountMode==='idle')return;
+  coachCountMode='paused';
+  if(coachCountTimer){clearTimeout(coachCountTimer);coachCountTimer=null;}
+  speechSynthesis.cancel();
+  const box=document.getElementById('rep-counter-box');
+  const lbl=document.getElementById('rep-label');
+  if(box){box.classList.remove('counting');box.classList.add('paused');}
+  const pauseMsg=COACH_COUNT_PHRASES.pause[Math.floor(Math.random()*COACH_COUNT_PHRASES.pause.length)];
+  if(lbl){lbl.textContent='Pausa — di "sigo" para continuar';lbl.style.color='#fbbf24';}
+  updateCoachBubble('paused',pauseMsg);
+  setTimeout(()=>speak(pauseMsg),80);
+}
+
+function resumeCoachCounting(){
+  if(coachCountMode!=='paused')return;
+  const resumePhrase=COACH_COUNT_PHRASES.resume[Math.floor(Math.random()*COACH_COUNT_PHRASES.resume.length)];
+  speak(resumePhrase+' '+coachCurrentRep+'...');
+  setTimeout(()=>startCoachCounting(coachCurrentRep),900);
+}
+
+function stopCoachCounting(){
+  if(coachCountTimer){clearTimeout(coachCountTimer);coachCountTimer=null;}
+  coachCountMode='idle';
+}
+
+function updateCoachBubble(state,msg){
+  const el=document.getElementById('wa-voice-txt');
+  const av=document.querySelector('.coach-avatar');
+  if(el)el.textContent=msg;
+  if(av){
+    const icons={counting:'🏃',paused:'😤',done:'🎉',idle:'💪'};
+    av.textContent=icons[state]||'💪';
+  }
+  const bubble=document.getElementById('coach-bubble');
+  if(bubble){
+    const borders={counting:'rgba(236,72,153,.4)',paused:'rgba(251,191,36,.35)',done:'rgba(16,185,129,.4)',idle:'rgba(139,92,246,.2)'};
+    const bgs={counting:'linear-gradient(135deg,rgba(236,72,153,.12),rgba(139,92,246,.08))',paused:'linear-gradient(135deg,rgba(251,191,36,.1),rgba(236,72,153,.06))',done:'linear-gradient(135deg,rgba(16,185,129,.12),rgba(52,211,153,.06))',idle:'linear-gradient(135deg,rgba(139,92,246,.12),rgba(236,72,153,.08))'};
+    bubble.style.borderColor=borders[state]||borders.idle;
+    bubble.style.background=bgs[state]||bgs.idle;
+  }
+}
+
 // ══ VOICE COMMANDS ══
 function initVoiceCmd(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   if(!SR){toast('Comandos de voz no disponibles en este dispositivo');return false;}
   function makeRec(){
-    const r=new SR();r.lang='es-ES';r.continuous=false;r.interimResults=false;r.maxAlternatives=3;
+    const r=new SR();r.lang='es-ES';r.continuous=false;r.interimResults=false;r.maxAlternatives=4;
     r.onresult=e=>{
-      const cmd=Array.from(e.results[0]).map(a=>a.transcript).join(' ').toLowerCase().trim();
-      toast('🎙 "'+cmd.slice(0,30)+'"');processCmd(cmd);
+      const alts=Array.from(e.results[0]).map(a=>a.transcript.toLowerCase().trim());
+      const cmd=alts.join(' ');
+      // Show brief toast only in debug-like mode — silent for clean UX
+      processCmd(cmd,alts);
     };
-    r.onend=()=>{if(S.srActive)setTimeout(()=>{try{S.sr=makeRec();S.sr.start();}catch(ex){}},300);};
+    r.onend=()=>{if(S.srActive)setTimeout(()=>{try{S.sr=makeRec();S.sr.start();}catch(ex){}},280);};
     r.onerror=ev=>{if(ev.error==='not-allowed'){S.srActive=false;toast('🎙 Sin permiso de micrófono');updateListenBtn();}
-      else if(S.srActive)setTimeout(()=>{try{S.sr=makeRec();S.sr.start();}catch(ex){}},500);};
+      else if(S.srActive)setTimeout(()=>{try{S.sr=makeRec();S.sr.start();}catch(ex){}},450);};
     return r;
   }
   S.makeRec=makeRec;S.sr=makeRec();return true;
 }
+
 function updateListenBtn(){
   const btn=document.getElementById('listen-btn');if(!btn)return;
   const dot=document.getElementById('listen-dot');
-  if(S.srActive){btn.style.background='rgba(236,72,153,.3)';btn.style.borderColor='rgba(236,72,153,.6)';dot.style.opacity='1';dot.style.animation='wv .8s ease-in-out infinite alternate';}
-  else{btn.style.background='rgba(236,72,153,.15)';btn.style.borderColor='rgba(236,72,153,.35)';dot.style.opacity='0.4';dot.style.animation='none';}
-}
-function processCmd(cmd){
-  if(/siguiente|listo|lista|hecha|hecho|serie|completa/.test(cmd)){
-    completeSet();
-  } else if(/ocupa|máquina|alternativ/.test(cmd)){
-    switchToAlt();speak('Aquí tienes la alternativa sin máquina. ¡Tú puedes!');
-  } else if(/cuántas|faltan|quedan|cuánto|falta/.test(cmd)){
-    if(!S.workout)return;
-    const left=S.workout.exercises.length-S.exIdx-1;
-    const sets=S.workout.exercises[S.exIdx].sets-S.setIdx-1;
-    speak('Te '+(sets>0?'faltan '+sets+' series más de este ejercicio':'queda la última serie')+' y '+left+' ejercicios más. ¡Vas increíble!');
-  } else if(/ánimo|motiv|puedo|cansa|ayud/.test(cmd)){
-    const f=['¡Eres una campeona, no pares!','¡Cada repetición te acerca a tu meta!','¡Tú puedes, ya casi terminas!','¡Ese cuerpo que quieres lo estás construyendo ahora!','¡Sigue así, estás haciendo un trabajo increíble!'];
-    speak(f[Math.floor(Math.random()*f.length)]);
-  } else if(/pausa|espera|momento/.test(cmd)){
-    speak('Tomando una pausa. Respira profundo. Cuando estés lista di "siguiente" para continuar.');
-  } else if(/salir|terminar|parar|basta/.test(cmd)){
-    speak('¿Segura que quieres salir? Di "confirmar" para salir.');
-    S._exitPending=true;
-  } else if(/confirmar/.test(cmd)&&S._exitPending){
-    S._exitPending=false;confirmExit();
-  } else if(/tiempo|cuánto tiempo|minutos/.test(cmd)){
-    if(S.wStart){const m=Math.round((Date.now()-S.wStart)/60000);speak('Llevas '+m+' minutos entrenando. ¡Excelente!')}
+  const lbl=document.getElementById('listen-label');
+  const sub=document.getElementById('listen-sublabel');
+  if(S.srActive){
+    btn.style.background='rgba(236,72,153,.28)';btn.style.borderColor='rgba(236,72,153,.65)';
+    dot.style.opacity='1';dot.style.animation='wv .7s ease-in-out infinite alternate';
+    if(lbl)lbl.style.color='#f9a8d4';
+    if(coachCountMode==='counting'&&sub)sub.textContent='Contando... di "espere" para pausar';
+    else if(coachCountMode==='paused'&&sub)sub.textContent='Pausada — di "sigo" para continuar';
+    else if(sub)sub.textContent='Di "empecé" cuando empieces';
+  } else {
+    btn.style.background='rgba(236,72,153,.08)';btn.style.borderColor='rgba(236,72,153,.2)';
+    dot.style.opacity='0.3';dot.style.animation='none';
+    if(lbl)lbl.style.color='rgba(249,168,212,.5)';
+    if(sub)sub.textContent='Toca para activar entrenadora';
   }
 }
+
+function processCmd(cmd,alts){
+  alts=alts||[cmd];
+  const any=p=>alts.some(a=>p.test(a));
+
+  // ── REP COUNTING COMMANDS ──
+  if(any(/^(empec[eéé]|vamos|ya|dale|ahora|start|comenzando|start|lista para empezar|empieza|arriba)$/)||
+     any(/empec[eéé]|ya empec|empiez|dale que|vamos que|arriba que|empecemos|comencemos/)){
+    if(coachCountMode==='idle'||coachCountMode==='paused'){
+      if(coachCountMode==='paused') resumeCoachCounting();
+      else startCoachCounting(S.repCount);
+    }
+    return;
+  }
+
+  if(any(/^(espere|espera|para|stop|pausa|descansa|cansada|cansad|un momento|momento|ayuda|no puedo|no puedo más|auxilio)$/) ||
+     any(/espere|cansada|no puedo|me canso|parar|para un|un segundo|necesito|momento/)){
+    if(coachCountMode==='counting') pauseCoachCounting();
+    else if(coachCountMode==='idle'){
+      const f=['¡Tómate tu tiempo! Respira profundo.','Está bien tomarse un momento. Inhala y exhala.','Descansa lo que necesites. Cuando estés lista di "sigo".'];
+      speak(f[Math.floor(Math.random()*f.length)]);
+      updateCoachBubble('paused','Tomando una pausa. Di "sigo" cuando estés lista.');
+    }
+    return;
+  }
+
+  if(any(/^(sigo|cont[ií]nua|continúa|lista|listo|ya estoy|ya esté|adelante|sigue|vamos de nuevo|sigamos|ya me recuperé|recuperé|me recuperé|seguimos)$/) ||
+     any(/sigo|ya estoy|lista para|continúa|seguimos|ya puedo|de nuevo/)){
+    if(coachCountMode==='paused'){resumeCoachCounting();return;}
+    if(coachCountMode==='idle'){startCoachCounting(S.repCount);return;}
+  }
+
+  // Adjust pace commands
+  if(any(/más lento|despacio|lento|más espacio/)){
+    coachRepDelay=Math.min(coachRepDelay+400,4000);
+    speak('Bien, vamos más despacio. A tu ritmo.');
+    return;
+  }
+  if(any(/más rápido|rápido|acelera|más veloz/)){
+    coachRepDelay=Math.max(coachRepDelay-300,1200);
+    speak('¡Vamos rápido! Ese es el ritmo.');
+    return;
+  }
+
+  // ── STANDARD COMMANDS ──
+  if(any(/siguiente|termina(da|do)|hech[ao]|ya terminé|acabé|listo la serie|complet/)){
+    stopCoachCounting();completeSet();
+  } else if(any(/ocupa|máquina|alternativ/)){
+    switchToAlt();
+  } else if(any(/cuántas|cuánto falta|faltan|quedan|cuánto me falta/)){
+    if(!S.workout)return;
+    const left=S.workout.exercises.length-S.exIdx-1;
+    const setsLeft=S.workout.exercises[S.exIdx].sets-S.setIdx-1;
+    speak('Te '+(setsLeft>0?'faltan '+setsLeft+' series más de este ejercicio':'queda la última serie')+
+      (left>0?' y '+left+' ejercicios más':'')+'. ¡Vas increíble!');
+  } else if(any(/ánimo|motiv|no puedo más|ayuda|anímame/)){
+    const f=['¡Eres una campeona absoluta!','¡Cada repetición te acerca a tu meta!','¡Ese cuerpo que quieres lo estás construyendo ahora mismo!','¡Sigue, estás haciendo algo increíble por ti!','¡Piensa en lo orgullosa que te sentirás cuando termines!'];
+    speak(f[Math.floor(Math.random()*f.length)]);
+    updateCoachBubble('counting',f[Math.floor(Math.random()*f.length)]);
+  } else if(any(/salir|quiero salir|terminar entrena|basta|me voy/)){
+    speak('¿Segura? Di "confirmar" si quieres salir.');
+    S._exitPending=true;
+  } else if(any(/confirmar/)&&S._exitPending){
+    S._exitPending=false;stopCoachCounting();confirmExit();
+  } else if(any(/tiempo|cuánto llevo|cuánto tiempo llevo/)){
+    if(S.wStart){const m=Math.round((Date.now()-S.wStart)/60000);speak('Llevas '+m+' minuto'+(m!==1?'s':'')+' entrenando. ¡Excelente ritmo!');}
+  }
+}
+
 function toggleListen(){
   if(!S.makeRec&&!initVoiceCmd())return;
   S.srActive=!S.srActive;
   if(S.srActive){
     try{S.sr.start();}catch(e){try{S.sr=S.makeRec();S.sr.start();}catch(ex){}}
-    speak('Entrenadora activada. Puedes decirme: siguiente serie, cuántas faltan, ánimo, o máquina ocupada.');
+    speak('Entrenadora activada. Di "empecé" cuando comiences a hacer el ejercicio y te cuento cada repetición. Di "espere" si necesitas pausar.');
+    updateCoachBubble('idle','Di "empecé" cuando empieces el ejercicio — te cuento cada rep.');
   } else {
+    stopCoachCounting();
     try{S.sr.stop();}catch(e){}
-    speak('Comandos de voz desactivados.');
+    speak('Entrenadora desactivada.');
+    updateCoachBubble('idle','Tu entrenadora está lista...');
   }
   updateListenBtn();
 }
@@ -1384,6 +2027,7 @@ function speak(text){
 
 // ══ REST TIMER ══
 function startRest(sec){
+  stopCoachCounting();coachCountMode='idle';
   go('rest');
   let remaining=sec;
   const total=sec;
@@ -1392,17 +2036,19 @@ function startRest(sec){
   const circum=2*Math.PI*80;
   ring.style.strokeDasharray=circum;
   if(S.restTimer)clearInterval(S.restTimer);
+  let said10=false,said5=false;
   const update=()=>{
     secEl.textContent=remaining;
     const pct=(remaining/total);
     ring.style.strokeDashoffset=circum*(1-pct);
-    if(remaining<=3&&S.voiceOn)speak(remaining+'');
+    if(remaining===10&&!said10&&S.voiceOn){said10=true;speak('10 segundos. Prepárate.');}
+    if(remaining===5&&!said5&&S.voiceOn){said5=true;speak('5... 4... 3... 2... 1... ¡Ya!');}
+    if(remaining<=3&&remaining>0&&remaining!==5&&S.voiceOn)speak(remaining+'');
     if(remaining<=0){clearInterval(S.restTimer);renderActiveExercise();go('wactive');}
     remaining--;
   };
   update();
   S.restTimer=setInterval(update,1000);
-  if(S.voiceOn)speak('Descansa '+sec+' segundos.');
 }
 
 function skipRest(){
@@ -1435,6 +2081,118 @@ function finishWorkout(){
 
 // ══ NUTRITION ══
 function renderNutrition(){
+  if(!S.weekDay)S.weekDay=0;
+  renderDayBar();
+  renderDayMeals();
+}
+
+function renderDayBar(){
+  const bar=document.getElementById('nutri-day-bar');
+  if(!bar)return;
+  bar.innerHTML=WEEKLY_PLAN.map((d,i)=>{
+    const on=i===S.weekDay;
+    return `<button onclick="selectDay(${i})" style="flex-shrink:0;padding:8px 14px;border-radius:14px;border:${on?'none':'1px solid rgba(255,255,255,.1)'};background:${on?`linear-gradient(135deg,${d.color}cc,${d.color}88)`:'rgba(255,255,255,.05)'};color:${on?'#fff':'rgba(255,255,255,.6)'};font-size:12px;font-weight:${on?'800':'600'};cursor:pointer;transition:all .2s">
+      <div style="font-size:16px">${on?'✦':''}</div>
+      <div>${d.day}</div>
+    </button>`;
+  }).join('');
+}
+
+function selectDay(i){
+  S.weekDay=i;
+  renderDayBar();
+  renderDayMeals();
+}
+
+function renderDayMeals(){
+  const d=WEEKLY_PLAN[S.weekDay];
+  const banner=document.getElementById('nutri-macro-banner');
+  if(banner){
+    banner.innerHTML=`
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div>
+          <div style="font-size:13px;font-weight:800;color:#fff">${d.full} — Total del día</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.5)">3 comidas balanceadas</div>
+        </div>
+        <div style="width:36px;height:36px;border-radius:12px;background:${d.color}33;display:flex;align-items:center;justify-content:center;font-size:18px">🌟</div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <div style="flex:1;text-align:center;background:rgba(255,255,255,.06);border-radius:10px;padding:7px 4px">
+          <div style="font-size:16px;font-weight:900;color:#fbbf24">${d.kcal}</div>
+          <div style="font-size:8px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.5px">kcal</div>
+        </div>
+        <div style="flex:1;text-align:center;background:rgba(255,255,255,.06);border-radius:10px;padding:7px 4px">
+          <div style="font-size:16px;font-weight:900;color:#34d399">${d.prot}g</div>
+          <div style="font-size:8px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.5px">proteína</div>
+        </div>
+        <div style="flex:1;text-align:center;background:rgba(255,255,255,.06);border-radius:10px;padding:7px 4px">
+          <div style="font-size:16px;font-weight:900;color:#60a5fa">${d.carbs}g</div>
+          <div style="font-size:8px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.5px">carbos</div>
+        </div>
+        <div style="flex:1;text-align:center;background:rgba(255,255,255,.06);border-radius:10px;padding:7px 4px">
+          <div style="font-size:16px;font-weight:900;color:#f472b6">${d.fat}g</div>
+          <div style="font-size:8px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.5px">grasas</div>
+        </div>
+      </div>`;
+  }
+  const mealsEl=document.getElementById('nutri-day-meals');
+  if(!mealsEl)return;
+  const mealDefs=[
+    {key:'D',label:'Desayuno',icon:'🌅',grad:'linear-gradient(135deg,rgba(251,191,36,.12),rgba(245,158,11,.06))'},
+    {key:'A',label:'Almuerzo',icon:'☀️',grad:'linear-gradient(135deg,rgba(139,92,246,.12),rgba(99,102,241,.06))'},
+    {key:'C',label:'Cena',icon:'🌙',grad:'linear-gradient(135deg,rgba(236,72,153,.12),rgba(168,85,247,.06))'},
+  ];
+  mealsEl.innerHTML=mealDefs.map(m=>{
+    const meal=d[m.key];
+    return `<div onclick="openWeeklyMeal(${S.weekDay},'${m.key}')" style="background:${m.grad};border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:transform .15s" onmousedown="this.style.transform='scale(.97)'" onmouseup="this.style.transform=''" ontouchstart="this.style.transform='scale(.97)'" ontouchend="this.style.transform=''">
+      <div style="display:flex;align-items:center;gap:4px;margin-bottom:10px">
+        <span style="font-size:14px">${m.icon}</span>
+        <span style="font-size:10px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px">${m.label}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="font-size:38px;flex-shrink:0">${meal.e}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:13px;font-weight:800;line-height:1.3;margin-bottom:6px;white-space:normal">${meal.n}</div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap">
+            <span style="font-size:9px;padding:2px 8px;border-radius:8px;background:rgba(251,191,36,.15);color:#fbbf24;font-weight:700">🔥 ${meal.kcal} kcal</span>
+            <span style="font-size:9px;padding:2px 8px;border-radius:8px;background:rgba(52,211,153,.12);color:#34d399;font-weight:700">💪 ${meal.prot}g prot</span>
+            <span style="font-size:9px;padding:2px 8px;border-radius:8px;background:rgba(96,165,250,.12);color:#60a5fa;font-weight:700">🌾 ${meal.carbs}g</span>
+          </div>
+        </div>
+        <div style="color:rgba(255,255,255,.3);font-size:16px;flex-shrink:0">›</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openWeeklyMeal(dayIdx,mealKey){
+  const d=WEEKLY_PLAN[dayIdx];
+  const meal=d[mealKey];
+  const mealNames={D:'Desayuno',A:'Almuerzo',C:'Cena'};
+  document.getElementById('modal-recipe-body').innerHTML=`
+    <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:16px">
+      <div style="font-size:52px">${meal.e}</div>
+      <div>
+        <div style="font-size:9px;font-weight:700;color:${d.color};text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">${d.full} · ${mealNames[mealKey]}</div>
+        <div style="font-size:17px;font-weight:900;line-height:1.3;margin-bottom:0">${meal.n}</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:7px;margin-bottom:16px;background:rgba(255,255,255,.04);border-radius:14px;padding:14px">
+      <div style="text-align:center;flex:1"><div style="font-size:20px;font-weight:900;color:#fbbf24">${meal.kcal}</div><div style="font-size:9px;color:rgba(255,255,255,.4)">kcal</div></div>
+      <div style="text-align:center;flex:1"><div style="font-size:20px;font-weight:900;color:#34d399">${meal.prot}g</div><div style="font-size:9px;color:rgba(255,255,255,.4)">proteína</div></div>
+      <div style="text-align:center;flex:1"><div style="font-size:20px;font-weight:900;color:#60a5fa">${meal.carbs}g</div><div style="font-size:9px;color:rgba(255,255,255,.4)">carbos</div></div>
+      <div style="text-align:center;flex:1"><div style="font-size:20px;font-weight:900;color:#f472b6">${meal.fat}g</div><div style="font-size:9px;color:rgba(255,255,255,.4)">grasa</div></div>
+    </div>
+    <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">🛒 Ingredientes</div>
+    <div style="background:rgba(255,255,255,.04);border-radius:12px;padding:12px;margin-bottom:14px">${meal.ing.map(i=>`<div style="font-size:12px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:8px"><span style="color:#c084fc;font-size:10px">●</span>${i}</div>`).join('')}</div>
+    <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">👩‍🍳 Preparación</div>
+    ${meal.steps.map((s,i)=>`<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05)"><div style="width:22px;height:22px;border-radius:7px;background:${d.color}33;color:${d.color};font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">${i+1}</div><div style="font-size:12px;line-height:1.5;color:rgba(255,255,255,.7)">${s}</div></div>`).join('')}
+    ${meal.tip?`<div style="margin-top:14px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:12px 14px;font-size:11px;color:#fcd34d;line-height:1.6">💡 <strong>Tip:</strong> ${meal.tip}</div>`:''}`;
+  openModal('modal-recipe');
+}
+
+function openAllRecipes(){
+  go('allrecipes');
   renderRecipes();
 }
 
@@ -1455,6 +2213,7 @@ function toggleStore(store){
 function renderRecipes(){
   const meal=MEALS[S.mealIdx];
   const list=document.getElementById('recipe-list');
+  if(!list)return;
   list.innerHTML='';
   const filtered=RECIPES.filter(r=>{
     if(r.meal!==meal)return false;
